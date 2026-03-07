@@ -1,0 +1,37 @@
+{
+  "id": "prd-sample-001",
+  "slug": "sample-product-slug",
+  "name": "샘플 상품명",
+  "category": "anchovy",
+  "shortDescription": "한 줄 요약 설명",
+  "longDescription": "긴 설명 텍스트",
+  "keySellingPoints": ["강점 1", "강점 2", "강점 3"],
+  "origin": "원산지/소싱 설명",
+  "processing": "가공/품질 설명",
+  "usage": "추천 활용 설명",
+  "packageInfo": "포장 정보",
+  "shippingInfo": "배송 정보",
+  "smartstoreUrl": "https://smartstore.naver.com/example/products/0000",
+  "gmarketUrl": "https://www.gmarket.co.kr/example/0000",
+  "wholesaleAvailable": true,
+  "featured": false,
+  "image": "anchovy-gold",
+  "heroVisual": {
+    "alt": "대표 이미지 설명",
+    "caption": "Hero visual caption",
+    "tone": "anchovy-gold"
+  },
+  "contentVisuals": [
+    {
+      "alt": "원물 이미지",
+      "caption": "산지/원물",
+      "tone": "anchovy-gold"
+    },
+    {
+      "alt": "가공 이미지",
+      "caption": "가공/품질",
+      "tone": "anchovy-blue"
+    }
+  ],
+  "status": "published"
+}
