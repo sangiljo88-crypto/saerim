@@ -85,3 +85,4 @@ npm run publish:product -- --input /absolute/path/to/product.json --status draft
 1. 상품/카테고리에 `heroVisual.src`와 `contentVisuals[].src`를 채우면 실제 이미지로 자동 전환됩니다.
 2. `src`가 비어 있으면 프리미엄 플레이스홀더가 유지됩니다.
 3. 이미지 비율은 공통 컴포넌트 `src/components/ui/ImageSection.tsx`에서 고정 관리됩니다.
+# saerim
