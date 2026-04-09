@@ -1,55 +1,52 @@
 import Link from "next/link";
 
+import { CategoryDropdown } from "@/components/layout/CategoryDropdown";
 import { getAllCategories } from "@/lib/catalog";
 
 export function Header() {
   const categories = getAllCategories();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+    <header
+      className="sticky z-50 border-b border-slate-200/70 bg-white/92 backdrop-blur-xl"
+      style={{ top: "var(--top-promo-height)" }}
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex min-h-[68px] items-center justify-between gap-6">
-          <Link href="/" className="font-display text-xl font-extrabold tracking-tight text-deep-950">
-            광일건해
+        <div className="flex min-h-[68px] items-center justify-between gap-6 py-1">
+          <Link href="/" className="group flex flex-col">
+            <span className="font-display text-2xl font-extrabold tracking-tight text-deep-950 transition group-hover:text-brand-700">
+              유한회사 새림
+            </span>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-500">Saerim Food System</span>
           </Link>
 
-          <nav className="hidden items-center gap-6 text-sm font-medium text-slate-700 lg:flex">
-            <Link href="/" className="hover:text-deep-950">
+          <nav className="hidden items-center gap-7 text-sm font-semibold tracking-[0.01em] text-slate-700 lg:flex">
+            <Link href="/" className="transition hover:text-deep-950">
               홈
             </Link>
-            <details className="group relative">
-              <summary className="list-none cursor-pointer hover:text-deep-950">카테고리</summary>
-              <div className="absolute left-0 top-8 w-72 rounded-2xl border border-slate-200 bg-white p-3 shadow-soft">
-                <ul className="space-y-1">
-                  {categories.map((category) => (
-                    <li key={category.id}>
-                      <Link
-                        href={`/categories/${category.slug}`}
-                        className="block rounded-xl px-3 py-2 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-800"
-                      >
-                        {category.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </details>
-            <Link href="/categories" className="hover:text-deep-950">
+            <CategoryDropdown
+              categories={categories.map((category) => ({
+                id: category.id,
+                slug: category.slug,
+                name: category.name,
+              }))}
+            />
+            <Link href="/categories" className="transition hover:text-deep-950">
               전체 카테고리
             </Link>
-            <Link href="/brand" className="hover:text-deep-950">
-              브랜드 스토리
+            <Link href="/brand" className="transition hover:text-deep-950">
+              브랜드 소개
             </Link>
-            <Link href="/contact" className="hover:text-deep-950">
+            <Link href="/contact" className="transition hover:text-deep-950">
               위치/연락처
             </Link>
           </nav>
 
           <Link
             href="/wholesale"
-            className="inline-flex items-center rounded-full bg-brand-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-800"
+            className="inline-flex items-center rounded-full bg-gradient-to-r from-brand-700 to-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:from-brand-800 hover:to-brand-700"
           >
-            도매 문의
+            도매 상담
           </Link>
         </div>
 

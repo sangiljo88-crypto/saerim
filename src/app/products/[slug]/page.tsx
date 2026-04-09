@@ -98,15 +98,23 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <a href={product.smartstoreUrl} target="_blank" rel="noreferrer" className="cta-primary">
-                Buy on SmartStore
+                스마트스토어 주문
               </a>
               <a href={product.gmarketUrl} target="_blank" rel="noreferrer" className="cta-secondary">
-                Buy on Gmarket
+                카카오 상담
               </a>
             </div>
           </div>
 
-          <GradientVisual label={product.name} tone={product.image} className="min-h-[340px]" />
+          <GradientVisual
+            label={product.name}
+            tone={product.image}
+            src={visuals.hero.src}
+            showLabel={false}
+            overlay="soft"
+            loading="eager"
+            className="min-h-[340px]"
+          />
         </section>
       </Reveal>
 
@@ -184,7 +192,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             <p className="premium-kicker text-brand-200">CTA Area</p>
             <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">지금 구매하거나 도매 상담을 시작해보세요</h2>
             <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-200 sm:text-base">
-              외부 마켓 구매와 B2B 문의를 동시에 제공합니다. 향후 결제 연동/API 연동으로 확장하기 쉬운 구조입니다.
+              스마트스토어 주문과 카카오 상담, B2B 문의를 동시에 제공합니다.
             </p>
             <ExternalBuyButtons
               smartstoreUrl={product.smartstoreUrl}

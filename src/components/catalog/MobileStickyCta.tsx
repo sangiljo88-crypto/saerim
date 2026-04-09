@@ -24,7 +24,7 @@ export function MobileStickyCta({ smartstoreUrl, gmarketUrl, wholesaleHref }: Mo
           rel="noreferrer"
           className="flex-1 rounded-full border border-slate-300 bg-white px-3 py-3 text-center text-xs font-semibold text-slate-700"
         >
-          Gmarket 구매
+          카카오 상담
         </a>
         <Link
           href={wholesaleHref}

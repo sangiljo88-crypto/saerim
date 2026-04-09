@@ -1,7 +1,7 @@
 import type { Product } from "@/types/catalog";
 
 export const getProductBadges = (product: Product): string[] => {
-  const badges = ["무료배송", "산지직송"];
+  const badges = ["HACCP", "공장직송"];
 
   if (product.wholesaleAvailable) {
     badges.push("도매가능");

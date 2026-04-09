@@ -14,7 +14,7 @@ import {
   getCategoryBySlug,
   getProductsByCategory,
 } from "@/lib/catalog";
-import { getCategoryVisualBundle } from "@/lib/visuals";
+import { getCategoryVisualBundle, getProductPrimaryImage } from "@/lib/visuals";
 
 type CategoryDetailPageProps = {
   params: Promise<{
@@ -53,6 +53,7 @@ export default async function CategoryDetailPage({ params }: CategoryDetailPageP
   const categoryProducts = getProductsByCategory(category.slug);
   const featuredProducts = categoryProducts.filter((product) => product.featured).slice(0, 3);
   const heroProduct = (featuredProducts[0] ?? categoryProducts[0]) || null;
+  const heroProductImage = heroProduct ? getProductPrimaryImage(heroProduct) : undefined;
   const visuals = getCategoryVisualBundle(category);
 
   return (
@@ -88,7 +89,15 @@ export default async function CategoryDetailPage({ params }: CategoryDetailPageP
               </Link>
             </div>
           </div>
-          <GradientVisual label={`${category.name} Category`} tone={category.tone} className="min-h-[300px]" />
+          <GradientVisual
+            label={`${category.name} Category`}
+            tone={category.tone}
+            src={visuals.hero.src}
+            showLabel={false}
+            overlay="soft"
+            loading="eager"
+            className="min-h-[300px]"
+          />
         </section>
       </Reveal>
 
@@ -161,7 +170,14 @@ export default async function CategoryDetailPage({ params }: CategoryDetailPageP
                     </Link>
                   </div>
                 </div>
-                <GradientVisual label={heroProduct.name} tone={heroProduct.image} className="min-h-[260px] border-white/20" />
+                <GradientVisual
+                  label={heroProduct.name}
+                  tone={heroProduct.image}
+                  src={heroProductImage}
+                  showLabel={false}
+                  overlay="soft"
+                  className="min-h-[260px] border-white/20"
+                />
               </div>
             </div>
           </Reveal>

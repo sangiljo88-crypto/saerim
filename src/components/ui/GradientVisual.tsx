@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 const paletteMap: Record<string, string> = {
   sunset: "from-amber-100 via-orange-100 to-rose-100",
   sea: "from-cyan-100 via-sky-100 to-blue-100",
@@ -20,22 +22,55 @@ const paletteMap: Record<string, string> = {
 type GradientVisualProps = {
   label: string;
   tone?: string;
+  src?: string;
+  showLabel?: boolean;
+  overlay?: "none" | "soft" | "strong";
+  loading?: "eager" | "lazy";
   className?: string;
 };
 
-export function GradientVisual({ label, tone = "sea", className = "" }: GradientVisualProps) {
+const overlayMap: Record<NonNullable<GradientVisualProps["overlay"]>, string> = {
+  none: "",
+  soft: "bg-gradient-to-t from-black/35 via-black/10 to-transparent",
+  strong: "bg-gradient-to-t from-black/55 via-black/15 to-transparent",
+};
+
+export function GradientVisual({
+  label,
+  tone = "sea",
+  src,
+  showLabel = true,
+  overlay = "soft",
+  loading = "lazy",
+  className = "",
+}: GradientVisualProps) {
   const gradient = paletteMap[tone] ?? paletteMap.sea;
+  const overlayClass = overlayMap[overlay];
 
   return (
     <div
       className={`relative overflow-hidden rounded-3xl border border-white/70 bg-gradient-to-br ${gradient} ${className}`}
       aria-label={label}
     >
-      <div className="absolute -left-8 -top-8 h-28 w-28 rounded-full bg-white/40 blur-xl" />
-      <div className="absolute -bottom-8 -right-8 h-32 w-32 rounded-full bg-white/50 blur-xl" />
-      <div className="relative flex h-full min-h-[220px] items-end p-6">
-        <p className="font-display text-lg font-semibold text-deep-950/80">{label}</p>
-      </div>
+      {src ? (
+        <img
+          src={src}
+          alt={label}
+          className="absolute inset-0 h-full w-full object-cover transition duration-500 hover:scale-[1.015]"
+          loading={loading}
+        />
+      ) : (
+        <>
+          <div className="absolute -left-8 -top-8 h-28 w-28 rounded-full bg-white/40 blur-xl" />
+          <div className="absolute -bottom-8 -right-8 h-32 w-32 rounded-full bg-white/50 blur-xl" />
+        </>
+      )}
+      {overlayClass ? <div className={`absolute inset-0 ${overlayClass}`} aria-hidden /> : null}
+      {showLabel ? (
+        <div className="relative flex h-full min-h-[220px] items-end p-6">
+          <p className={`font-display text-lg font-semibold ${src ? "text-white" : "text-deep-950/80"}`}>{label}</p>
+        </div>
+      ) : null}
     </div>
   );
 }

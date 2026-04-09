@@ -4,19 +4,43 @@
 
 :root {
   color-scheme: light;
+  --top-promo-height: 2.5rem;
+  --header-height: 6.75rem;
+  --ink-900: #111827;
+  --ink-950: #090e1a;
+  --surface: #f5f2ea;
 }
 
 body {
   font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   background:
-    radial-gradient(circle at 88% -4%, #fbe7cc 0%, rgba(251, 231, 204, 0) 30%),
-    radial-gradient(circle at 8% 14%, #e9f2ff 0%, rgba(233, 242, 255, 0) 28%),
-    linear-gradient(180deg, #f6f4ee 0%, #f7f6f2 100%);
+    radial-gradient(circle at 88% -6%, #efe5d2 0%, rgba(239, 229, 210, 0) 34%),
+    radial-gradient(circle at 10% 12%, #edf2f8 0%, rgba(237, 242, 248, 0) 30%),
+    linear-gradient(180deg, #f8f6f1 0%, var(--surface) 100%);
   color: #1f2937;
+  padding-top: var(--top-promo-height);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-height: 4.25rem;
+  }
+}
+
+body.home-shell-active {
+  overflow: hidden;
+}
+
+body.home-shell-active main {
+  height: calc(100svh - var(--top-promo-height) - var(--header-height));
+}
+
+body.home-shell-active .site-footer {
+  display: none;
 }
 
 .font-display {
-  font-family: "SUIT", "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-family: "Noto Serif KR", "SUIT", "Pretendard", "Apple SD Gothic Neo", serif;
 }
 
 @layer utilities {
@@ -25,11 +49,11 @@ body {
   }
 
   .glass-card {
-    @apply rounded-3xl border border-white/70 bg-white/90 shadow-soft backdrop-blur;
+    @apply rounded-3xl border border-white/60 bg-white/90 shadow-soft backdrop-blur;
   }
 
   .premium-shell {
-    @apply rounded-[2rem] border border-slate-200/80 bg-white/95 shadow-soft;
+    @apply rounded-[2rem] border border-slate-200/70 bg-white/95 shadow-soft;
   }
 
   .premium-kicker {
@@ -37,11 +61,11 @@ body {
   }
 
   .cta-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-deep-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800;
+    @apply inline-flex items-center justify-center rounded-full bg-deep-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#18253d];
   }
 
   .cta-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400;
+    @apply inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50;
   }
 
   .cta-accent {
@@ -57,6 +81,69 @@ body {
   .reveal-block.is-visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .home-snap-container {
+    height: 100%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  .home-snap-panel {
+    display: flex;
+    min-height: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .home-dot-nav {
+    position: fixed;
+    right: clamp(0.65rem, 1.7vw, 1.8rem);
+    top: 50%;
+    z-index: 65;
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 0.55rem;
+    border-radius: 999px;
+    border: 1px solid rgba(203, 213, 225, 0.9);
+    background: rgba(255, 255, 255, 0.86);
+    padding: 0.75rem 0.45rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .home-dot {
+    height: 0.36rem;
+    width: 0.36rem;
+    border-radius: 999px;
+    background: #cbd5e1;
+    transition: all 0.25s ease;
+  }
+
+  .home-dot.is-active {
+    height: 0.62rem;
+    width: 0.62rem;
+    background: #0f172a;
+  }
+}
+
+@media (max-width: 1023px) {
+  body.home-shell-active {
+    overflow: auto;
+  }
+
+  body.home-shell-active main {
+    height: auto;
+  }
+
+  .home-snap-container {
+    height: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .home-snap-panel {
+    min-height: auto;
   }
 }
 
