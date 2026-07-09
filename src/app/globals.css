@@ -2,155 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 새림 디자인 시스템 — 화이트 기반 미니멀 (docs/brand-system/03) */
+
 :root {
   color-scheme: light;
-  --top-promo-height: 2.5rem;
-  --header-height: 6.75rem;
-  --ink-900: #111827;
-  --ink-950: #090e1a;
-  --surface: #f5f2ea;
+  --header-height: 4rem;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  background:
-    radial-gradient(circle at 88% -6%, #efe5d2 0%, rgba(239, 229, 210, 0) 34%),
-    radial-gradient(circle at 10% 12%, #edf2f8 0%, rgba(237, 242, 248, 0) 30%),
-    linear-gradient(180deg, #f8f6f1 0%, var(--surface) 100%);
-  color: #1f2937;
-  padding-top: var(--top-promo-height);
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --header-height: 4.25rem;
-  }
-}
-
-body.home-shell-active {
-  overflow: hidden;
-}
-
-body.home-shell-active main {
-  height: calc(100svh - var(--top-promo-height) - var(--header-height));
-}
-
-body.home-shell-active .site-footer {
-  display: none;
-}
-
-.font-display {
-  font-family: "Noto Serif KR", "SUIT", "Pretendard", "Apple SD Gothic Neo", serif;
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    sans-serif;
+  background: #ffffff;
+  color: #111417;
+  -webkit-font-smoothing: antialiased;
+  /* 한글은 단어(어절) 단위로만 줄바꿈 — "슬라이스"가 "슬라이/스"로 잘리지 않게 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 @layer utilities {
-  .landing-section {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  /* 레이아웃 */
+  .section {
+    @apply py-20 md:py-32;
   }
 
-  .glass-card {
-    @apply rounded-3xl border border-white/60 bg-white/90 shadow-soft backdrop-blur;
+  .container-text {
+    @apply mx-auto w-full max-w-4xl px-6;
   }
 
-  .premium-shell {
-    @apply rounded-[2rem] border border-slate-200/70 bg-white/95 shadow-soft;
+  .container-grid {
+    @apply mx-auto w-full max-w-6xl px-6;
   }
 
-  .premium-kicker {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-brand-700;
+  /* 타이포 */
+  .kicker {
+    @apply text-label uppercase tracking-[0.18em] text-ink-400;
   }
 
+  .prose-body {
+    @apply text-body text-ink-600 max-w-[65ch];
+  }
+
+  /* CTA */
   .cta-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-deep-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#18253d];
+    @apply inline-flex items-center justify-center rounded-full bg-ink-900 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-ink-950;
   }
 
   .cta-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50;
+    @apply inline-flex items-center justify-center rounded-full border border-line bg-transparent px-7 py-3.5 text-sm font-semibold text-ink-900 transition-colors hover:border-ink-400;
   }
 
-  .cta-accent {
-    @apply inline-flex items-center justify-center rounded-full border border-brand-600 bg-brand-50 px-6 py-3 text-sm font-semibold text-brand-700 transition hover:-translate-y-0.5 hover:bg-brand-100;
+  /* 헤어라인 구분 */
+  .hairline-t {
+    @apply border-t border-line;
   }
 
-  .reveal-block {
+  /* 스크롤 등장 모션 */
+  .reveal {
     opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
   }
 
-  .reveal-block.is-visible {
+  .reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  .home-snap-container {
-    height: 100%;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-  }
-
-  .home-snap-panel {
-    display: flex;
-    min-height: 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
-
-  .home-dot-nav {
-    position: fixed;
-    right: clamp(0.65rem, 1.7vw, 1.8rem);
-    top: 50%;
-    z-index: 65;
-    transform: translateY(-50%);
-    flex-direction: column;
-    gap: 0.55rem;
-    border-radius: 999px;
-    border: 1px solid rgba(203, 213, 225, 0.9);
-    background: rgba(255, 255, 255, 0.86);
-    padding: 0.75rem 0.45rem;
-    backdrop-filter: blur(10px);
-  }
-
-  .home-dot {
-    height: 0.36rem;
-    width: 0.36rem;
-    border-radius: 999px;
-    background: #cbd5e1;
-    transition: all 0.25s ease;
-  }
-
-  .home-dot.is-active {
-    height: 0.62rem;
-    width: 0.62rem;
-    background: #0f172a;
-  }
-}
-
-@media (max-width: 1023px) {
-  body.home-shell-active {
-    overflow: auto;
-  }
-
-  body.home-shell-active main {
-    height: auto;
-  }
-
-  .home-snap-container {
-    height: auto;
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-
-  .home-snap-panel {
-    min-height: auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-block {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .animate-slow-zoom {
+    animation: none;
   }
 }

@@ -2,21 +2,20 @@ import type { Metadata } from "next";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { TopPromoBar } from "@/components/layout/TopPromoBar";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://saerim-food.example"),
+  metadataBase: new URL("https://www.saerim.kr"),
   title: {
-    default: "유한회사 새림 | 식육 포장·가공 및 국탕·뒷고기 전문",
+    default: "유한회사 새림 | 대한민국 외식 산업을 준비하는 식품 인프라",
     template: "%s | 유한회사 새림",
   },
   description:
-    "유한회사 새림 공식 사이트. 국탕류와 뒷고기류를 중심으로 식육 포장·가공 제품, 도매 공급, 브랜드 사업장을 소개합니다.",
+    "식당은 손님을 맞이합니다. 새림은 식당을 준비합니다. 군산·김제·용인 공장 기반의 B2B 식품 제조 플랫폼 — 국탕류·뒷고기류·OEM.",
   openGraph: {
-    title: "유한회사 새림 | 국탕류·뒷고기류 공장 직송",
-    description: "브랜드 소개부터 카테고리, 제품 상세, 도매 문의까지 연결된 멀티페이지 사이트",
+    title: "유한회사 새림 | 식품 인프라",
+    description: "식품 브랜드 뒤에는 새림이 있습니다.",
     type: "website",
     locale: "ko_KR",
   },
@@ -29,8 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        />
+      </head>
       <body className="min-h-screen antialiased">
-        <TopPromoBar />
         <Header />
         <main>{children}</main>
         <Footer />

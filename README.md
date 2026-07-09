@@ -1,88 +1,51 @@
-# Premium Dried Seafood Brand Site (Next.js)
+# 새림 브랜드 플랫폼
 
-전통 쇼핑몰형이 아닌, 카테고리와 스토리 중심의 프리미엄 멀티페이지 랜딩 사이트 샘플입니다.
+"대한민국 외식 산업을 준비하는 식품 인프라" — 유한회사 새림의 B2B 브랜드 플랫폼입니다.
 
-## Tech Stack
+브랜드 시스템(철학·아키텍처·디자인·데이터 구조)은 `docs/brand-system/` 4개 문서에 정의되어 있으며,
+모든 페이지는 이 문서를 기준으로 만들어졌습니다.
 
-- Next.js (App Router)
-- TypeScript
-- Tailwind CSS
-- Catalog service + content collections
-  - Seed data: `src/data/categories.ts`, `src/data/products.ts`
-  - Publishable content: `content/categories/*.json`, `content/products/*.json`
+## 구조
 
-## Pages
+```
+HOME → WHY → BRAND → BUSINESS → PRODUCT → FACTORY → QUALITY → OEM → NEWS → STORE → CONTACT
+```
 
-- Home: `/`
-- Categories: `/categories`
-- Category detail (dynamic): `/categories/[slug]`
-- Product detail (dynamic): `/products/[slug]`
-- Brand story: `/brand`
-- Wholesale inquiry: `/wholesale`
-- Contact / location: `/contact`
+- 공개 페이지는 SQLite DB를 읽어 렌더링됩니다 (콘텐츠 수정에 코드 변경 불필요)
+- 관리자(/admin)에서 제품·브랜드·공장·품질단계·뉴스·스토어 링크·문의·사이트 설정을 관리합니다
+- 문의 폼은 실제로 접수되어 관리자 문의함에 저장됩니다
 
-## Run Locally
+## 기술 스택
+
+- Next.js (App Router) + TypeScript + Tailwind CSS
+- DB: SQLite (Node 내장 `node:sqlite` — 추가 의존성 없음), 파일 위치 `data/saerim.db`
+- 관리자 인증: Basic Auth (middleware)
+
+## 실행
+
+**요구사항: Node.js 22.5 이상** (`node -v`로 확인)
 
 ```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-브라우저에서 `http://localhost:3000` 접속
+- 관리자: http://localhost:3000/admin (계정은 `.env`의 ADMIN_USER / ADMIN_PASSWORD)
+- 최초 실행 시 `data/saerim.db`가 자동 생성되고 시드 데이터가 주입됩니다
+- DB를 초기화하려면 `data/` 폴더를 삭제하고 다시 실행하세요
 
-## Add a New Category
+## 배포 (Railway)
 
-1. 빠른 수정은 `src/data/categories.ts`에 추가
-2. 발행형 워크플로는 `content/categories/{slug}.json` 추가
-3. 필수 필드:
-   - `id`, `slug`, `name`, `englishName`
-   - `shortDescription`, `intro`, `whyItMatters`, `heroTagline`
-   - `highlights`(배열), `tone`
-4. 선택 필드:
-   - `heroVisual`, `contentVisuals`(2~4개 권장)
-   - `status` (`draft` | `published`)
-5. 저장 후 `/categories/[slug]` 페이지가 자동 생성됩니다.
+1. 환경변수 설정: `ADMIN_USER`, `ADMIN_PASSWORD`, `DATA_DIR=/data`
+2. **볼륨을 `/data`에 마운트** — 없으면 재배포 때마다 CMS 데이터가 초기화됩니다
+3. Node 버전 22.5+ 확인 (필요 시 `NIXPACKS_NODE_VERSION=22` 지정)
 
-## Add a New Product
+## 콘텐츠 수정 방법
 
-1. 빠른 수정은 `src/data/products.ts`에 추가
-2. 발행형 워크플로는 `content/products/{slug}.json` 추가
-3. `category` 값은 기존 카테고리 `slug`와 동일해야 합니다.
-4. 필수 필드:
-   - `name`, `category`
-   - `shortDescription`, `longDescription`, `keySellingPoints`
-   - `origin`, `processing`, `usage`
-   - `packageInfo`, `shippingInfo`
-   - `smartstoreUrl`, `gmarketUrl`, `image`
-5. 권장 필드:
-   - `id`, `slug`, `wholesaleAvailable`, `featured`
-   - `heroVisual`, `contentVisuals`(2~4개 권장)
-   - `status` (`draft` | `published`)
-6. 저장 후 `/products/[slug]` 상세 페이지와 관련 섹션에 자동 반영됩니다.
-
-## Admin / AI Publishing Bridge
-
-현재는 CLI 브리지로 구조화 데이터 발행을 지원합니다.
-
-```bash
-npm run publish:product -- --input /absolute/path/to/product.json
-```
-
-`draft` 저장:
-
-```bash
-npm run publish:product -- --input /absolute/path/to/product.json --status draft
-```
-
-템플릿:
-- `content/templates/product.template.json`
-
-아키텍처 문서:
-- `docs/product-publishing-architecture.md`
-
-## AI Image Swap Guide
-
-1. 상품/카테고리에 `heroVisual.src`와 `contentVisuals[].src`를 채우면 실제 이미지로 자동 전환됩니다.
-2. `src`가 비어 있으면 프리미엄 플레이스홀더가 유지됩니다.
-3. 이미지 비율은 공통 컴포넌트 `src/components/ui/ImageSection.tsx`에서 고정 관리됩니다.
-# saerim
+| 하고 싶은 일 | 위치 |
+|---|---|
+| Hero 문구·통계·연락처 변경 | /admin/settings |
+| 제품 추가·수정 | /admin/products |
+| 공장·브랜드·뉴스 관리 | /admin/factories, /admin/brands, /admin/news |
+| Hero를 영상으로 교체 | 영상을 `public/videos/`에 넣고 /admin/settings의 Hero 미디어에 `/videos/파일명.mp4` 입력 |
+| 디자인 토큰 변경 | `tailwind.config.ts` + `docs/brand-system/03-design-system.md` |

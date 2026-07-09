@@ -1,134 +1,108 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
-import { GradientVisual } from "@/components/ui/GradientVisual";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
+import { NextStory, SectionTitle } from "@/components/ui/brand";
+import { listBrands } from "@/lib/db/repo";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "브랜드 소개",
-  description: "유한회사 새림의 기업 개요, 3개 사업장, 생산 역량과 식품안전 시스템을 소개합니다.",
+  title: "BRAND — 하나의 인프라, 세 개의 얼굴",
+  description: "새림 · 전국국밥거래소 · 육식노트. 브랜드 아키텍처를 소개합니다.",
 };
 
-const branchCards = [
-  {
-    name: "새림 본사",
-    focus: "돼지 부산물",
-    body: "군산 본사를 중심으로 돈두·내장류를 포함한 돼지 부산물 포장/가공 제품을 생산·공급합니다.",
-    tone: "night",
-    src: "/images/company/branch-hq-product.jpg",
-  },
-  {
-    name: "새림 용인지점",
-    focus: "햄 육가공",
-    body: "햄·육가공 라인의 OEM 및 B2B 생산을 담당하며, 위생 기준과 표준 공정 중심으로 운영합니다.",
-    tone: "stone",
-    src: "/images/company/branch-yongin-product.jpg",
-  },
-  {
-    name: "새림 임피공장",
-    focus: "즙공장",
-    body: "즙·추출 기반 제품 생산 라인을 운영하며, 가공/열처리/포장 공정을 체계적으로 관리합니다.",
-    tone: "sand",
-    src: "/images/company/branch-impi-product.jpg",
-  },
-] as const;
+/** BRAND — 새림 ↔ 전국국밥거래소 ↔ 육식노트 관계를 명확하게 보여준다 (docs/brand-system/02) */
+export default function BrandPage() {
+  const brands = listBrands();
+  const master = brands.find((b) => b.role === "master");
+  const subs = brands.filter((b) => b.role === "sub");
 
-export default function BrandStoryPage() {
   return (
-    <div className="landing-section py-10 sm:py-14">
-      <section className="grid gap-8 rounded-[2rem] border border-slate-200 bg-white p-7 shadow-soft sm:p-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <SectionHeading
-            eyebrow="Company Introduction"
-            title="유한회사 새림 브랜드 소개"
-            description="식육 포장/가공 및 HMR 식품개발에 정성을 더해, 품질은 높이고 거품을 뺀 합리적 가격을 추구합니다."
-          />
-          <p className="mt-5 text-sm leading-7 text-slate-600 sm:text-base">
-            새림은 2004년부터 축적한 생산 노하우와 HACCP 기반 운영 체계를 바탕으로, 국탕류와 뒷고기류를
-            포함한 다양한 식육 제품을 안정적으로 공급하고 있습니다.
-          </p>
+    <>
+      <section className="section">
+        <div className="container-text">
+          <Reveal>
+            <p className="kicker">Brand Architecture</p>
+            <h1 className="mt-6 text-display text-ink-900">
+              하나의 인프라,
+              <br />세 개의 얼굴.
+            </h1>
+            <p className="prose-body mt-8">
+              새림은 생산·품질·OEM을 책임지는 마스터 브랜드입니다. 전국국밥거래소와 육식노트는 그
+              위에서 각자의 손님을 만나는 채널 브랜드입니다.
+            </p>
+          </Reveal>
         </div>
-        <GradientVisual
-          label="Saerim Brand"
-          tone="night"
-          src="/images/company/hero-main-photo4.jpg"
-          showLabel={false}
-          overlay="soft"
-          className="min-h-[300px]"
-        />
       </section>
 
-      <section className="mt-14 rounded-[2rem] border border-slate-200 bg-white p-7 shadow-soft sm:p-10">
-        <SectionHeading
-          eyebrow="Business Areas"
-          title="새림 3대 사업축"
-          description="브랜드 소개의 핵심인 본사·용인지점·임피공장을 중심으로 사업을 운영합니다."
-        />
-        <div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {branchCards.map((branch) => (
-            <article key={branch.name} className="overflow-hidden rounded-3xl border border-slate-200 bg-white">
-              <GradientVisual
-                label={branch.name}
-                tone={branch.tone}
-                src={branch.src}
-                showLabel={false}
-                overlay="soft"
-                className="min-h-[180px] rounded-none border-none"
-              />
-              <div className="p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">{branch.focus}</p>
-                <h3 className="mt-2 font-display text-2xl font-bold text-deep-950">{branch.name}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{branch.body}</p>
+      {/* 구조도 */}
+      <section className="pb-20 md:pb-32">
+        <div className="container-grid">
+          <Reveal>
+            {master && (
+              <div className="rounded-2xl border-2 border-ink-900 p-8 text-center md:p-12">
+                <p className="kicker">{master.nameEn} · Master Brand</p>
+                <p className="mt-3 text-h1 text-ink-900">{master.name}</p>
+                <p className="mt-3 text-body text-ink-600">{master.tagline}</p>
               </div>
-            </article>
-          ))}
+            )}
+            <div className="mx-auto h-10 w-px bg-line" aria-hidden />
+            <div className="grid gap-6 md:grid-cols-2">
+              {subs.map((brand) => (
+                <div key={brand.slug} className="rounded-2xl border border-line p-8">
+                  <p className="kicker">{brand.nameEn} · by 새림</p>
+                  <h2 className="mt-3 text-h2 text-ink-900">{brand.name}</h2>
+                  <p className="mt-2 text-sm font-medium text-accent">{brand.tagline}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-600">{brand.description}</p>
+                  <p className="mt-6 text-xs text-ink-400">고객 — {brand.target}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <section className="mt-14 grid gap-6 lg:grid-cols-2">
-        <article className="glass-card p-7 sm:p-8">
-          <SectionHeading
-            eyebrow="Core Capabilities"
-            title="생산 및 운영 역량"
-            description="식육 포장, 식육 가공, 식육 추출, HMR 식품 개발을 중심으로 제품 기획부터 생산까지 원스톱으로 대응합니다."
+      {/* 운영 원칙 */}
+      <section className="section hairline-t bg-paper-warm">
+        <div className="container-grid">
+          <SectionTitle
+            kicker="Operating Principles"
+            title="브랜드가 늘어나도 바뀌지 않는 것"
           />
-          <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-700">
-            <li className="rounded-2xl border border-slate-200 bg-white p-4">전 생산공정 HACCP 기준 운영</li>
-            <li className="rounded-2xl border border-slate-200 bg-white p-4">매일 생산/출고 기반의 안정적 납품 구조</li>
-            <li className="rounded-2xl border border-slate-200 bg-white p-4">온·오프라인 채널 동시 대응 가능한 생산 체계</li>
-          </ul>
-        </article>
-
-        <article className="glass-card p-7 sm:p-8">
-          <SectionHeading
-            eyebrow="Food Safety"
-            title="식품안전시스템"
-            description="생산, 보관, 유통 전 과정을 엄격한 기준으로 관리하며 품질 추적 시스템으로 이력 관리를 수행합니다."
-          />
-          <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-700">
-            <li className="rounded-2xl border border-slate-200 bg-white p-4">위험요소 원천 차단을 위한 다단계 검수</li>
-            <li className="rounded-2xl border border-slate-200 bg-white p-4">배송 전 온도 체크 및 콜드체인 적용</li>
-            <li className="rounded-2xl border border-slate-200 bg-white p-4">문제 발생 시 역추적 가능한 기록 관리</li>
-          </ul>
-        </article>
-      </section>
-
-      <section className="mt-14 rounded-[2rem] bg-brand-50 p-7 sm:p-10">
-        <SectionHeading
-          eyebrow="Company Info"
-          title="사업자 정보"
-          description="사업자등록증 기준 회사 정보를 안내합니다."
-        />
-        <div className="mt-5 grid gap-4 text-sm text-slate-700 sm:grid-cols-2">
-          <p>법인명: 유한회사 새림</p>
-          <p>대표자: 최인환</p>
-          <p>사업자등록번호: 481-86-00066</p>
-          <p>법인등록번호: 211114-0032627</p>
-          <p className="sm:col-span-2">주소: 전북특별자치도 군산시 옥산면 산성로 154</p>
-          <p>TEL: 063-464-8681</p>
-          <p>FAX: 063-464-8683</p>
-          <p className="sm:col-span-2">E-MAIL: serim6408@naver.com</p>
+          <div className="grid gap-10 md:grid-cols-3">
+            {[
+              {
+                title: "품질의 기준은 하나",
+                body: "어느 브랜드로 팔리든 같은 8단계 품질 여정을 통과합니다. 브랜드는 얼굴이고, 품질은 새림입니다.",
+              },
+              {
+                title: "항상 '새림의 브랜드'로",
+                body: "모든 접점에서 마스터 브랜드가 함께 보입니다. 전국국밥거래소 by 새림, 새림이 만드는 육식노트.",
+              },
+              {
+                title: "확장은 데이터로",
+                body: "새 브랜드·새 공장은 구조 변경 없이 추가됩니다. 이 플랫폼은 10년의 확장을 전제로 설계되었습니다.",
+              },
+            ].map((item, i) => (
+              <Reveal key={item.title} delayMs={i * 80}>
+                <h3 className="text-h3 text-ink-900">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-600">{item.body}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <div className="mt-16 text-center">
+              <p className="text-h2 text-ink-900">식품 브랜드 뒤에는 새림이 있습니다.</p>
+              <Link href="/oem" className="cta-secondary mt-8">
+                내 브랜드 만들기 (OEM)
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
-    </div>
+
+      <NextStory href="/business" label="BUSINESS" title="무엇을 하는 회사인가" />
+    </>
   );
 }

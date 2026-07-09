@@ -36,7 +36,7 @@ export function Reveal({ children, className = "", delayMs = 0 }: RevealProps) {
   return (
     <div
       ref={ref}
-      className={`reveal-block ${className}`}
+      className={`reveal ${className}`}
       style={{ animationDelay: `${delayMs}ms`, transitionDelay: `${delayMs}ms` }}
     >
       {children}
