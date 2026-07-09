@@ -23,13 +23,14 @@ export default function FactoryPage() {
           <Reveal>
             <p className="kicker">Factories</p>
             <h1 className="mt-6 text-display text-ink-900">
-              세 개의 공장,
+              본사와 지점,
               <br />
               하나의 기준.
             </h1>
             <p className="prose-body mt-8">
-              새림의 공장은 생산 역량을 셋으로 나눠 운영합니다. 각 공장은 고유한 역할과 이름을 가진
-              하나의 브랜드입니다.
+              새림은 군산 본사와 김제·예산·임피·용인 4개 지점으로 생산 역량을 나눠 운영합니다.
+              그중 핵심 생산 세 축을 소개합니다. 각 공장은 고유한 역할과 이름을 가진 하나의
+              브랜드입니다.
             </p>
           </Reveal>
         </div>

@@ -36,7 +36,7 @@ export default function OemPage() {
             </h1>
             <p className="prose-body mt-8">
               좋은 레시피가 있어도 공장이 없어 시작하지 못하는 브랜드가 많습니다. 새림의 OEM은
-              설비를 빌려주는 것이 아니라, 23년의 품질 체계를 통째로 빌려드리는 일입니다.
+              설비를 빌려주는 것이 아니라, 12년의 품질 체계를 통째로 빌려드리는 일입니다.
             </p>
             <p className="prose-body mt-4">
               하이포크 특수부위 OEM, 농협 목우촌 생산도급, 이마트 트레이더스 PB 납품 — 대형 유통의

@@ -79,9 +79,9 @@ export default function HomePage() {
               <TrustBadge>INNOBIZ · MAIN-BIZ</TrustBadge>
             </div>
             <div className="mt-12 grid grid-cols-2 gap-10 md:grid-cols-4">
-              <StatBlock value={settings.stat_founded ?? "2003"} label="창립 — 축산 제조 외길" />
+              <StatBlock value={settings.stat_founded ?? "2014"} label="창립 — 군산에서 12년" />
+              <StatBlock value={settings.stat_revenue ?? "235.6억"} label="2025년 연 매출" />
               <StatBlock value={settings.stat_partners ?? "55개사"} label="거래 파트너" />
-              <StatBlock value={settings.stat_items ?? "116개"} label="취급 품목" />
               <StatBlock value={settings.stat_daily ?? "1,500두"} label="일일 돈두·내장 열처리" />
             </div>
             {settings.partners && (
@@ -123,8 +123,8 @@ export default function HomePage() {
         <div className="container-grid">
           <SectionTitle
             kicker="Factories"
-            title="세 개의 공장, 하나의 기준"
-            lead="군산이 원료를 준비하고, 김제가 세척·가열을 맡고, 용인이 파트너의 브랜드를 만듭니다."
+            title="본사와 지점, 하나의 기준"
+            lead="군산 본사와 김제·예산·임피·용인 4개 지점 — 그중 핵심 생산 세 축을 소개합니다."
           />
           <div className="grid gap-8 md:grid-cols-3">
             {factories.map((factory, i) => (
