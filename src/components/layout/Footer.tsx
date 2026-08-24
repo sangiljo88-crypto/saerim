@@ -1,44 +1,41 @@
 import Link from "next/link";
 
-const SITE_MAP = [
-  { href: "/why", label: "WHY" },
-  { href: "/brand", label: "BRAND" },
-  { href: "/business", label: "BUSINESS" },
-  { href: "/products", label: "PRODUCT" },
-  { href: "/factory", label: "FACTORY" },
-  { href: "/quality", label: "QUALITY" },
-  { href: "/oem", label: "OEM" },
-  { href: "/news", label: "NEWS" },
-  { href: "/store", label: "STORE" },
-  { href: "/contact", label: "CONTACT" },
-];
+import { getSettings } from "@/lib/content";
+import { getDict, fill } from "@/lib/i18n";
+import { href, type Locale } from "@/lib/i18n/config";
 
-export function Footer() {
+export function Footer({ locale }: { locale: Locale }) {
+  const settings = getSettings(locale);
+  const dict = getDict(locale);
+  const t = dict.footer;
+  const siteMap = [...dict.common.nav, { href: "/contact", label: dict.common.contact }];
+
   return (
     <footer className="hairline-t bg-paper-warm">
       <div className="container-grid grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <p className="text-lg font-bold text-ink-900">유한회사 새림</p>
-          <p className="prose-body mt-4 text-sm">
-            대한민국 외식 산업을 준비하는 식품 인프라.
-            <br />
-            군산 본사와 김제·예산·임피·용인 4개 지점에서 원료·가공·물류를 책임집니다.
-          </p>
+          <div className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/logo.svg" alt="" className="h-10 w-10" />
+            <p className="text-lg font-bold text-ink-900">{dict.common.companyName}</p>
+          </div>
+          <p className="prose-body mt-4 whitespace-pre-line text-sm">{t.lead}</p>
           <p className="mt-6 text-xs leading-6 text-ink-400">
-            대표이사 최인환 — 사업자등록번호 481-86-00066
+            {t.ceo}
             <br />
-            전북특별자치도 군산시 옥산면 산성로 154
+            {settings.contact_address}
             <br />
-            TEL 063-464-8681 · FAX 063-464-8683 · serim6408@naver.com
+            TEL {settings.contact_tel ?? "063-464-8681"} · FAX {settings.contact_fax ?? "063-464-8683"} ·{" "}
+            {settings.contact_email ?? "info@saerim.kr"}
           </p>
         </div>
 
-        <nav aria-label="사이트맵">
-          <p className="kicker mb-4">Site Map</p>
+        <nav aria-label={t.siteMapLabel}>
+          <p className="kicker mb-4">{t.siteMap}</p>
           <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 text-sm text-ink-600">
-            {SITE_MAP.map((item) => (
+            {siteMap.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="transition-colors hover:text-ink-900">
+                <Link href={href(locale, item.href)} className="transition-colors hover:text-ink-900">
                   {item.label}
                 </Link>
               </li>
@@ -47,19 +44,19 @@ export function Footer() {
         </nav>
 
         <div>
-          <p className="kicker mb-4">Brands</p>
+          <p className="kicker mb-4">{t.brands}</p>
           <ul className="space-y-2.5 text-sm text-ink-600">
-            <li>새림 — 식품 인프라</li>
-            <li>전국국밥거래소 — 국탕류 공급</li>
-            <li>육식노트 — 뒷고기·특수부위</li>
+            {t.brandList.map((brand) => (
+              <li key={brand}>{brand}</li>
+            ))}
           </ul>
         </div>
       </div>
 
       <div className="hairline-t">
         <div className="container-grid flex flex-col items-start justify-between gap-2 py-6 text-xs text-ink-400 md:flex-row">
-          <p>© {new Date().getFullYear()} SAERIM. All rights reserved.</p>
-          <p>평일 09:00–18:00 · 주말/공휴일 휴무</p>
+          <p>{fill(t.rights, { year: new Date().getFullYear() })}</p>
+          <p>{t.hours}</p>
         </div>
       </div>
     </footer>

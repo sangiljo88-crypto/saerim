@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+import { getDict } from "@/lib/i18n";
+import { href, type Locale } from "@/lib/i18n/config";
+
 /**
  * 새림 디자인 시스템 공통 컴포넌트.
  * 모든 페이지는 이 컴포넌트로만 섹션을 구성한다. (docs/brand-system/03)
@@ -42,16 +45,35 @@ export function StatBlock({ value, label }: { value: string; label: string }) {
   );
 }
 
-/** 페이지 하단 고정 패턴 — 다음 스토리로 연결 */
-export function NextStory({ href, label, title }: { href: string; label: string; title: string }) {
+/**
+ * 페이지 하단 고정 패턴 — 다음 스토리로 연결.
+ * 라벨은 로케일 내비게이션 사전에서 가져온다(중국어면 중국어 메뉴명).
+ */
+export function NextStory({
+  locale,
+  href: path,
+  title,
+}: {
+  locale: Locale;
+  href: string;
+  title: string;
+}) {
+  const common = getDict(locale).common;
+  const label =
+    path === "/contact"
+      ? common.contact
+      : (common.nav.find((item) => item.href === path)?.label ?? path.replace("/", "").toUpperCase());
+
   return (
     <section className="hairline-t">
       <Link
-        href={href}
+        href={href(locale, path)}
         className="container-grid group flex items-center justify-between py-14 md:py-20"
       >
         <div>
-          <p className="kicker mb-3">다음 이야기 — {label}</p>
+          <p className="kicker mb-3">
+            {common.nextStory} — {label}
+          </p>
           <p className="text-h2 text-ink-900 transition-colors group-hover:text-accent">{title}</p>
         </div>
         <span

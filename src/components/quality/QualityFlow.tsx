@@ -8,7 +8,13 @@ import type { QualityStep } from "@/lib/db/types";
  * 품질 8단계 인터랙티브 스텝퍼.
  * 단계를 클릭하면 상세·관리 기준이 전환된다. 키보드(←/→) 지원.
  */
-export function QualityFlow({ steps }: { steps: QualityStep[] }) {
+export function QualityFlow({
+  steps,
+  labels,
+}: {
+  steps: QualityStep[];
+  labels: { listLabel: string; metricLabel: string; prev: string; next: string };
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const active = steps[activeIndex];
 
@@ -22,7 +28,7 @@ export function QualityFlow({ steps }: { steps: QualityStep[] }) {
   return (
     <div onKeyDown={onKeyDown}>
       {/* 스텝 트랙 */}
-      <ol className="relative flex flex-wrap items-center gap-y-6" role="tablist" aria-label="품질 8단계">
+      <ol className="relative flex flex-wrap items-center gap-y-6" role="tablist" aria-label={labels.listLabel}>
         {steps.map((step, i) => {
           const isActive = i === activeIndex;
           const isPassed = i < activeIndex;
@@ -80,7 +86,7 @@ export function QualityFlow({ steps }: { steps: QualityStep[] }) {
         </div>
         <div className="flex flex-col justify-end md:w-64">
           <div className="rounded-xl bg-trust-soft p-6">
-            <p className="text-label uppercase tracking-[0.14em] text-trust">관리 기준</p>
+            <p className="text-label uppercase tracking-[0.14em] text-trust">{labels.metricLabel}</p>
             <p className="mt-2 text-sm font-semibold leading-relaxed text-trust">{active.metric}</p>
           </div>
         </div>
@@ -94,7 +100,7 @@ export function QualityFlow({ steps }: { steps: QualityStep[] }) {
           disabled={activeIndex === 0}
           className="font-semibold text-ink-600 transition-colors hover:text-ink-900 disabled:opacity-30"
         >
-          ← 이전 단계
+          {labels.prev}
         </button>
         <p className="text-ink-400">
           {activeIndex + 1} / {steps.length}
@@ -105,7 +111,7 @@ export function QualityFlow({ steps }: { steps: QualityStep[] }) {
           disabled={activeIndex === steps.length - 1}
           className="font-semibold text-ink-600 transition-colors hover:text-ink-900 disabled:opacity-30"
         >
-          다음 단계 →
+          {labels.next}
         </button>
       </div>
 

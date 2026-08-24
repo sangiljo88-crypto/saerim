@@ -1,0 +1,200 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+import { Reveal } from "@/components/ui/Reveal";
+import { NextStory, SectionTitle, TrustBadge } from "@/components/ui/brand";
+import { categoryLabel, getFactory, getProduct, listBrands, listProducts } from "@/lib/content";
+import { fill, getDict } from "@/lib/i18n";
+import { href, type Locale } from "@/lib/i18n/config";
+
+export const dynamic = "force-dynamic";
+
+type Props = { params: Promise<{ locale: Locale; slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const product = getProduct(locale, slug);
+  if (!product) return {};
+  return { title: product.name, description: product.summary };
+}
+
+/**
+ * 제품 상세 — 항상 같은 스토리 순서로 노출한다. (docs/brand-system/04 §3)
+ * 스토리 → 대표 특징 → 생산공정 → 포장규격 → 활용사례 → OEM → 구매/문의
+ */
+export default async function ProductDetailPage({ params }: Props) {
+  const { locale, slug } = await params;
+  const product = getProduct(locale, slug);
+  if (!product) notFound();
+
+  const dict = getDict(locale);
+  const t = dict.productDetail;
+  const factory = product.factorySlug ? getFactory(locale, product.factorySlug) : null;
+  const brand = listBrands(locale).find((b) => b.slug === product.brandSlug);
+  const category = categoryLabel(locale, product.category);
+  const related = listProducts(locale, product.category)
+    .filter((p) => p.slug !== product.slug)
+    .slice(0, 3);
+
+  return (
+    <>
+      {/* 헤더 */}
+      <section className="section !pb-14">
+        <div className="container-grid grid items-center gap-12 lg:grid-cols-2">
+          <Reveal>
+            <p className="kicker">
+              {brand ? `${brand.name} ${dict.brand.subSuffix}` : dict.common.companyShort} · {category}
+            </p>
+            <h1 className="mt-5 text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.15] text-ink-900">
+              {product.name}
+            </h1>
+            <p className="prose-body mt-6">{product.summary}</p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              <TrustBadge>{t.haccpBadge}</TrustBadge>
+              {factory && <TrustBadge>{fill(t.producedAt, { factory: factory.name })}</TrustBadge>}
+              {product.oemAvailable && <TrustBadge>{t.oemBadge}</TrustBadge>}
+            </div>
+          </Reveal>
+          <Reveal delayMs={100}>
+            <div className="overflow-hidden rounded-2xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={product.image} alt={product.name} className="aspect-square w-full object-cover" />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 1. 스토리 */}
+      <section className="section hairline-t">
+        <div className="container-text">
+          <SectionTitle kicker={t.storyKicker} title={t.storyTitle} />
+          <Reveal>
+            <p className="prose-body text-lg leading-loose">{product.story}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 2. 대표 특징 */}
+      <section className="section hairline-t bg-paper-warm">
+        <div className="container-text">
+          <SectionTitle kicker={t.featureKicker} title={t.featureTitle} />
+          <div className="grid gap-6 sm:grid-cols-3">
+            {product.features.map((feature, i) => (
+              <Reveal key={feature} delayMs={i * 60}>
+                <div className="rounded-xl border border-line bg-white p-6">
+                  <p className="text-sm font-semibold text-ink-900">{feature}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. 생산공정 */}
+      <section className="section hairline-t">
+        <div className="container-text">
+          <SectionTitle kicker={t.processKicker} title={t.processTitle} />
+          <Reveal>
+            <ol className="flex flex-wrap items-center gap-y-3 text-sm font-medium text-ink-600">
+              {product.process.split("→").map((step, i, all) => (
+                <li key={i} className="flex items-center">
+                  <span className="rounded-full border border-line px-4 py-2">{step.trim()}</span>
+                  {i < all.length - 1 && (
+                    <span aria-hidden className="px-2 text-ink-400">
+                      →
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+            <p className="mt-6 text-sm text-ink-400">
+              {t.processNote.before}
+              <Link href={href(locale, "/quality")} className="underline hover:text-ink-900">
+                {t.processNote.link}
+              </Link>
+              {t.processNote.after}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 4. 포장규격 · 5. 활용사례 */}
+      <section className="section hairline-t bg-paper-warm">
+        <div className="container-text grid gap-14 md:grid-cols-2">
+          <Reveal>
+            <SectionTitle kicker={t.packagingKicker} title={t.packagingTitle} />
+            <p className="prose-body">{product.packaging}</p>
+          </Reveal>
+          <Reveal delayMs={80}>
+            <SectionTitle kicker={t.useCaseKicker} title={t.useCaseTitle} />
+            <ul className="space-y-3">
+              {product.useCases.map((useCase) => (
+                <li key={useCase} className="flex items-start gap-3 text-body text-ink-600">
+                  <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  {useCase}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 6. OEM · 7. 구매/문의 */}
+      <section className="section hairline-t">
+        <div className="container-text text-center">
+          <Reveal>
+            <p className="kicker">{fill(t.orderKicker, { oem: product.oemAvailable ? "Available" : "—" })}</p>
+            <h2 className="mt-5 text-h1 text-ink-900">
+              {product.oemAvailable ? t.orderTitleOem : t.orderTitlePlain}
+            </h2>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+              {product.storeUrl && (
+                <a href={product.storeUrl} target="_blank" rel="noreferrer" className="cta-primary">
+                  {t.storeCta}
+                </a>
+              )}
+              <Link href={href(locale, `/contact?product=${product.slug}`)} className="cta-secondary">
+                {t.wholesaleCta}
+              </Link>
+              {product.oemAvailable && (
+                <Link
+                  href={href(locale, `/contact?type=oem&product=${product.slug}`)}
+                  className="cta-secondary"
+                >
+                  {t.oemCta}
+                </Link>
+              )}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 같은 카테고리 */}
+      {related.length > 0 && (
+        <section className="section hairline-t bg-paper-warm">
+          <div className="container-grid">
+            <SectionTitle kicker={t.relatedKicker} title={fill(t.relatedTitle, { category })} />
+            <div className="grid gap-8 sm:grid-cols-3">
+              {related.map((item) => (
+                <Link key={item.slug} href={href(locale, `/products/${item.slug}`)} className="group block">
+                  <div className="overflow-hidden rounded-2xl">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <h3 className="mt-4 text-h3 text-ink-900 group-hover:text-accent">{item.name}</h3>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <NextStory locale={locale} href="/factory" title={t.nextStory} />
+    </>
+  );
+}

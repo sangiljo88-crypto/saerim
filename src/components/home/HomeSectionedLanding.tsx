@@ -238,7 +238,7 @@ export function HomeSectionedLanding({ categories, products, featuredProducts }:
             <li>사업자등록번호: 481-86-00066</li>
             <li>주소: 전북특별자치도 군산시 옥산면 산성로 154</li>
             <li>TEL: 063-464-8681 / FAX: 063-464-8683</li>
-            <li>E-MAIL: serim6408@naver.com</li>
+            <li>E-MAIL: info@saerim.kr</li>
             <li>카카오 상담: open.kakao.com/o/pRSmEn9h</li>
             <li>스마트스토어: vo.la/RFDWcIg</li>
           </ul>

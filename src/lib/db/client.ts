@@ -114,6 +114,18 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 `;
 
+/**
+ * 이미 생성된 DB(운영 볼륨 포함)에 적용할 일회성 보정.
+ * 시드는 최초 1회만 돌기 때문에, 기존 값 교체는 여기서 처리한다.
+ */
+function migrate(db: DatabaseSync) {
+  // 대표 메일 주소 변경: 네이버 → 회사 도메인
+  db.prepare("UPDATE settings SET value=? WHERE key='contact_email' AND value=?").run(
+    "info@saerim.kr",
+    "serim6408@naver.com",
+  );
+}
+
 declare global {
   // Next.js dev 핫리로드 시 커넥션 중복 생성을 막는다.
   var __saerimDb: DatabaseSync | undefined;
@@ -129,6 +141,7 @@ export function getDb(): DatabaseSync {
   db.exec("PRAGMA journal_mode = WAL;");
   db.exec(SCHEMA);
   seedIfEmpty(db);
+  migrate(db);
 
   globalThis.__saerimDb = db;
   return db;

@@ -2,22 +2,23 @@
 
 import { useState } from "react";
 
-type FieldErrors = Partial<Record<"company" | "name" | "phone" | "email" | "message", string[]>>;
+import type { Dictionary } from "@/lib/i18n/ko";
+import { useParams } from "next/navigation";
 
-const KINDS = [
-  { value: "wholesale", label: "도매 공급" },
-  { value: "oem", label: "OEM 생산" },
-  { value: "general", label: "일반 문의" },
-] as const;
+type FieldErrors = Partial<Record<"company" | "name" | "phone" | "email" | "message", string[]>>;
 
 /** 문의 폼 — /api/inquiries 로 접수되어 관리자 문의함에 저장된다 */
 export function InquiryForm({
+  labels,
   defaultKind = "wholesale",
   defaultProduct = "",
 }: {
+  labels: Dictionary["inquiryForm"];
   defaultKind?: string;
   defaultProduct?: string;
 }) {
+  const params = useParams<{ locale?: string }>();
+  const locale = params?.locale === "zh" ? "zh" : "ko";
   const [state, setState] = useState<"idle" | "submitting" | "done" | "error">("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -37,6 +38,7 @@ export function InquiryForm({
       email: String(form.get("email") ?? ""),
       message: String(form.get("message") ?? ""),
       productSlug: defaultProduct,
+      locale,
     };
 
     try {
@@ -52,10 +54,10 @@ export function InquiryForm({
         return;
       }
       setErrors(data.fieldErrors ?? {});
-      setErrorMessage(data.error ?? "접수에 실패했습니다. 잠시 후 다시 시도해주세요.");
+      setErrorMessage(data.error ?? labels.failed);
       setState("error");
     } catch {
-      setErrorMessage("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      setErrorMessage(labels.networkError);
       setState("error");
     }
   }
@@ -63,13 +65,9 @@ export function InquiryForm({
   if (state === "done") {
     return (
       <div className="rounded-2xl border border-line bg-white p-10 text-center">
-        <p className="text-h2 text-ink-900">문의가 접수되었습니다.</p>
-        <p className="prose-body mx-auto mt-3">
-          담당자가 영업일 기준 1일 이내에 연락드립니다.
-          <br />
-          급하신 경우 063-464-8681로 전화 주세요.
-        </p>
-        <p className="mt-6 text-sm font-medium text-accent">오늘도 사장님 가게의 완판을 빕니다.</p>
+        <p className="text-h2 text-ink-900">{labels.doneTitle}</p>
+        <p className="prose-body mx-auto mt-3 whitespace-pre-line">{labels.doneBody}</p>
+        <p className="mt-6 text-sm font-medium text-accent">{labels.doneSignature}</p>
       </div>
     );
   }
@@ -82,9 +80,9 @@ export function InquiryForm({
   return (
     <form onSubmit={onSubmit} className="space-y-6" noValidate>
       <fieldset>
-        <legend className={labelCls}>문의 유형</legend>
+        <legend className={labelCls}>{labels.kindLegend}</legend>
         <div className="flex flex-wrap gap-2">
-          {KINDS.map((kind) => (
+          {labels.kinds.map((kind) => (
             <label key={kind.value} className="cursor-pointer">
               <input
                 type="radio"
@@ -104,44 +102,44 @@ export function InquiryForm({
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="company" className={labelCls}>
-            업체명 <span className="text-accent">*</span>
+            {labels.company} <span className="text-accent">*</span>
           </label>
-          <input id="company" name="company" required className={inputCls} placeholder="예) 군산옥산국밥" />
+          <input id="company" name="company" required className={inputCls} placeholder={labels.companyPlaceholder} />
           {errors.company && <p className={errCls}>{errors.company[0]}</p>}
         </div>
         <div>
           <label htmlFor="name" className={labelCls}>
-            담당자명 <span className="text-accent">*</span>
+            {labels.name} <span className="text-accent">*</span>
           </label>
-          <input id="name" name="name" required className={inputCls} placeholder="예) 홍길동" />
+          <input id="name" name="name" required className={inputCls} placeholder={labels.namePlaceholder} />
           {errors.name && <p className={errCls}>{errors.name[0]}</p>}
         </div>
         <div>
           <label htmlFor="phone" className={labelCls}>
-            연락처 <span className="text-accent">*</span>
+            {labels.phone} <span className="text-accent">*</span>
           </label>
-          <input id="phone" name="phone" required className={inputCls} placeholder="010-0000-0000" />
+          <input id="phone" name="phone" required className={inputCls} placeholder={labels.phonePlaceholder} />
           {errors.phone && <p className={errCls}>{errors.phone[0]}</p>}
         </div>
         <div>
           <label htmlFor="email" className={labelCls}>
-            이메일
+            {labels.email}
           </label>
-          <input id="email" name="email" type="email" className={inputCls} placeholder="선택 입력" />
+          <input id="email" name="email" type="email" className={inputCls} placeholder={labels.emailPlaceholder} />
           {errors.email && <p className={errCls}>{errors.email[0]}</p>}
         </div>
       </div>
 
       <div>
         <label htmlFor="message" className={labelCls}>
-          문의 내용
+          {labels.message}
         </label>
         <textarea
           id="message"
           name="message"
           rows={5}
           className={inputCls}
-          placeholder="품목, 수량, 납기 조건을 알려주시면 더 정확한 제안을 드릴 수 있습니다."
+          placeholder={labels.messagePlaceholder}
         />
         {errors.message && <p className={errCls}>{errors.message[0]}</p>}
       </div>
@@ -149,7 +147,7 @@ export function InquiryForm({
       {errorMessage && <p className="text-sm font-medium text-accent">{errorMessage}</p>}
 
       <button type="submit" disabled={state === "submitting"} className="cta-primary w-full disabled:opacity-60">
-        {state === "submitting" ? "접수 중…" : "문의 접수하기"}
+        {state === "submitting" ? labels.submitting : labels.submit}
       </button>
     </form>
   );

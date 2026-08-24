@@ -11,6 +11,19 @@
 HOME → WHY → BRAND → BUSINESS → PRODUCT → FACTORY → QUALITY → OEM → NEWS → STORE → CONTACT
 ```
 
+## 다국어 (한국어 / 중국어 간체)
+
+- 한국어: 접두사 없는 기존 URL 그대로 (`https://www.saerim.kr/why`)
+- 중국어: `/zh` 접두사 (`https://www.saerim.kr/zh/why`) — 중국 비즈니스 QR 배포용
+- 우측 상단 `한국어 | 中文` 토글은 **보고 있던 페이지를 유지한 채** 언어만 전환합니다.
+- 문구가 있는 위치
+  - 화면 고정 문구: `src/lib/i18n/ko.ts` / `src/lib/i18n/zh.ts` (두 파일의 구조가 동일해야 하며, ko가 타입 원본)
+  - CMS(DB) 콘텐츠의 중국어 대역: `src/lib/i18n/content-zh.ts` (제품/공장/브랜드/품질단계/뉴스 slug 기준)
+  - 페이지는 DB를 직접 읽지 않고 `src/lib/content.ts`(로케일 반영 계층)를 통해 읽습니다.
+- 관리자에서 한국어 콘텐츠를 수정해도 중국어 대역표는 자동으로 바뀌지 않습니다. 제품·뉴스를 추가하면
+  `content-zh.ts`에 같은 slug로 번역을 추가하세요(없으면 해당 항목만 한국어로 노출됩니다).
+- QR 코드: `public/qr/saerim-zh.png` · `public/qr/saerim-zh.svg` → `https://www.saerim.kr/zh`
+
 - 공개 페이지는 SQLite DB를 읽어 렌더링됩니다 (콘텐츠 수정에 코드 변경 불필요)
 - 관리자(/admin)에서 제품·브랜드·공장·품질단계·뉴스·스토어 링크·문의·사이트 설정을 관리합니다
 - 문의 폼은 실제로 접수되어 관리자 문의함에 저장됩니다

@@ -513,7 +513,7 @@ const SETTINGS: Record<string, string> = {
     "선진·하이포크, 농협 목우촌, 팜스코, 이마트, 이마트 트레이더스, 홈플러스, 쿠팡, 마켓컬리, 오아시스마켓, bhc, 하림산업, 더바른정·권사부, 군산 학교급식",
   contact_tel: "063-464-8681",
   contact_fax: "063-464-8683",
-  contact_email: "serim6408@naver.com",
+  contact_email: "info@saerim.kr",
   contact_address: "전북특별자치도 군산시 옥산면 산성로 154",
   contact_kakao: "https://open.kakao.com/o/pRSmEn9h",
 };
