@@ -15,6 +15,7 @@ export const ko = {
       { href: "/factory", label: "FACTORY" },
       { href: "/quality", label: "QUALITY" },
       { href: "/oem", label: "OEM" },
+      { href: "/export", label: "EXPORT" },
       { href: "/news", label: "NEWS" },
       { href: "/store", label: "STORE" },
     ],
@@ -26,6 +27,13 @@ export const ko = {
     nextStory: "다음 이야기",
     readMore: "읽기",
     openLink: "바로가기",
+    logoAlt: "유한회사 새림 로고 — 식품 인프라",
+    productImageAlt: "{name} {packaging} — HACCP 공정, {factory}, {brand}",
+    factoryImageAlt: "새림 {factory} — {role}",
+    profilePdf: "회사소개서 다운로드 (PDF)",
+    catalogPdf: "제품 카탈로그 (PDF)",
+    downloadsLabel: "자료 다운로드",
+    orgDescription: "HACCP 인증 돼지 부산물·특수부위·육가공 B2B 제조사. 군산·김제·용인 3개 공장.",
     notFoundTitle: "페이지를 찾을 수 없습니다",
     notFoundBody: "요청하신 페이지가 없거나 이동되었습니다.",
     notFoundCta: "홈으로 이동",
@@ -404,7 +412,7 @@ export const ko = {
     kinds: [
       { value: "wholesale", label: "도매 공급" },
       { value: "oem", label: "OEM 생산" },
-      { value: "general", label: "일반 문의" },
+      { value: "general", label: "일반 · 수출 문의" },
     ],
     kindLegend: "문의 유형",
     company: "업체명",
@@ -424,6 +432,52 @@ export const ko = {
     doneTitle: "문의가 접수되었습니다.",
     doneBody: "담당자가 영업일 기준 1일 이내에 연락드립니다.\n급하신 경우 063-464-8681로 전화 주세요.",
     doneSignature: "오늘도 사장님 가게의 완판을 빕니다.",
+  },
+
+  exportPage: {
+    kicker: "Export",
+    title: "해외 바이어를 위한 안내",
+    lead: "새림은 군산·김제·용인 3개 HACCP 공장에서 돼지 부산물·특수부위·육가공품을 생산하는 B2B 제조사입니다. 수입업체·유통사·프랜차이즈 본사와의 직거래, OEM·PB 생산을 환영합니다.",
+    faqTitle: "자주 묻는 질문",
+    cta: "수출 문의하기",
+    nextStory: "이제 대화를 시작하자",
+    sections: [
+      {
+        title: "수출 가능 품목",
+        items: [
+          "돼지 부산물·특수부위(냉동): 한국과 검역 협정이 체결된 국가에 한해 가능",
+          "육가공품(햄·소시지·조제 육류)",
+          "축산 성분을 포함하지 않는 한식 밀키트·탕류(식품류 허가)",
+        ],
+        note: "대상국을 알려주시면 품목별 가능 여부를 확인해 드립니다.",
+      },
+      {
+        title: "거래 조건",
+        items: [
+          "인코텀즈: FOB 부산/인천 기준 견적, CIF·CFR 협의 가능",
+          "결제: T/T(선금·잔금) 또는 L/C at sight 협의",
+          "포장: 수출 규격 박스·팔레트, 라벨은 대상국 규정 반영",
+          "샘플: 규격 협의 후 1주 내 발송(운임 협의)",
+        ],
+        note: "",
+      },
+      {
+        title: "제공 서류",
+        items: [
+          "HACCP 인증서 사본",
+          "제품 스펙시트 · 성분표",
+          "원산지 확인 서류",
+          "검역·위생증명서(대상국 요건에 따라 발급 지원)",
+          "공장 실사 자료",
+        ],
+        note: "",
+      },
+    ],
+    faq: [
+      { q: "미국·중국으로 돼지고기를 수출할 수 있습니까?", a: "현재 한국산 돼지고기·부산물은 미국·중국과 검역 협정이 체결되어 있지 않아 수출이 불가합니다. 축산 성분이 없는 밀키트·탕류는 식품류로 별도 검토합니다." },
+      { q: "할랄 인증이 있습니까?", a: "돼지고기 제품은 해당되지 않습니다. 비축산 밀키트의 할랄 인증은 대상 시장에 맞춰 검토 중입니다." },
+      { q: "어느 담당자에게 연락해야 합니까?", a: "수출 문의는 info@saerim.kr 또는 문의 폼(일반/수출)으로 보내주시면 영업일 1일 내 영어로 회신합니다." },
+    ],
   },
 
   faq: {
@@ -448,6 +502,7 @@ export const ko = {
     titleTemplate: "%s | 유한회사 새림",
     /** 제품 상세 <title>에 붙는 검색어 접미사 (영어만 사용) */
     productTitleSuffix: "",
+    keywords: ["돼지 부산물", "돈두", "머릿고기", "내장", "막창", "뒷고기", "국밥 재료", "육가공 OEM", "HACCP", "군산 식품회사", "새림"],
     description:
       "식당은 손님을 맞이합니다. 새림은 식당을 준비합니다. 군산·김제·용인 공장 기반의 B2B 식품 제조 플랫폼 — 국탕류·뒷고기류·OEM.",
     ogTitle: "유한회사 새림 | 식품 인프라",
@@ -463,6 +518,7 @@ export const ko = {
       news: { title: "NEWS — 새림은 계속 움직이고 있다", description: "게시판이 아니라 브랜드 스토리. 새림의 소식을 전합니다." },
       store: { title: "STORE — 지금 바로 경험할 수 있다", description: "새림의 제품을 소량으로 먼저 경험해 보세요. 스마트스토어·카카오 채널 안내." },
       contact: { title: "CONTACT — 이제 대화를 시작하자", description: "도매·OEM·일반 문의. 품목, 수량, 납기 조건을 알려주시면 맞춤 공급안을 제안합니다." },
+      export: { title: "EXPORT — 해외 바이어 안내", description: "HACCP 인증 돼지 부산물·육가공·한식 밀키트 수출 안내. 검역 협정국 확인, 필요 서류, 인코텀즈·결제 조건." },
     },
   },
 

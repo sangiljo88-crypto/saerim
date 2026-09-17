@@ -44,7 +44,7 @@ export default async function NewsDetailPage({ params }: Props) {
             <Reveal>
               <div className="mt-12 overflow-hidden rounded-2xl">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.coverImage} alt="" className="aspect-video w-full object-cover" />
+                <img src={item.coverImage} alt={item.title} className="aspect-video w-full object-cover" />
               </div>
             </Reveal>
           )}

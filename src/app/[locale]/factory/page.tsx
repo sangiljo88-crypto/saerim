@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory } from "@/components/ui/brand";
-import { listFactories } from "@/lib/content";
+import { factoryImageAlt, listFactories } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
 
@@ -46,7 +46,7 @@ export default async function FactoryPage({ params }: Props) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={factory.image}
-                    alt={factory.name}
+                    alt={factoryImageAlt(locale, factory)}
                     className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 </div>

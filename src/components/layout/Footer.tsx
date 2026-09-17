@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Downloads } from "@/components/ui/Downloads";
 import { getSettings } from "@/lib/content";
 import { getDict, fill } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
@@ -16,7 +17,7 @@ export function Footer({ locale }: { locale: Locale }) {
         <div>
           <div className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/logo.svg" alt="" className="h-10 w-10" />
+            <img src="/images/logo.svg" alt={dict.common.logoAlt} className="h-10 w-10" />
             <p className="text-lg font-bold text-ink-900">{dict.common.companyName}</p>
           </div>
           <p className="prose-body mt-4 whitespace-pre-line text-sm">{t.lead}</p>
@@ -28,6 +29,7 @@ export function Footer({ locale }: { locale: Locale }) {
             TEL {settings.contact_tel ?? "063-464-8681"} · FAX {settings.contact_fax ?? "063-464-8683"} ·{" "}
             {settings.contact_email ?? "info@saerim.kr"}
           </p>
+          <Downloads locale={locale} className="mt-5 !text-xs" />
         </div>
 
         <nav aria-label={t.siteMapLabel}>

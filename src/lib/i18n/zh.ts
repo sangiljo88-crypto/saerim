@@ -17,6 +17,7 @@ export const zh: Dictionary = {
       { href: "/factory", label: "工厂" },
       { href: "/quality", label: "品质" },
       { href: "/oem", label: "OEM" },
+      { href: "/export", label: "EXPORT" },
       { href: "/news", label: "新闻" },
       { href: "/store", label: "商城" },
     ],
@@ -28,6 +29,13 @@ export const zh: Dictionary = {
     nextStory: "下一篇",
     readMore: "阅读全文",
     openLink: "前往",
+    logoAlt: "SAERIM 有限公司标志 — 食品基础设施",
+    productImageAlt: "{name} {packaging} — HACCP 工艺，{factory}，{brand}",
+    factoryImageAlt: "SAERIM {factory} — {role}",
+    profilePdf: "下载公司简介（PDF）",
+    catalogPdf: "产品目录（PDF）",
+    downloadsLabel: "资料下载",
+    orgDescription: "HACCP 认证的猪副产品·特殊部位·肉类加工 B2B 制造商。群山·金堤·龙仁三座工厂。",
     notFoundTitle: "找不到页面",
     notFoundBody: "您访问的页面不存在或已被移动。",
     notFoundCta: "返回首页",
@@ -406,7 +414,7 @@ export const zh: Dictionary = {
     kinds: [
       { value: "wholesale", label: "批发供应" },
       { value: "oem", label: "OEM 生产" },
-      { value: "general", label: "一般咨询" },
+      { value: "general", label: "一般·出口咨询" },
     ],
     kindLegend: "咨询类型",
     company: "公司名称",
@@ -426,6 +434,52 @@ export const zh: Dictionary = {
     doneTitle: "咨询已提交。",
     doneBody: "负责人将在一个工作日内与您联系。\n如有紧急事项，请致电 +82-63-464-8681。",
     doneSignature: "祝您生意兴隆。",
+  },
+
+  exportPage: {
+    kicker: "出口",
+    title: "致海外采购商",
+    lead: "SAERIM 是在群山·金堤·龙仁三座 HACCP 工厂生产猪副产品·特殊部位·肉类加工品的 B2B 制造商。欢迎进口商、经销商、连锁总部直接交易及 OEM·自有品牌生产。",
+    faqTitle: "常见问题",
+    cta: "出口咨询",
+    nextStory: "现在，开始对话吧",
+    sections: [
+      {
+        title: "可出口品目",
+        items: [
+          "猪副产品·特殊部位（冷冻）：仅限与韩国签有检疫协定的国家",
+          "肉类加工品（火腿·香肠·调制肉类）",
+          "不含畜产成分的韩式料理包·汤类（食品类许可）",
+        ],
+        note: "请告知目标国，我们将按品目确认可行性。",
+      },
+      {
+        title: "交易条件",
+        items: [
+          "贸易术语：以 FOB 釜山/仁川报价，可协商 CIF·CFR",
+          "付款：T/T（预付+尾款）或即期 L/C 协商",
+          "包装：出口规格纸箱·托盘，标签按目标国规定",
+          "样品：规格确认后 1 周内发出（运费协商）",
+        ],
+        note: "",
+      },
+      {
+        title: "可提供文件",
+        items: [
+          "HACCP 证书副本",
+          "产品规格书 · 成分表",
+          "原产地证明文件",
+          "检疫·卫生证书（按目标国要求协助办理）",
+          "工厂审核资料",
+        ],
+        note: "",
+      },
+    ],
+    faq: [
+      { q: "可以向美国·中国出口猪肉吗？", a: "目前韩国产猪肉及副产品与美国·中国尚未签订检疫协定，无法出口。不含畜产成分的料理包·汤类将作为食品类另行评估。" },
+      { q: "有清真认证吗？", a: "猪肉产品不适用。非畜产料理包的清真认证正按目标市场评估中。" },
+      { q: "应联系谁？", a: "出口咨询请发送至 info@saerim.kr 或使用咨询表（一般/出口），我们将在 1 个工作日内以英文回复。" },
+    ],
   },
 
   faq: {
@@ -450,6 +504,7 @@ export const zh: Dictionary = {
     titleTemplate: "%s | SAERIM 有限公司",
     /** 제품 상세 <title>에 붙는 검색어 접미사 (영어만 사용) */
     productTitleSuffix: "",
+    keywords: ["猪副产品", "猪头肉", "猪内脏", "猪大肠", "特殊部位", "汤饭原料", "肉类加工 OEM", "HACCP", "韩国群山食品公司", "SAERIM"],
     description:
       "餐厅招待客人，SAERIM 为餐厅做准备。以群山·金堤·龙仁工厂为基础的 B2B 食品制造平台 —— 汤类原料、猪特色部位肉、OEM 代工。",
     ogTitle: "SAERIM 有限公司 | 食品基础设施",
@@ -465,6 +520,7 @@ export const zh: Dictionary = {
       news: { title: "新闻 — SAERIM 一直在前进", description: "不是公告板，而是品牌故事。SAERIM 的最新消息。" },
       store: { title: "线上购买 — 现在就可以体验", description: "先小批量体验 SAERIM 的产品。线上商城与 KakaoTalk 频道指引。" },
       contact: { title: "联系我们 — 现在开始对话", description: "批发 · OEM · 一般咨询。告知品类、数量与交期条件，我们将提出定制供应方案。" },
+      export: { title: "EXPORT — 海外采购商指南", description: "HACCP 认证猪副产品·肉类加工·韩式料理包出口指南。检疫协定国确认、所需文件、贸易术语与付款条件。" },
     },
   },
 

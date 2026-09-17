@@ -3,6 +3,8 @@
  * 키는 DB의 slug / step_no / settings key / store_links id 를 그대로 쓴다.
  * 여기에 없는 항목은 한국어 원문이 그대로 노출된다(누락돼도 화면은 깨지지 않는다).
  * 고유명사·부위명 표기는 GEO·SEO 작업지시서 §14 용어집을 따른다.
+ * 국제 통용명이 없는 특수부위(뽈항정·관자살·설하살·도래창·오소리감투 등)는 영어로 의역하지 않고
+ * 붙여 쓴 로마자로 표기한다. (Gwanjasal, Seolhasal …)
  */
 import type {
   BrandOverlay,
@@ -56,7 +58,7 @@ export const brands: Record<string, BrandOverlay> = {
     nameEn: "YUKSIK NOTE",
     tagline: "The cuts only insiders knew become your signature",
     description:
-      "SAERIM's channel brand for specialty pork cuts such as cheek jowl (ppol-hangjeong), temple meat (gwanja-sal) and tongue-root meat (seolha-sal). It serves both grill restaurants and consumers.",
+      "SAERIM's channel brand for specialty pork cuts such as ppolhangjeong, gwanjasal and seolhasal. It serves both grill restaurants and consumers.",
     target: "Grill restaurants · consumers",
   },
   "yeomgane-bapsang": {
@@ -72,7 +74,7 @@ export const brands: Record<string, BrandOverlay> = {
     nameEn: "CHUEOK DWITGOGI",
     tagline: "A house brand that holds the memory of a bite of specialty pork",
     description:
-      "A registered-trademark house brand for the grilling line of specialty pork cuts such as kkodeul-sal and cheek meat.",
+      "A registered-trademark house brand for the grilling line of specialty pork cuts such as kkodeulsal and ppolsal.",
     target: "Consumers · grill restaurants",
   },
 };
@@ -158,40 +160,40 @@ export const products: Record<string, ProductOverlay> = {
     useCases: ["Sundae-gukbap · offal soup", "Bar-snack topping", "Gopchang hot pot (jeongol)"],
   },
   "boiled-osori-gamtu": {
-    name: "Boiled Pork Stomach (Osori-gamtu)",
+    name: "Boiled Pork Osorigamtu",
     summary: "The final layer that gives your gukbap its own texture",
     story:
-      "A bowl of gukbap is judged by its layers of texture, and pork stomach is the cut that fills the last layer. We tightened the washing and heat-processing standards to supply it at specialty-restaurant quality.",
+      "A bowl of gukbap is judged by its layers of texture, and osorigamtu is the cut that fills the last layer. We tightened the washing and heat-processing standards to supply it at specialty-restaurant quality.",
     features: ["Specialty-cut texture", "Richer gukbap flavor", "Stable delivery"],
     process: "Washing → Heat processing → Chilling → Hygiene inspection → Packaging to specification",
     packaging: "Frozen, 1 kg pack · nationwide frozen direct shipping",
     useCases: ["Gukbap · offal soup", "Gopchang dishes", "Signature restaurant topping"],
   },
   "ppolhangjeong-500g": {
-    name: "Pork Cheek Jowl (Ppol-hangjeong) 500 g",
+    name: "Pork Ppolhangjeong 500 g",
     summary: "A cut once sold only near farms, now on your menu",
     story:
-      "Cuts that yield only a small amount per pig are hard to distribute and used to be consumed only near the source. Because SAERIM runs its own slaughter-and-deboning system, it can collect pork cheek jowl steadily and supply it nationwide.",
+      "Cuts that yield only a small amount per pig are hard to distribute and used to be consumed only near the source. Because SAERIM runs its own slaughter-and-deboning system, it can collect ppolhangjeong steadily and supply it nationwide.",
     features: ["Rare specialty cut", "Rich, nutty flavor", "Popular restaurant item"],
     process: "Same-day slaughter → Same-day deboning → Sorting & trimming → Vacuum packaging → Frozen shipping",
     packaging: "Frozen, 500 g vacuum pack · 300 kg+ bulk by arrangement",
     useCases: ["Charcoal grilling", "Main item for specialty-cut grill restaurants", "Camping barbecue"],
   },
   "gwanjasal-300g": {
-    name: "Pork Temple Meat (Gwanja-sal) 300 g",
-    summary: "Grill straight from the 300 g bag, no weighing — the marbled cut regulars ask for first",
+    name: "Pork Gwanjasal 300 g",
+    summary: "Grill straight from the 300 g bag, no weighing — the gwanjasal regulars ask for first",
     story:
-      "Also known as snowflake meat, pork temple meat is the cut that customers in the know ask for first. We trim and weigh it to a specification that fits restaurant cooking, ready to use from side dish to main.",
+      "Also known as nunkkotsal, gwanjasal is the cut that customers in the know ask for first. We trim and weigh it to a specification that fits restaurant cooking, ready to use from side dish to main.",
     features: ["Springy texture", "Rare cut", "Restaurant-specification packaging"],
     process: "Precision deboning → Trimming → Weighing → Vacuum packaging",
     packaging: "Frozen, 300 g vacuum pack · morning orders ship same day",
     useCases: ["Specialty-cut grilling", "Direct-flame dishes", "Specialty-cut platter"],
   },
   "seolhasal-300g": {
-    name: "Pork Tongue-Root Meat (Seolha-sal) 300 g",
+    name: "Pork Seolhasal 300 g",
     summary: "The same texture from every lot you receive",
     story:
-      "Tongue-root meat varies widely from piece to piece, so the trimming standard determines quality. We sort and trim to SAERIM's standard to keep your cooking results consistent.",
+      "Seolhasal varies widely from piece to piece, so the trimming standard determines quality. We sort and trim to SAERIM's standard to keep your cooking results consistent.",
     features: ["Distinctive texture", "Sorted and trimmed", "Stable volume supply"],
     process: "Deboning right after slaughter → Sorting & trimming → Hygiene inspection → Frozen packaging",
     packaging: "Frozen, 300 g vacuum pack · case-unit wholesale pricing",
@@ -208,10 +210,10 @@ export const products: Record<string, ProductOverlay> = {
     useCases: ["Gopchang hot pot · daechang hot pot", "Gukbap topping", "Side ingredient for grilled dishes"],
   },
   "modeum-naejang": {
-    name: "Assorted Pork Offal (small intestine · heart · stomach)",
+    name: "Assorted Pork Offal (small intestine · heart · osorigamtu)",
     summary: "One case completes your gukbap toppings — no need to buy each cut separately",
     story:
-      "A bowl of sundae-gukbap takes three or four kinds of offal. Sourcing each cut from a different supplier means uneven quality and delivery. SAERIM boils small intestine, heart and stomach to the same process standard and packs them as one assortment.",
+      "A bowl of sundae-gukbap takes three or four kinds of offal. Sourcing each cut from a different supplier means uneven quality and delivery. SAERIM boils small intestine, heart and osorigamtu to the same process standard and packs them as one assortment.",
     features: ["Three cuts in one assortment", "Uniform quality from one process standard", "Simpler inventory management"],
     process: "Washing by cut → Heat processing → Chilling → Combining & weighing → Frozen packaging",
     packaging: "Frozen, 1 kg pack · recurring delivery schedule available",

@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Faq } from "@/components/ui/Faq";
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle, TrustBadge } from "@/components/ui/brand";
-import { categoryLabel, getFactory, getProduct, listBrands, listProducts } from "@/lib/content";
+import { categoryLabel, getFactory, getProduct, listBrands, listProducts, productImageAlt } from "@/lib/content";
 import { fill, getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
 
@@ -74,7 +75,7 @@ export default async function ProductDetailPage({ params }: Props) {
           <Reveal delayMs={100}>
             <div className="overflow-hidden rounded-2xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={product.image} alt={product.name} className="aspect-square w-full object-cover" />
+              <img src={product.image} alt={productImageAlt(locale, product)} className="aspect-square w-full object-cover" />
             </div>
           </Reveal>
         </div>
@@ -232,7 +233,7 @@ export default async function ProductDetailPage({ params }: Props) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.image}
-                      alt={item.name}
+                      alt={productImageAlt(locale, item)}
                       className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
@@ -245,6 +246,27 @@ export default async function ProductDetailPage({ params }: Props) {
       )}
 
       <NextStory locale={locale} href="/factory" title={t.nextStory} />
+
+      {/* Product 구조화 데이터 — 가격이 확정되지 않아 offers는 싣지 않는다 */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.name,
+          description: product.summary,
+          image: `https://www.saerim.kr${product.image}`,
+          url: `https://www.saerim.kr${href(locale, `/products/${product.slug}`)}`,
+          ...(brand ? { brand: { "@type": "Brand", name: brand.name } } : {}),
+          manufacturer: { "@type": "Organization", name: "SAERIM Co., Ltd." },
+          category,
+          countryOfOrigin: "KR",
+          additionalProperty: [
+            { "@type": "PropertyValue", name: "Certification", value: "HACCP" },
+            ...(product.storage ? [{ "@type": "PropertyValue", name: "Storage", value: product.storage }] : []),
+            ...(product.hsCode ? [{ "@type": "PropertyValue", name: "HS code", value: product.hsCode }] : []),
+          ],
+        }}
+      />
     </>
   );
 }

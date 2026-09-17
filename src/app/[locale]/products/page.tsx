@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Downloads } from "@/components/ui/Downloads";
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory } from "@/components/ui/brand";
-import { categoryLabel, listProductCategories, listProducts } from "@/lib/content";
+import { categoryLabel, listProductCategories, listProducts, productImageAlt } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
 
@@ -36,6 +37,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
             <p className="kicker">{t.kicker}</p>
             <h1 className="mt-6 text-display text-ink-900">{t.title}</h1>
             <p className="prose-body mt-6">{t.lead}</p>
+            <Downloads locale={locale} className="mt-6" />
           </Reveal>
 
           <nav className="mt-12 flex flex-wrap gap-2" aria-label={t.filterLabel}>
@@ -74,7 +76,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={product.image}
-                      alt={product.name}
+                      alt={productImageAlt(locale, product)}
                       className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>

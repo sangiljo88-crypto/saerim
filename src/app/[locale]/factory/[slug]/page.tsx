@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle, TrustBadge } from "@/components/ui/brand";
-import { getFactory, listFactories, listProducts } from "@/lib/content";
+import { factoryImageAlt, getFactory, listFactories, listProducts, productImageAlt } from "@/lib/content";
 import { fill, getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
 
@@ -36,7 +36,7 @@ export default async function FactoryDetailPage({ params }: Props) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={factory.image}
-          alt={factory.name}
+          alt={factoryImageAlt(locale, factory)}
           className="absolute inset-0 h-full w-full object-cover opacity-50"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 to-ink-950/20" aria-hidden />
@@ -92,7 +92,7 @@ export default async function FactoryDetailPage({ params }: Props) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={product.image}
-                      alt={product.name}
+                      alt={productImageAlt(locale, product)}
                       className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>

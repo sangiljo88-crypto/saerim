@@ -249,14 +249,15 @@ export const products: Record<string, ProductOverlay> = {
     useCases: ["烤肠专门店", "直火预烤菜品", "火锅用"],
   },
   doraechang: {
-    name: "猪子宫（母猪特色部位）",
-    summary: "少数能让您把这道菜写上菜单的供应来源",
+    // 부위 정의가 확인되지 않아 해부학적 명칭으로 옮기지 않고 로마자 표기를 쓴다 (영문 Pork Doraechang과 동일)
+    name: "Doraechang 猪稀有特色部位",
+    summary: "少数能让您把 Doraechang 写上菜单的供应来源",
     story:
-      "这一部位产量极少，能够经手的供应商本就不多。正因为 SAERIM 自主运营屠宰与分割产线，才能稳定归集供应。让您的菜单与周边门店拉开差距。",
+      "Doraechang 产量极少，能够经手的供应商本就不多。正因为 SAERIM 自主运营屠宰与分割产线，才能稳定归集供应。让您的菜单与周边门店拉开差距。",
     features: ["稀有部位稳定供货", "自营产线直送", "差异化菜单食材"],
     process: "屠宰后即时分割 → 挑选 → 清洗 → 卫生验收 → 冷冻包装",
     packaging: "冷冻真空包装 · 数量需提前协商",
-    useCases: ["特色部位烤肉专门店", "特色部位火锅", "限量菜单"],
+    useCases: ["特色部位烤肉专门店", "Doraechang 火锅", "限量菜单"],
   },
 };
 

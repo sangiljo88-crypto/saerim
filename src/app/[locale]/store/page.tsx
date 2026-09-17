@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle } from "@/components/ui/brand";
-import { listFeaturedProducts, listStoreLinks } from "@/lib/content";
+import { listFeaturedProducts, listStoreLinks, productImageAlt } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
 
@@ -70,7 +70,7 @@ export default async function StorePage({ params }: Props) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={product.image}
-                    alt={product.name}
+                    alt={productImageAlt(locale, product)}
                     className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 </div>
