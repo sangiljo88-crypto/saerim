@@ -50,6 +50,9 @@ const toProduct = (r: Row): Product => ({
   summary: str(r.summary), story: str(r.story), features: arr(r.features),
   process: str(r.process), packaging: str(r.packaging), useCases: arr(r.use_cases),
   oemAvailable: num(r.oem_available) === 1, storeUrl: str(r.store_url), image: str(r.image),
+  ingredients: str(r.ingredients), origin: str(r.origin), shelfLife: str(r.shelf_life),
+  storage: str(r.storage), netWeight: str(r.net_weight), boxQty: str(r.box_qty),
+  hsCode: str(r.hs_code), specSheetUrl: str(r.spec_sheet_url),
   featured: num(r.featured) === 1, sort: num(r.sort), status: str(r.status) as Product["status"],
 });
 

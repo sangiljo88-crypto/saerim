@@ -14,9 +14,14 @@ import type {
 } from "./content-zh";
 
 export const settings: Record<string, string> = {
-  hero_title_1: "Restaurants welcome guests.",
-  hero_title_2: "SAERIM prepares restaurants.",
-  hero_sub: "Tomorrow morning, the only thing you need to check is your guests.",
+  // 영어 메인 H1은 슬로건 대신 설명형 — 바이어 검색어(품목 · 인증 · 지역)가 앞에 온다
+  hero_title_1: "Korean pork by-product & processed meat manufacturer,",
+  hero_title_2: "HACCP-certified. Made in Gunsan.",
+  hero_sub: "Restaurants welcome guests. SAERIM prepares restaurants.",
+  hero_descriptor:
+    "HACCP-certified B2B manufacturer of pork by-products, specialty cuts and processed meat — supplying franchise HQs, distributors and importers from three plants in Gunsan, Gimje and Yongin.",
+  hero_alt:
+    "SAERIM Gunsan plant pork head and offal heat-processing line — HACCP-certified pork by-product manufacturing",
   stat_partners: "55 companies",
   stat_items: "116 items",
   stat_daily: "1,500 heads",

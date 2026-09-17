@@ -83,6 +83,7 @@ export const zh: Dictionary = {
     productTitle: "可直接投入门店使用的产品",
     productLead: "每一款产品都包含故事、工艺、规格与应用方式，是一套完整的供应方案。",
     productCta: "查看全部产品",
+    certCta: "查看全部认证与实绩",
     nextStory: "我们为何存在",
   },
 
@@ -245,6 +246,22 @@ export const zh: Dictionary = {
     },
     packagingKicker: "04 · Packaging",
     packagingTitle: "包装规格",
+    specTitle: "规格·标示事项",
+    specLabels: {
+      netWeight: "净含量",
+      packaging: "包装",
+      boxQty: "每箱数量",
+      storage: "储存方法",
+      shelfLife: "保质期",
+      ingredients: "原料",
+      origin: "原产地",
+      hsCode: "HS 编码",
+      specSheet: "产品规格书（PDF）",
+    },
+    notFilled: "咨询时提供",
+    specSheetCta: "打开 PDF",
+    faqKicker: "FAQ",
+    faqTitle: "常见问题",
     useCaseKicker: "05 · Use Cases",
     useCaseTitle: "应用场景",
     orderKicker: "06 · OEM {oem} / 07 · Order",
@@ -293,6 +310,29 @@ export const zh: Dictionary = {
       before: "这八道工序不仅适用于 SAERIM 自有产品，也同样适用于以 OEM 方式生产的合作品牌产品。 ",
       link: "查看 OEM 说明",
     },
+    certs: {
+      kicker: "认证与实绩",
+      title: "以文件证明，而非口头承诺",
+      lead: "以下为 SAERIM 持有的认证与登记事项。证书原件在工厂审核时全部公开，副本可应要求提供。",
+      trackKicker: "供货实绩",
+      trackTitle: "12 年，托付给我们的名字",
+      trackLead: "2014 年创立于群山 · 2025 年年营收 235.6 亿韩元 · 交易伙伴 55 家 · 经营品目 116 种 · 日处理猪头·内脏 1,500 头 · Hyfork 特殊部位 OEM · 农协牧牛村委托生产 · 易买得 Traders 自有品牌",
+      inProgressNote: "标注\"准备中\"的认证目前正在办理，取得前不作为已持有认证宣传。",
+      statusValid: "已持有",
+      statusInProgress: "准备中",
+      numberLabel: "证书编号",
+      items: [
+        { id: "haccp-packaging", name: "HACCP — 肉类包装处理业", issuer: "韩国食品安全管理认证院", number: "", issued: "2017", status: "valid" },
+        { id: "haccp-processing", name: "HACCP — 畜产品加工业", issuer: "韩国食品安全管理认证院", number: "", issued: "", status: "valid" },
+        { id: "antibiotic-free", name: "无抗生素畜产品经营认证", issuer: "", number: "", issued: "", status: "valid" },
+        { id: "organic-processed", name: "有机加工食品认证", issuer: "", number: "", issued: "2025", status: "valid" },
+        { id: "innobiz", name: "INNOBIZ 技术创新型中小企业", issuer: "", number: "", issued: "2021", status: "valid" },
+        { id: "mainbiz", name: "MAIN-BIZ 经营创新型中小企业", issuer: "", number: "", issued: "", status: "valid" },
+        { id: "patent-1644939", name: "专利第1644939号 — 酶固定化方法", issuer: "", number: "", issued: "2016", status: "valid" },
+        { id: "rnd-dept", name: "研发专职部门登记", issuer: "", number: "", issued: "2021", status: "valid" },
+        { id: "iso-9001-14001", name: "ISO 9001（质量管理）· ISO 14001（环境管理）认证准备中 — 取得后将连同证书编号一并公布。", issuer: "", number: "", issued: "", status: "in_progress" },
+      ],
+    },
     flow: {
       listLabel: "品质 8 道工序",
       metricLabel: "管理标准",
@@ -303,6 +343,8 @@ export const zh: Dictionary = {
   },
 
   oem: {
+    faqKicker: "FAQ",
+    faqTitle: "常见问题",
     kicker: "OEM Partnership",
     title: "您的品牌背后，\n由 SAERIM 支撑。",
     lead1: "许多品牌拥有出色的配方，却因为没有工厂而无法起步。SAERIM 的 OEM 并不是把设备租给您，而是把 12 年积累的品质体系整套借给您。",
@@ -386,9 +428,28 @@ export const zh: Dictionary = {
     doneSignature: "祝您生意兴隆。",
   },
 
+  faq: {
+    oem: [
+      { q: "最小起订量（MOQ）是多少？", a: "视品目与包装规格而定。可进行小批量试产，正式生产的 MOQ 在洽谈时按品目提供。" },
+      { q: "交货周期是多久？", a: "规格确认后，样品 1 周内发出。正式生产周期根据品目、数量与包装在洽谈时确定。" },
+      { q: "可以提供样品吗？", a: "可以。请在咨询时告知品目、用途与数量，我们将说明样品条件。" },
+      { q: "在何种认证体系下生产？", a: "完全按照 HACCP 两大类别（肉类包装处理业·畜产品加工业）的工艺生产。证书副本可应要求提供。" },
+      { q: "是否协助标签标示审核？", a: "我们协助进行韩国食品标示标准审核。出口用标签将一并核对目标国规定。" },
+      { q: "可以进行工厂审核吗？", a: "可以。生产线、品质体系与认证原件全部公开。" },
+    ],
+    product: [
+      { q: "储存温度与保质期？", a: "冷冻产品需保存于 -18℃ 以下。保质期以包装标示的生产日期为准，请参阅各产品规格表。" },
+      { q: "原产地？", a: "原料原产地标注于各产品规格表及包装标示。" },
+      { q: "当日发货的条件？", a: "上午 10 点前确认的订单原则上当日发货（韩国国内）。" },
+      { q: "可以出口吗？", a: "猪肉及副产品的可出口国家受对方国检疫协定限制。请告知目标国，我们将说明可行性及所需文件。" },
+    ],
+  },
+
   meta: {
     siteTitle: "SAERIM 有限公司 | 为韩国餐饮业做准备的食品基础设施",
     titleTemplate: "%s | SAERIM 有限公司",
+    /** 제품 상세 <title>에 붙는 검색어 접미사 (영어만 사용) */
+    productTitleSuffix: "",
     description:
       "餐厅招待客人，SAERIM 为餐厅做准备。以群山·金堤·龙仁工厂为基础的 B2B 食品制造平台 —— 汤类原料、猪特色部位肉、OEM 代工。",
     ogTitle: "SAERIM 有限公司 | 食品基础设施",

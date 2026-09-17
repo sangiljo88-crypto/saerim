@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Faq } from "@/components/ui/Faq";
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle, TrustBadge } from "@/components/ui/brand";
 import { listFactories } from "@/lib/content";
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 /** OEM — "식품 브랜드 뒤에는 새림이 있습니다"가 실제 사업이 되는 페이지 */
 export default async function OemPage({ params }: Props) {
   const { locale } = await params;
-  const t = getDict(locale).oem;
+  const dict = getDict(locale);
+  const t = dict.oem;
   const factories = listFactories(locale).filter((f) => f.slug !== "gunsan");
 
   return (
@@ -91,6 +93,14 @@ export default async function OemPage({ params }: Props) {
               </Reveal>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="section hairline-t">
+        <div className="container-text">
+          <SectionTitle kicker={t.faqKicker} title={t.faqTitle} />
+          <Faq items={dict.faq.oem} />
         </div>
       </section>
 

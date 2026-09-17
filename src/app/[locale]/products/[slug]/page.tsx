@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Faq } from "@/components/ui/Faq";
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle, TrustBadge } from "@/components/ui/brand";
 import { categoryLabel, getFactory, getProduct, listBrands, listProducts } from "@/lib/content";
@@ -16,7 +17,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const product = getProduct(locale, slug);
   if (!product) return {};
-  return { title: product.name, description: product.summary };
+  // 영어는 바이어 검색어를 제목에 덧붙인다: "{name} | Korean pork by-product supplier | SAERIM Co., Ltd."
+  const suffix = getDict(locale).meta.productTitleSuffix;
+  return { title: suffix ? `${product.name} | ${suffix}` : product.name, description: product.summary };
 }
 
 /**
@@ -36,6 +39,18 @@ export default async function ProductDetailPage({ params }: Props) {
   const related = listProducts(locale, product.category)
     .filter((p) => p.slug !== product.slug)
     .slice(0, 3);
+
+  // 규격표 — 값이 비어 있으면 빈 칸 대신 "문의 시 안내"를 보여준다
+  const specRows = [
+    { label: t.specLabels.netWeight, value: product.netWeight },
+    { label: t.specLabels.packaging, value: product.packaging },
+    { label: t.specLabels.boxQty, value: product.boxQty },
+    { label: t.specLabels.storage, value: product.storage },
+    { label: t.specLabels.shelfLife, value: product.shelfLife },
+    { label: t.specLabels.ingredients, value: product.ingredients },
+    { label: t.specLabels.origin, value: product.origin },
+    { label: t.specLabels.hsCode, value: product.hsCode },
+  ];
 
   return (
     <>
@@ -123,8 +138,35 @@ export default async function ProductDetailPage({ params }: Props) {
       <section className="section hairline-t bg-paper-warm">
         <div className="container-text grid gap-14 md:grid-cols-2">
           <Reveal>
-            <SectionTitle kicker={t.packagingKicker} title={t.packagingTitle} />
-            <p className="prose-body">{product.packaging}</p>
+            <SectionTitle kicker={t.packagingKicker} title={t.specTitle} />
+            <table className="w-full text-left text-sm">
+              <tbody className="divide-y divide-line border-y border-line">
+                {specRows.map((row) => (
+                  <tr key={row.label}>
+                    <th scope="row" className="w-32 py-3 pr-4 align-top font-semibold text-ink-900">
+                      {row.label}
+                    </th>
+                    <td className={`py-3 align-top leading-relaxed ${row.value ? "text-ink-600" : "text-ink-400"}`}>
+                      {row.value || t.notFilled}
+                    </td>
+                  </tr>
+                ))}
+                <tr>
+                  <th scope="row" className="w-32 py-3 pr-4 align-top font-semibold text-ink-900">
+                    {t.specLabels.specSheet}
+                  </th>
+                  <td className="py-3 align-top text-ink-400">
+                    {product.specSheetUrl ? (
+                      <a href={product.specSheetUrl} className="font-semibold text-ink-900 underline hover:text-accent">
+                        {t.specSheetCta}
+                      </a>
+                    ) : (
+                      t.notFilled
+                    )}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </Reveal>
           <Reveal delayMs={80}>
             <SectionTitle kicker={t.useCaseKicker} title={t.useCaseTitle} />
@@ -137,6 +179,14 @@ export default async function ProductDetailPage({ params }: Props) {
               ))}
             </ul>
           </Reveal>
+        </div>
+      </section>
+
+      {/* FAQ — 모든 제품 공통 */}
+      <section className="section hairline-t">
+        <div className="container-text">
+          <SectionTitle kicker={t.faqKicker} title={t.faqTitle} />
+          <Faq items={dict.faq.product} />
         </div>
       </section>
 
