@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Certifications } from "@/components/quality/Certifications";
 import { QualityFlow } from "@/components/quality/QualityFlow";
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle } from "@/components/ui/brand";
@@ -64,6 +65,8 @@ export default async function QualityPage({ params }: Props) {
           </Reveal>
         </div>
       </section>
+
+      <Certifications t={t.certs} />
 
       <NextStory locale={locale} href="/oem" title={t.nextStory} />
     </>

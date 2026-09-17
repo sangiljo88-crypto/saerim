@@ -81,6 +81,7 @@ export const ko = {
     productTitle: "매장에 바로 투입되는 품목",
     productLead: "모든 제품은 스토리·공정·규격·활용까지 갖춘 하나의 제안입니다.",
     productCta: "전체 제품 보기",
+    certCta: "인증·실적 전체 보기",
     nextStory: "우리는 왜 존재하는가",
   },
 
@@ -243,6 +244,22 @@ export const ko = {
     },
     packagingKicker: "04 · Packaging",
     packagingTitle: "포장 규격",
+    specTitle: "규격 · 표시사항",
+    specLabels: {
+      netWeight: "내용량",
+      packaging: "포장",
+      boxQty: "박스 입수",
+      storage: "보관 방법",
+      shelfLife: "유통기한",
+      ingredients: "원재료",
+      origin: "원산지",
+      hsCode: "HS 코드",
+      specSheet: "제품 스펙시트 (PDF)",
+    },
+    notFilled: "문의 시 안내",
+    specSheetCta: "PDF 열기",
+    faqKicker: "FAQ",
+    faqTitle: "자주 묻는 질문",
     useCaseKicker: "05 · Use Cases",
     useCaseTitle: "활용 사례",
     orderKicker: "06 · OEM {oem} / 07 · Order",
@@ -291,6 +308,29 @@ export const ko = {
       before: "이 여덟 단계는 새림 제품뿐 아니라 OEM으로 생산되는 파트너 브랜드의 제품에도 동일하게 적용됩니다. ",
       link: "OEM 안내 보기",
     },
+    certs: {
+      kicker: "Certifications & Track Record",
+      title: "말이 아니라 문서로 증명합니다",
+      lead: "새림이 보유한 인증과 등록 사항입니다. 인증서 원본은 공장 실사 시 전면 공개하며, 사본은 문의 시 제공합니다.",
+      trackKicker: "Track Record",
+      trackTitle: "12년, 맡겨주신 이름들",
+      trackLead: "2014년 군산 설립 · 2025년 연 매출 235.6억 원 · 거래 파트너 55개사 · 취급 품목 116개 · 일 1,500두 돈두·내장 열처리 · 하이포크 특수부위 OEM · 농협 목우촌 생산도급 · 이마트 트레이더스 PB",
+      inProgressNote: "\"준비 중\" 표기는 현재 취득 절차가 진행 중인 인증으로, 취득 전에는 보유 인증으로 주장하지 않습니다.",
+      statusValid: "보유",
+      statusInProgress: "준비 중",
+      numberLabel: "인증번호",
+      items: [
+        { id: "haccp-packaging", name: "HACCP — 식육포장처리업", issuer: "한국식품안전관리인증원", number: "", issued: "2017", status: "valid" },
+        { id: "haccp-processing", name: "HACCP — 축산물가공업", issuer: "한국식품안전관리인증원", number: "", issued: "", status: "valid" },
+        { id: "antibiotic-free", name: "무항생제 축산물 취급 인증", issuer: "", number: "", issued: "", status: "valid" },
+        { id: "organic-processed", name: "유기가공식품 인증", issuer: "", number: "", issued: "2025", status: "valid" },
+        { id: "innobiz", name: "INNOBIZ 기술혁신형 중소기업", issuer: "", number: "", issued: "2021", status: "valid" },
+        { id: "mainbiz", name: "MAIN-BIZ 경영혁신형 중소기업", issuer: "", number: "", issued: "", status: "valid" },
+        { id: "patent-1644939", name: "특허 제1644939호 — 효소 고정화 방법", issuer: "", number: "", issued: "2016", status: "valid" },
+        { id: "rnd-dept", name: "연구개발전담부서 등록", issuer: "", number: "", issued: "2021", status: "valid" },
+        { id: "iso-9001-14001", name: "ISO 9001(품질경영) · ISO 14001(환경경영) 인증 준비 중 — 취득 시 인증번호와 함께 게시합니다.", issuer: "", number: "", issued: "", status: "in_progress" },
+      ],
+    },
     flow: {
       listLabel: "품질 8단계",
       metricLabel: "관리 기준",
@@ -301,6 +341,8 @@ export const ko = {
   },
 
   oem: {
+    faqKicker: "FAQ",
+    faqTitle: "자주 묻는 질문",
     kicker: "OEM Partnership",
     title: "당신의 브랜드 뒤에\n새림이 서겠습니다.",
     lead1: "좋은 레시피가 있어도 공장이 없어 시작하지 못하는 브랜드가 많습니다. 새림의 OEM은 설비를 빌려주는 것이 아니라, 12년의 품질 체계를 통째로 빌려드리는 일입니다.",
@@ -384,9 +426,28 @@ export const ko = {
     doneSignature: "오늘도 사장님 가게의 완판을 빕니다.",
   },
 
+  faq: {
+    oem: [
+      { q: "최소 주문 수량(MOQ)은 얼마입니까?", a: "품목과 포장 규격에 따라 다릅니다. 소량 시생산이 가능하며, 정식 생산 MOQ는 상담 시 품목별로 제시합니다." },
+      { q: "리드타임은 어떻게 됩니까?", a: "규격 협의 후 시제품은 1주 내 발송합니다. 정식 생산 리드타임은 품목·물량·포장에 따라 상담 시 확정합니다." },
+      { q: "샘플을 받을 수 있습니까?", a: "가능합니다. 문의 시 품목·용도·수량을 알려주시면 샘플 조건을 안내합니다." },
+      { q: "어떤 인증 하에서 생산됩니까?", a: "HACCP 2개 업종(식육포장처리업·축산물가공업) 공정을 그대로 적용합니다. 인증서 사본은 요청 시 제공합니다." },
+      { q: "표시사항(라벨) 검토를 지원합니까?", a: "국내 식품표시기준 검토를 지원합니다. 수출용 라벨은 대상국 규정을 함께 확인합니다." },
+      { q: "공장 실사가 가능합니까?", a: "가능합니다. 생산 라인·품질 시스템·인증 원본을 전면 공개합니다." },
+    ],
+    product: [
+      { q: "보관 온도와 유통기한은?", a: "냉동 제품은 -18℃ 이하 보관. 유통기한은 포장에 표시된 제조일 기준이며, 제품별 스펙표를 참고하세요." },
+      { q: "원산지는?", a: "원료 원산지는 제품별 스펙표와 포장 표시사항에 기재합니다." },
+      { q: "당일 출고 기준은?", a: "오전 10시 이전 확정 주문은 당일 출고가 원칙입니다(국내)." },
+      { q: "수출이 가능합니까?", a: "돼지고기·부산물은 상대국 검역 협정에 따라 수출 가능 국가가 제한됩니다. 대상국을 알려주시면 가능 여부와 필요 서류를 안내합니다." },
+    ],
+  },
+
   meta: {
     siteTitle: "유한회사 새림 | 대한민국 외식 산업을 준비하는 식품 인프라",
     titleTemplate: "%s | 유한회사 새림",
+    /** 제품 상세 <title>에 붙는 검색어 접미사 (영어만 사용) */
+    productTitleSuffix: "",
     description:
       "식당은 손님을 맞이합니다. 새림은 식당을 준비합니다. 군산·김제·용인 공장 기반의 B2B 식품 제조 플랫폼 — 국탕류·뒷고기류·OEM.",
     ogTitle: "유한회사 새림 | 식품 인프라",

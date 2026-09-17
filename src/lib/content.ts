@@ -46,8 +46,19 @@ export function getFactory(locale: Locale, slug: string): Factory | null {
   return factory ? localizeFactory(locale, factory) : null;
 }
 
-const localizeProduct = (locale: Locale, product: Product): Product =>
-  merge(product, OVERLAYS[locale]?.products[product.slug]);
+/**
+ * 규격 값은 관리자가 한국어로 입력한다. 대역표에 번역이 없는 로케일에서는 한국어를 노출하지 않고
+ * 비워서 "문의 시 안내"로 보이게 한다. (HS 코드·스펙시트 경로는 언어와 무관하므로 그대로 둔다)
+ */
+const UNTRANSLATED_SPEC = {
+  ingredients: "", origin: "", shelfLife: "", storage: "", netWeight: "", boxQty: "",
+} satisfies Partial<Product>;
+
+const localizeProduct = (locale: Locale, product: Product): Product => {
+  const overlay = OVERLAYS[locale];
+  if (!overlay) return product;
+  return { ...product, ...UNTRANSLATED_SPEC, ...overlay.products[product.slug] };
+};
 
 export function listProducts(locale: Locale, category?: string): Product[] {
   return repo.listProducts(category).map((p) => localizeProduct(locale, p));

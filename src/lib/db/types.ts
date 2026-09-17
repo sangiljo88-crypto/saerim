@@ -50,6 +50,15 @@ export type Product = {
   oemAvailable: boolean;
   storeUrl: string;
   image: string;
+  /** 규격·표시사항 — 비어 있으면 화면에 "문의 시 안내"로 표시된다 */
+  ingredients: string;
+  origin: string;
+  shelfLife: string;
+  storage: string;
+  netWeight: string;
+  boxQty: string;
+  hsCode: string;
+  specSheetUrl: string;
   featured: boolean;
   sort: number;
   status: Status;

@@ -41,7 +41,7 @@ export default async function HomePage({ params }: Props) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={heroMedia}
-              alt=""
+              alt={settings.hero_alt ?? ""}
               className="absolute inset-0 h-full w-full animate-slow-zoom object-cover opacity-60"
             />
           )
@@ -78,11 +78,23 @@ export default async function HomePage({ params }: Props) {
       <section className="section">
         <div className="container-grid">
           <Reveal>
+            {/* 설명형 한 줄 — 무엇을 하는 회사인지 텍스트로 먼저 밝힌다 */}
+            {settings.hero_descriptor && (
+              <h2 className="mb-8 max-w-3xl text-body font-medium leading-relaxed text-ink-600">
+                {settings.hero_descriptor}
+              </h2>
+            )}
             <div className="flex flex-wrap items-center gap-3">
               {t.badges.map((badge) => (
                 <TrustBadge key={badge}>{badge}</TrustBadge>
               ))}
             </div>
+            <Link
+              href={href(locale, "/quality#certifications")}
+              className="mt-5 inline-block text-sm font-semibold text-ink-900 underline underline-offset-4 hover:text-accent"
+            >
+              {t.certCta} →
+            </Link>
             <div className="mt-12 grid grid-cols-2 gap-10 md:grid-cols-4">
               <StatBlock value={settings.stat_founded ?? "2014"} label={t.stats.founded} />
               <StatBlock value={settings.stat_revenue ?? t.stats.revenueFallback} label={t.stats.revenue} />

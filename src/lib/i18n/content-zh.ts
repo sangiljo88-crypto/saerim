@@ -8,6 +8,9 @@ export const settings: Record<string, string> = {
   hero_title_1: "餐厅招待客人。",
   hero_title_2: "SAERIM 为餐厅做准备。",
   hero_sub: "明天早上，您需要确认的只有客人。",
+  hero_descriptor:
+    "HACCP 认证的猪副产品·特殊部位·肉类加工 B2B 制造商 — 依托群山·金堤·龙仁三座工厂，向连锁总部、经销商及进口商供货。",
+  hero_alt: "SAERIM 群山工厂猪头·内脏热加工生产线 — HACCP 认证猪副产品制造",
   stat_partners: "55 家",
   stat_items: "116 种",
   stat_daily: "1,500 头",
@@ -105,6 +108,13 @@ export type ProductOverlay = {
   process: string;
   packaging: string;
   useCases: string[];
+  /** 규격 값 번역 (선택) — 없으면 해당 로케일에서는 "문의 시 안내"로 표시된다 */
+  ingredients?: string;
+  origin?: string;
+  shelfLife?: string;
+  storage?: string;
+  netWeight?: string;
+  boxQty?: string;
 };
 
 export const products: Record<string, ProductOverlay> = {

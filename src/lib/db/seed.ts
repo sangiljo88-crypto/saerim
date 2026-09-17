@@ -499,11 +499,14 @@ const STORE_LINKS = [
   },
 ];
 
-const SETTINGS: Record<string, string> = {
+export const SEED_SETTINGS: Record<string, string> = {
   hero_title_1: "식당은 손님을 맞이합니다.",
   hero_title_2: "새림은 식당을 준비합니다.",
   hero_sub: "내일 아침, 확인할 것은 손님뿐입니다.",
   hero_media: "/images/company/hero-main-photo4.jpg",
+  hero_descriptor:
+    "HACCP 인증 돼지 부산물·특수부위·육가공 B2B 제조사 — 군산·김제·용인 3개 공장에서 프랜차이즈 본사·유통사·수입업체에 공급합니다.",
+  hero_alt: "새림 군산공장 돈두·내장 열처리 라인 — HACCP 인증 돼지 부산물 제조",
   stat_founded: "2014",
   stat_revenue: "235.6억",
   stat_partners: "55개사",
@@ -575,7 +578,7 @@ export function seedIfEmpty(db: DatabaseSync) {
     }
 
     const insSetting = db.prepare("INSERT INTO settings (key,value) VALUES (?,?)");
-    for (const [key, value] of Object.entries(SETTINGS)) {
+    for (const [key, value] of Object.entries(SEED_SETTINGS)) {
       insSetting.run(key, value);
     }
   };

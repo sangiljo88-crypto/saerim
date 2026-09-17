@@ -2,7 +2,7 @@ import { mkdirSync } from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 
-import { seedIfEmpty } from "./seed";
+import { SEED_SETTINGS, seedIfEmpty } from "./seed";
 
 /**
  * SQLite 클라이언트 (Node 내장 node:sqlite — 추가 의존성 없음).
@@ -57,6 +57,14 @@ CREATE TABLE IF NOT EXISTS products (
   oem_available INTEGER NOT NULL DEFAULT 1,
   store_url TEXT NOT NULL DEFAULT '',
   image TEXT NOT NULL DEFAULT '',
+  ingredients TEXT NOT NULL DEFAULT '',
+  origin TEXT NOT NULL DEFAULT '',
+  shelf_life TEXT NOT NULL DEFAULT '',
+  storage TEXT NOT NULL DEFAULT '',
+  net_weight TEXT NOT NULL DEFAULT '',
+  box_qty TEXT NOT NULL DEFAULT '',
+  hs_code TEXT NOT NULL DEFAULT '',
+  spec_sheet_url TEXT NOT NULL DEFAULT '',
   featured INTEGER NOT NULL DEFAULT 0,
   sort INTEGER NOT NULL DEFAULT 0,
   status TEXT NOT NULL DEFAULT 'published'
@@ -114,6 +122,10 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 `;
 
+const PRODUCT_SPEC_COLUMNS = [
+  "ingredients", "origin", "shelf_life", "storage", "net_weight", "box_qty", "hs_code", "spec_sheet_url",
+];
+
 /**
  * 이미 생성된 DB(운영 볼륨 포함)에 적용할 일회성 보정.
  * 시드는 최초 1회만 돌기 때문에, 기존 값 교체는 여기서 처리한다.
@@ -124,6 +136,27 @@ function migrate(db: DatabaseSync) {
     "info@saerim.kr",
     "serim6408@naver.com",
   );
+
+  // ISO 9001·14001은 미보유(취득 절차 진행 중) — 보유 인증처럼 저장된 기존 값을 "준비 중"으로 바로잡는다
+  db.prepare(
+    "UPDATE factories SET certifications = replace(certifications, ?, ?) WHERE slug='gunsan'",
+  ).run('"ISO 9001 · 14001"', '"ISO 9001 · 14001 (준비 중)"');
+
+  // 제품 스펙 컬럼 (없을 때만 추가)
+  const productColumns = new Set(
+    (db.prepare("PRAGMA table_info(products)").all() as { name: string }[]).map((c) => c.name),
+  );
+  for (const column of PRODUCT_SPEC_COLUMNS) {
+    if (!productColumns.has(column)) {
+      db.exec(`ALTER TABLE products ADD COLUMN ${column} TEXT NOT NULL DEFAULT ''`);
+    }
+  }
+
+  // 신규 설정 키 (이미 있으면 관리자가 고친 값을 유지)
+  const insertSetting = db.prepare("INSERT OR IGNORE INTO settings (key,value) VALUES (?,?)");
+  for (const key of ["hero_descriptor", "hero_alt"]) {
+    insertSetting.run(key, SEED_SETTINGS[key] ?? "");
+  }
 }
 
 declare global {
