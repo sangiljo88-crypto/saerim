@@ -44,7 +44,7 @@ export default async function NewsPage({ params }: Props) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={first.coverImage}
-                    alt=""
+                    alt={first.title}
                     className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 </div>
@@ -73,7 +73,7 @@ export default async function NewsPage({ params }: Props) {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={item.coverImage}
-                        alt=""
+                        alt={item.title}
                         className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     </div>

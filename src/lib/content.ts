@@ -1,3 +1,4 @@
+import { fill, getDict } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n/config";
 import * as en from "@/lib/i18n/content-en";
 import * as zh from "@/lib/i18n/content-zh";
@@ -104,4 +105,25 @@ export function listStoreLinks(locale: Locale): StoreLink[] {
   const links = repo.listStoreLinks();
   const overlay = OVERLAYS[locale];
   return overlay ? links.map((l) => merge(l, overlay.storeLinks[l.id])) : links;
+}
+
+/**
+ * 이미지 대체 텍스트 — 키워드 하나가 아니라 "대상 + 규격 + 공정 + 장소 + 브랜드" 순으로 만든다.
+ * 포장 문구는 " · " 앞의 규격(예: "냉동 1kg 포장")만 쓴다.
+ */
+export function productImageAlt(locale: Locale, product: Product): string {
+  const factory = product.factorySlug ? getFactory(locale, product.factorySlug) : null;
+  const brand = listBrands(locale).find((b) => b.slug === product.brandSlug);
+  const alt = fill(getDict(locale).common.productImageAlt, {
+    name: product.name,
+    packaging: product.packaging.split(" · ")[0],
+    factory: factory?.name ?? "",
+    brand: brand?.name ?? "",
+  });
+  // 공장·브랜드가 비어 있을 때 남는 구분자를 정리한다
+  return alt.replace(/([,，]\s*)+$/u, "").replace(/([,，]\s*){2,}/gu, "$1").trim();
+}
+
+export function factoryImageAlt(locale: Locale, factory: Factory): string {
+  return fill(getDict(locale).common.factoryImageAlt, { factory: factory.name, role: factory.role });
 }

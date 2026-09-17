@@ -1,8 +1,9 @@
 import Link from "next/link";
 
+import { Downloads } from "@/components/ui/Downloads";
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle, StatBlock, TrustBadge } from "@/components/ui/brand";
-import { categoryLabel, getSettings, listFactories, listFeaturedProducts } from "@/lib/content";
+import { categoryLabel, factoryImageAlt, getSettings, listFactories, listFeaturedProducts, productImageAlt } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
 
@@ -95,6 +96,7 @@ export default async function HomePage({ params }: Props) {
             >
               {t.certCta} →
             </Link>
+            <Downloads locale={locale} className="mt-4" />
             <div className="mt-12 grid grid-cols-2 gap-10 md:grid-cols-4">
               <StatBlock value={settings.stat_founded ?? "2014"} label={t.stats.founded} />
               <StatBlock value={settings.stat_revenue ?? t.stats.revenueFallback} label={t.stats.revenue} />
@@ -146,7 +148,7 @@ export default async function HomePage({ params }: Props) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={factory.image}
-                      alt={factory.name}
+                      alt={factoryImageAlt(locale, factory)}
                       className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
@@ -173,7 +175,7 @@ export default async function HomePage({ params }: Props) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={product.image}
-                      alt={product.name}
+                      alt={productImageAlt(locale, product)}
                       className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>

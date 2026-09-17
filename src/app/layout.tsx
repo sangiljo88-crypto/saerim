@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getSettings } from "@/lib/content";
 import {
   DEFAULT_LOCALE,
   LOCALE_HEADER,
@@ -31,6 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(SITE_URL),
     title: { default: t.meta.siteTitle, template: t.meta.titleTemplate },
     description: t.meta.description,
+    keywords: t.meta.keywords,
     alternates: {
       canonical: `${SITE_URL}${href(locale, path)}`,
       languages: hreflangMap(SITE_URL, path),
@@ -57,6 +60,39 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await currentLocale();
+  const t = getDict(locale);
+  const settings = getSettings(locale);
+
+  // Organization 구조화 데이터 — 주소·전화는 해외에서도 읽히도록 영문/국가번호 표기로 고정한다
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "SAERIM Co., Ltd.",
+    alternateName: ["유한회사 새림", "SAERIM 有限公司"],
+    description: t.common.orgDescription,
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/logo.svg`,
+    foundingDate: "2014",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "154 Sanseong-ro, Oksan-myeon",
+      addressLocality: "Gunsan-si",
+      addressRegion: "Jeonbuk State",
+      addressCountry: "KR",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+82-63-464-8681",
+        email: settings.contact_email ?? "info@saerim.kr",
+        contactType: "sales",
+        availableLanguage: ["ko", "en", "zh"],
+      },
+    ],
+    // LinkedIn 기업 페이지가 생기면 여기에 추가한다
+    sameAs: ["https://vo.la/RFDWcIg"],
+    knowsAbout: ["pork by-products", "boiled pork head", "pork offal", "OEM meat processing", "HACCP"],
+  };
 
   return (
     <html lang={LOCALE_META[locale].htmlLang}>
@@ -70,6 +106,7 @@ export default async function RootLayout({
         <Header locale={locale} />
         <main>{children}</main>
         <Footer locale={locale} />
+        <JsonLd data={organization} />
       </body>
     </html>
   );

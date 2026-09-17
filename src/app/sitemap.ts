@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "", "/why", "/brand", "/business", "/products", "/factory",
-    "/quality", "/oem", "/news", "/store", "/contact",
+    "/quality", "/oem", "/export", "/news", "/store", "/contact",
   ];
 
   const productPaths = listProducts().map((p) => `/products/${p.slug}`);

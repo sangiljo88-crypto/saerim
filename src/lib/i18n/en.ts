@@ -17,6 +17,7 @@ export const en: Dictionary = {
       { href: "/factory", label: "FACTORIES" },
       { href: "/quality", label: "QUALITY" },
       { href: "/oem", label: "OEM" },
+      { href: "/export", label: "EXPORT" },
       { href: "/news", label: "NEWS" },
       { href: "/store", label: "STORE" },
     ],
@@ -28,6 +29,13 @@ export const en: Dictionary = {
     nextStory: "Next story",
     readMore: "Read",
     openLink: "Open",
+    logoAlt: "SAERIM Co., Ltd. logo — food infrastructure",
+    productImageAlt: "{name}, {packaging} — HACCP process, {factory}, {brand}",
+    factoryImageAlt: "SAERIM {factory} — {role}",
+    profilePdf: "Download company profile (PDF)",
+    catalogPdf: "Product catalog (PDF)",
+    downloadsLabel: "Downloads",
+    orgDescription: "HACCP-certified B2B manufacturer of pork by-products, specialty cuts and processed meat with plants in Gunsan, Gimje and Yongin, Korea.",
     notFoundTitle: "Page not found",
     notFoundBody: "The page you requested does not exist or has been moved.",
     notFoundCta: "Back to home",
@@ -365,6 +373,52 @@ export const en: Dictionary = {
     doneSignature: "We wish your restaurant a sold-out day.",
   },
 
+  exportPage: {
+    kicker: "Export",
+    title: "For overseas buyers",
+    lead: "SAERIM is a B2B manufacturer producing pork by-products, specialty cuts and processed meat at three HACCP plants in Gunsan, Gimje and Yongin. We welcome direct trade with importers, distributors and franchise HQs, as well as OEM and private-label production.",
+    faqTitle: "FAQ",
+    cta: "Send an export inquiry",
+    nextStory: "Let's start the conversation",
+    sections: [
+      {
+        title: "Export-ready product lines",
+        items: [
+          "Frozen pork by-products and specialty cuts: available only to countries with a quarantine agreement with Korea",
+          "Processed meat (ham, sausage, prepared meat)",
+          "Korean meal kits and soups without livestock ingredients (licensed as food products)",
+        ],
+        note: "Tell us the destination and we will confirm availability per item.",
+      },
+      {
+        title: "Trade terms",
+        items: [
+          "Incoterms: quotes on FOB Busan/Incheon basis; CIF/CFR negotiable",
+          "Payment: T/T (deposit + balance) or L/C at sight, negotiable",
+          "Packing: export-grade cartons and pallets; labels per destination regulations",
+          "Samples: shipped within one week after specifications are agreed (freight negotiable)",
+        ],
+        note: "",
+      },
+      {
+        title: "Documents we provide",
+        items: [
+          "HACCP certificate copy",
+          "Product specification sheets · ingredient lists",
+          "Origin documents",
+          "Quarantine/health certificates (issued per destination requirements)",
+          "Plant audit materials",
+        ],
+        note: "",
+      },
+    ],
+    faq: [
+      { q: "Can you export pork to the US or China?", a: "Korean pork and pork by-products currently cannot be exported to the US or China as no quarantine agreement is in place. Meal kits and soups without livestock ingredients are reviewed separately as food products." },
+      { q: "Do you have Halal certification?", a: "Not applicable to pork products. Halal certification for non-livestock meal kits is under review for target markets." },
+      { q: "Whom should I contact?", a: "Send export inquiries to info@saerim.kr or use the inquiry form (General / Export); we reply in English within one business day." },
+    ],
+  },
+
   faq: {
     oem: [
       { q: "What is the minimum order quantity (MOQ)?", a: "It depends on the item and packaging specification. Small-batch trial production is available; the MOQ for regular production is quoted per item during consultation." },
@@ -387,6 +441,7 @@ export const en: Dictionary = {
     titleTemplate: "%s | SAERIM Co., Ltd.",
     /** 제품 상세 <title>에 붙는 검색어 접미사 (영어만 사용) */
     productTitleSuffix: "Korean pork by-product supplier",
+    keywords: ["Korean pork by-products", "boiled pork head", "pork offal supplier", "pork makchang", "specialty pork cuts", "gukbap ingredients", "meat processing OEM Korea", "HACCP certified meat manufacturer", "Gunsan", "SAERIM"],
     description:
       "SAERIM is a HACCP-certified B2B pork by-product and processed meat manufacturer in Gunsan, Korea, with plants in Gunsan, Gimje and Yongin. Boiled pork head, offal, specialty cuts, soup ingredients and OEM/private label for franchise HQs, retailers and importers.",
     ogTitle: "SAERIM Co., Ltd. | Korean pork by-product & OEM manufacturer",
@@ -402,6 +457,7 @@ export const en: Dictionary = {
       news:     { title: "NEWS — SAERIM keeps moving", description: "Not a bulletin board but brand stories. News from SAERIM." },
       store:    { title: "STORE — Experience it now", description: "Try SAERIM products in small quantities first. Smart Store and Kakao Channel guide." },
       contact:  { title: "CONTACT — Let's start the conversation", description: "Wholesale, OEM, export and general inquiries. Tell us item, quantity and delivery terms and we will propose a tailored supply plan." },
+      export: { title: "EXPORT — For overseas buyers", description: "Export guide for HACCP-certified pork by-products, processed meat and Korean meal kits. Quarantine-agreement countries, required documents, Incoterms and payment terms." },
     },
   },
 
