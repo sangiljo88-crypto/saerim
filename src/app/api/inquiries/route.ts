@@ -18,6 +18,15 @@ const MESSAGES: Record<Locale, Record<string, string>> = {
     badRequest: "잘못된 요청입니다.",
     invalid: "입력값을 확인해주세요.",
   },
+  en: {
+    company: "Please enter your company name.",
+    name: "Please enter the contact person's name.",
+    phone: "Please check the phone number.",
+    phoneFormat: "Use digits, plus sign and hyphens only.",
+    email: "Please check the email format.",
+    badRequest: "Bad request.",
+    invalid: "Please check the information you entered.",
+  },
   zh: {
     company: "请填写公司名称。",
     name: "请填写联系人姓名。",

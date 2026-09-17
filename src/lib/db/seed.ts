@@ -79,7 +79,7 @@ const FACTORIES = [
       "스킨 · 진공 · MAP · 열성형 · 레토르트 포장",
       "8개 전용 작업실 분리 운영 · 폐수처리장(일 50톤)",
     ],
-    certifications: ["HACCP 식육포장처리업", "HACCP 축산물가공업", "ISO 9001 · 14001"],
+    certifications: ["HACCP 식육포장처리업", "HACCP 축산물가공업", "ISO 9001 · 14001 (준비 중)"],
     image: "/images/company/branch-hq-product.jpg",
     sort: 1,
   },

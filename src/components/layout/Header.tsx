@@ -32,19 +32,19 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href={href(locale, "/")} className="flex items-center gap-2.5">
+        <Link href={href(locale, "/")} className="flex shrink-0 items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/logo.svg" alt="" className="h-8 w-8" />
           <span className="flex items-baseline gap-2">
             <span className="text-lg font-bold tracking-tight text-ink-900">{t.companyShort}</span>
-            <span className="hidden text-[10px] font-semibold uppercase tracking-[0.24em] text-ink-400 sm:inline">
+            <span className="hidden text-[10px] font-semibold uppercase tracking-[0.24em] text-ink-400 sm:inline lg:hidden xl:inline">
               {t.latin}
             </span>
           </span>
         </Link>
 
-        <div className="flex items-center gap-5">
-          <nav className="hidden items-center gap-6 lg:flex" aria-label={t.mainMenuLabel}>
+        <div className="flex items-center gap-4 xl:gap-5">
+          <nav className="hidden items-center gap-3 lg:flex xl:gap-6" aria-label={t.mainMenuLabel}>
             {t.nav.map((item) => {
               const active = basePath.startsWith(item.href);
               return (

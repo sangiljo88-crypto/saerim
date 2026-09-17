@@ -55,6 +55,11 @@ const KIND_LABEL: Record<string, string> = {
   general: "일반 문의",
 };
 
+const FOREIGN_LOCALE: Record<string, { tag: string; note: string }> = {
+  zh: { tag: "中文", note: "중국어 페이지(/zh)" },
+  en: { tag: "English", note: "영어 페이지(/en)" },
+};
+
 export async function sendInquiryNotification(inquiry: InquiryMail): Promise<void> {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
@@ -62,14 +67,15 @@ export async function sendInquiryNotification(inquiry: InquiryMail): Promise<voi
 
   const to = process.env.INQUIRY_NOTIFY_TO ?? user;
   const kindLabel = KIND_LABEL[inquiry.kind] ?? inquiry.kind;
-  const isChinese = inquiry.locale === "zh";
-  const subject = `[새림 홈페이지${isChinese ? " · 中文" : ""}] ${kindLabel} 문의 — ${inquiry.company} ${inquiry.name}`;
+  // 해외 로케일 접수 건은 제목과 본문에 접수 언어를 남긴다
+  const foreign = inquiry.locale ? FOREIGN_LOCALE[inquiry.locale] : undefined;
+  const subject = `[새림 홈페이지${foreign ? ` · ${foreign.tag}` : ""}] ${kindLabel} 문의 — ${inquiry.company} ${inquiry.name}`;
 
   const bodyLines = [
     "새림 홈페이지로 새 문의가 접수되었습니다.",
     "",
     `문의 유형 : ${kindLabel}`,
-    isChinese && "접수 언어 : 중국어 페이지(/zh)",
+    foreign && `접수 언어 : ${foreign.note}`,
     `업체명   : ${inquiry.company}`,
     `담당자   : ${inquiry.name}`,
     `연락처   : ${inquiry.phone}`,

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/ko";
 import { useParams } from "next/navigation";
 
@@ -18,7 +19,7 @@ export function InquiryForm({
   defaultProduct?: string;
 }) {
   const params = useParams<{ locale?: string }>();
-  const locale = params?.locale === "zh" ? "zh" : "ko";
+  const locale = isLocale(params?.locale) ? params.locale : DEFAULT_LOCALE;
   const [state, setState] = useState<"idle" | "submitting" | "done" | "error">("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [errorMessage, setErrorMessage] = useState("");

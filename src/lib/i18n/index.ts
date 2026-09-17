@@ -1,8 +1,9 @@
 import { ko, type Dictionary } from "./ko";
+import { en } from "./en";
 import { zh } from "./zh";
 import { DEFAULT_LOCALE, type Locale } from "./config";
 
-const DICTIONARIES: Record<Locale, Dictionary> = { ko, zh };
+const DICTIONARIES: Record<Locale, Dictionary> = { ko, en, zh };
 
 export function getDict(locale: Locale): Dictionary {
   return DICTIONARIES[locale] ?? DICTIONARIES[DEFAULT_LOCALE];
