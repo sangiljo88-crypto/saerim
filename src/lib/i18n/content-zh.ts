@@ -50,6 +50,20 @@ export const brands: Record<string, BrandOverlay> = {
       "专注猪颊颈肉、雪花肉、舌下肉等特色部位的 SAERIM 渠道品牌，同时面向烤肉专门店与终端消费者。",
     target: "烤肉专门店 · 终端消费者",
   },
+  "yeomgane-bapsang": {
+    name: "Yeomgane Bapsang 廉家饭桌",
+    nameEn: "YEOMGANE BAPSANG",
+    tagline: "SAERIM 已注册商标的自有品牌",
+    description: "将 SAERIM 自主生产的猪头肉冻、汤类等产品直接送到消费者手中的注册商标自有品牌。",
+    target: "终端消费者",
+  },
+  "chueok-dwitgogi": {
+    name: "Chueok Dwitgogi 回忆特色部位肉",
+    nameEn: "CHUEOK DWITGOGI",
+    tagline: "承载一口特色部位肉回忆的自有品牌",
+    description: "面向 Kkodeulsal、Ppolsal 等猪特色部位烧烤产品线的注册商标自有品牌。",
+    target: "终端消费者 · 烤肉专门店",
+  },
 };
 
 export type FactoryOverlay = {
