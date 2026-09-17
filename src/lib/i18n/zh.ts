@@ -28,6 +28,9 @@ export const zh: Dictionary = {
     nextStory: "下一篇",
     readMore: "阅读全文",
     openLink: "前往",
+    notFoundTitle: "找不到页面",
+    notFoundBody: "您访问的页面不存在或已被移动。",
+    notFoundCta: "返回首页",
   },
 
   footer: {
@@ -50,7 +53,7 @@ export const zh: Dictionary = {
     heroCtaContact: "批发 · OEM 咨询",
     badges: [
       "HACCP 双业种认证（肉类包装处理 · 畜产品加工）",
-      "ISO 9001 · 14001",
+      "ISO 9001 · 14001 认证准备中",
       "无抗生素 · 有机加工食品认证",
       "INNOBIZ · MAIN-BIZ 认证",
     ],

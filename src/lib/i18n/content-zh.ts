@@ -4,13 +4,14 @@
  * 여기에 없는 항목은 한국어 원문이 그대로 노출된다(누락돼도 화면은 깨지지 않는다).
  */
 
-export const settingsZh: Record<string, string> = {
+export const settings: Record<string, string> = {
   hero_title_1: "餐厅招待客人。",
   hero_title_2: "SAERIM 为餐厅做准备。",
   hero_sub: "明天早上，您需要确认的只有客人。",
   stat_partners: "55 家",
   stat_items: "116 种",
   stat_daily: "1,500 头",
+  stat_revenue: "235.6 亿韩元",
   partners:
     "鲜进·Hyfork, 农协牧牛村, Farmsco, 易买得 E-mart, 易买得 Traders, Home plus, Coupang, Market Kurly, Oasis Market, bhc, Harim 产业, 群山学校供餐",
   contact_address: "韩国 全罗北道 群山市 玉山面 山城路 154",
@@ -19,9 +20,9 @@ export const settingsZh: Record<string, string> = {
   contact_fax: "+82-63-464-8683",
 };
 
-type BrandZh = { name: string; nameEn: string; tagline: string; description: string; target: string };
+export type BrandOverlay = { name: string; nameEn: string; tagline: string; description: string; target: string };
 
-export const brandsZh: Record<string, BrandZh> = {
+export const brands: Record<string, BrandOverlay> = {
   saerim: {
     name: "SAERIM 新林",
     nameEn: "SAERIM",
@@ -48,7 +49,7 @@ export const brandsZh: Record<string, BrandZh> = {
   },
 };
 
-type FactoryZh = {
+export type FactoryOverlay = {
   name: string;
   role: string;
   symbolSentence: string;
@@ -58,7 +59,7 @@ type FactoryZh = {
   certifications: string[];
 };
 
-export const factoriesZh: Record<string, FactoryZh> = {
+export const factories: Record<string, FactoryOverlay> = {
   gunsan: {
     name: "群山工厂",
     role: "总部 · 猪副产品一站式生产",
@@ -72,7 +73,7 @@ export const factoriesZh: Record<string, FactoryZh> = {
       "贴体 · 真空 · MAP · 热成型 · 蒸煮袋包装",
       "8 个专用作业间独立运营 · 污水处理厂（每日 50 吨）",
     ],
-    certifications: ["HACCP 肉类包装处理业", "HACCP 畜产品加工业", "ISO 9001 · 14001"],
+    certifications: ["HACCP 肉类包装处理业", "HACCP 畜产品加工业", "ISO 9001 · 14001（准备中）"],
   },
   gimje: {
     name: "金堤工厂",
@@ -96,7 +97,7 @@ export const factoriesZh: Record<string, FactoryZh> = {
   },
 };
 
-type ProductZh = {
+export type ProductOverlay = {
   name: string;
   summary: string;
   story: string;
@@ -106,7 +107,7 @@ type ProductZh = {
   useCases: string[];
 };
 
-export const productsZh: Record<string, ProductZh> = {
+export const products: Record<string, ProductOverlay> = {
   "boiled-pork-head-slice": {
     name: "熟制猪头肉片",
     summary: "无需早晨处理，直接下砂锅的猪头肉",
@@ -249,9 +250,9 @@ export const productsZh: Record<string, ProductZh> = {
   },
 };
 
-type QualityZh = { name: string; nameEn: string; summary: string; detail: string; metric: string };
+export type QualityOverlay = { name: string; nameEn: string; summary: string; detail: string; metric: string };
 
-export const qualityStepsZh: Record<number, QualityZh> = {
+export const qualitySteps: Record<number, QualityOverlay> = {
   1: {
     name: "入库",
     nameEn: "RECEIVING",
@@ -310,14 +311,14 @@ export const qualityStepsZh: Record<number, QualityZh> = {
   },
 };
 
-type NewsZh = { title: string; category: string; summary: string; body: string };
+export type NewsOverlay = { title: string; category: string; summary: string; body: string };
 
-export const newsZh: Record<string, NewsZh> = {
+export const news: Record<string, NewsOverlay> = {
   "brand-platform-launch": {
     title: "SAERIM 启动品牌平台转型",
     category: "品牌故事",
     summary: "从卖产品的公司，转向为餐饮业做准备的基础设施。SAERIM 重新梳理品牌体系。",
-    body: "SAERIM 自 2003 年创立以来，一直专注于畜产制造这一条路。\n\n如今，我们把全国汤饭交易所、肉食笔记两个渠道品牌与群山·金堤·龙仁三座工厂整合为一套体系，转型为支撑合作伙伴成长的食品基础设施。\n\n品牌可以增加，品质标准只有一个。SAERIM 的 8 道品质工序，对所有品牌、所有工厂一视同仁。",
+    body: "SAERIM 自 2014 年创立于群山以来，一直专注于畜产制造这一条路。\n\n如今，我们把全国汤饭交易所、肉食笔记两个渠道品牌与群山·金堤·龙仁三座工厂整合为一套体系，转型为支撑合作伙伴成长的食品基础设施。\n\n品牌可以增加，品质标准只有一个。SAERIM 的 8 道品质工序，对所有品牌、所有工厂一视同仁。",
   },
   "quality-journey": {
     title: "从入库到出货 —— SAERIM 的 8 道品质工序",
@@ -333,9 +334,9 @@ export const newsZh: Record<string, NewsZh> = {
   },
 };
 
-type StoreLinkZh = { name: string; description: string };
+export type StoreLinkOverlay = { name: string; description: string };
 
-export const storeLinksZh: Record<number, StoreLinkZh> = {
+export const storeLinks: Record<number, StoreLinkOverlay> = {
   1: {
     name: "NAVER 智能商店",
     description: "可以小批量直接购买 SAERIM 的产品。",
@@ -347,7 +348,7 @@ export const storeLinksZh: Record<number, StoreLinkZh> = {
 };
 
 /** 제품 카테고리 표시명 (필터 값은 한국어 원문 키를 그대로 유지한다) */
-export const categoriesZh: Record<string, string> = {
+export const categories: Record<string, string> = {
   국탕류: "汤类原料",
   뒷고기류: "特色部位肉",
 };

@@ -26,6 +26,9 @@ export const ko = {
     nextStory: "다음 이야기",
     readMore: "읽기",
     openLink: "바로가기",
+    notFoundTitle: "페이지를 찾을 수 없습니다",
+    notFoundBody: "요청하신 페이지가 없거나 이동되었습니다.",
+    notFoundCta: "홈으로 이동",
   },
 
   footer: {
@@ -48,7 +51,7 @@ export const ko = {
     heroCtaContact: "도매·OEM 문의",
     badges: [
       "HACCP 2개 업종 (포장처리 · 축산물가공)",
-      "ISO 9001 · 14001",
+      "ISO 9001 · 14001 인증 준비 중",
       "무항생제 · 유기가공식품",
       "INNOBIZ · MAIN-BIZ",
     ],

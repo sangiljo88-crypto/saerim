@@ -8,7 +8,9 @@ import {
   LOCALE_HEADER,
   LOCALE_META,
   PATH_HEADER,
+  LOCALES,
   href,
+  hreflangMap,
   isLocale,
 } from "@/lib/i18n/config";
 import { getDict } from "@/lib/i18n";
@@ -31,16 +33,14 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t.meta.description,
     alternates: {
       canonical: `${SITE_URL}${href(locale, path)}`,
-      languages: {
-        ko: `${SITE_URL}${href("ko", path)}`,
-        "zh-Hans": `${SITE_URL}${href("zh", path)}`,
-      },
+      languages: hreflangMap(SITE_URL, path),
     },
     openGraph: {
       title: t.meta.ogTitle,
       description: t.meta.ogDescription,
       type: "website",
       locale: meta.ogLocale,
+      alternateLocale: LOCALES.filter((l) => l !== locale).map((l) => LOCALE_META[l].ogLocale),
     },
   };
 }
