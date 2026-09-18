@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const factory = getFactory(locale, slug);
   if (!factory) return {};
-  return { title: `${factory.name} — ${factory.role}`, description: factory.description };
+  return pageMetadata(locale, `/factory/${slug}`, { title: `${factory.name} — ${factory.role}`, description: factory.description, image: factory.image });
 }
 
 /** 공장 상세 — 공장 하나가 브랜드 페이지 하나의 완성도를 갖는다 */

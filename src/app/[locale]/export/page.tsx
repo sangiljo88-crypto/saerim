@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Downloads } from "@/components/ui/Downloads";
@@ -12,7 +13,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.export;
+  return pageMetadata(locale, "/export", getDict(locale).meta.pages.export);
 }
 
 /**

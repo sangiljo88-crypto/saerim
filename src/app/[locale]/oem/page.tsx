@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Faq } from "@/components/ui/Faq";
@@ -14,7 +15,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.oem;
+  return pageMetadata(locale, "/oem", getDict(locale).meta.pages.oem);
 }
 
 /** OEM — "식품 브랜드 뒤에는 새림이 있습니다"가 실제 사업이 되는 페이지 */

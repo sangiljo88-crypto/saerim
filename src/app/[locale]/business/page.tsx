@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
@@ -10,7 +11,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.business;
+  return pageMetadata(locale, "/business", getDict(locale).meta.pages.business);
 }
 
 /** BUSINESS — 바이어가 3초 안에 이해하는 사업 구조 */

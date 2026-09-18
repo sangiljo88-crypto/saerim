@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return {};
   // 영어는 바이어 검색어를 제목에 덧붙인다: "{name} | Korean pork by-product supplier | SAERIM Co., Ltd."
   const suffix = getDict(locale).meta.productTitleSuffix;
-  return { title: suffix ? `${product.name} | ${suffix}` : product.name, description: product.summary };
+  return pageMetadata(locale, `/products/${slug}`, { title: suffix ? `${product.name} | ${suffix}` : product.name, description: product.summary, image: product.image });
 }
 
 /**

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
@@ -13,7 +14,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.factory;
+  return pageMetadata(locale, "/factory", getDict(locale).meta.pages.factory);
 }
 
 /** FACTORY — 각 공장을 하나의 브랜드처럼 (docs/brand-system/02 §4) */

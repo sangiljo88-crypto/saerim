@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Certifications } from "@/components/quality/Certifications";
@@ -15,7 +16,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.quality;
+  return pageMetadata(locale, "/quality", getDict(locale).meta.pages.quality);
 }
 
 /** QUALITY — 입고→출고 8단계를 인터랙티브로 경험하는 페이지 */

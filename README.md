@@ -53,6 +53,11 @@ npm run dev        # http://localhost:3000
 2. **볼륨을 `/data`에 마운트** — 없으면 재배포 때마다 CMS 데이터가 초기화됩니다
 3. Node 버전 22.5+ 확인 (필요 시 `NIXPACKS_NODE_VERSION=22` 지정)
 
+## 네이버 검색 등록
+
+대표 주소는 `https://www.saerim.kr`입니다. 소유확인 환경변수, 사이트맵 제출 및 검증 방법은
+[네이버 검색 설정 안내](docs/naver-search-setup.md)를 참고하세요.
+
 ## 콘텐츠 수정 방법
 
 | 하고 싶은 일 | 위치 |

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const item = getNews(locale, slug);
   if (!item) return {};
-  return { title: item.title, description: item.summary };
+  return pageMetadata(locale, `/news/${slug}`, { title: item.title, description: item.summary });
 }
 
 /** 뉴스 상세 — 한 편의 브랜드 스토리로 읽힌다 */

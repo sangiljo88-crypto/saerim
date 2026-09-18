@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
@@ -13,7 +14,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.brand;
+  return pageMetadata(locale, "/brand", getDict(locale).meta.pages.brand);
 }
 
 /** BRAND — 새림 ↔ 전국국밥거래소 ↔ 육식노트 관계를 명확하게 보여준다 (docs/brand-system/02) */

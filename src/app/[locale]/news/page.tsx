@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
@@ -13,7 +14,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.news;
+  return pageMetadata(locale, "/news", getDict(locale).meta.pages.news);
 }
 
 /** NEWS — 게시판이 아니라 브랜드 스토리 피드 */

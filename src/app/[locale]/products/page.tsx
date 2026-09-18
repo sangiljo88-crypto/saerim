@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Downloads } from "@/components/ui/Downloads";
@@ -17,7 +18,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.products;
+  return pageMetadata(locale, "/products", getDict(locale).meta.pages.products);
 }
 
 /** PRODUCT 목록 — 단순 나열이 아니라 카테고리 필터 + 제안형 카드 */

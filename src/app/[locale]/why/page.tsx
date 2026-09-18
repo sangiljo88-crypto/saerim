@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle } from "@/components/ui/brand";
@@ -9,7 +10,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.why;
+  return pageMetadata(locale, "/why", getDict(locale).meta.pages.why);
 }
 
 /** WHY — 브랜드 철학을 한 편의 글처럼 읽는 페이지 (Aesop 원칙) */

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
 import { InquiryForm } from "@/components/contact/InquiryForm";
 import { Reveal } from "@/components/ui/Reveal";
@@ -15,7 +16,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.contact;
+  return pageMetadata(locale, "/contact", getDict(locale).meta.pages.contact);
 }
 
 /** CONTACT — 스토리의 종착점. 실제로 접수되는 문의 폼 + 연락처 */

@@ -56,6 +56,13 @@ export function middleware(request: NextRequest) {
     return adminAuth(request) ?? NextResponse.next();
   }
 
+  // The Korean public URL has no locale prefix. Avoid two indexable copies.
+  if (pathname === "/ko" || pathname.startsWith("/ko/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.slice(3) || "/";
+    return NextResponse.redirect(url, 308);
+  }
+
   const prefixed = localeOf(pathname);
   const locale = prefixed ?? DEFAULT_LOCALE;
 

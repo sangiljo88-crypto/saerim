@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
@@ -13,7 +14,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return getDict(locale).meta.pages.store;
+  return pageMetadata(locale, "/store", getDict(locale).meta.pages.store);
 }
 
 /** STORE — 도매 전 단계: 소량 구매로 품질을 먼저 경험하게 한다 */
