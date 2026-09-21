@@ -25,7 +25,7 @@ export function pageMetadata(
       title,
       description: page.description,
       url,
-      siteName: dict.common.companyName,
+      siteName: dict.common.companyShort,
       type: "website",
       locale: LOCALE_META[locale].ogLocale,
       images,

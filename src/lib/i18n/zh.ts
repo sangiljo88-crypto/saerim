@@ -57,6 +57,9 @@ export const zh: Dictionary = {
   },
 
   home: {
+    siteLabel: "SAERIM · 食品基础设施",
+    companyHeading: "SAERIM 官方网站",
+    companyIntro: "SAERIM（새림）是一家总部位于韩国全北群山市的食品制造与加工企业，韩国法人名称为“유한회사 새림”。我们供应猪副产品、猪头肉、特色部位肉及汤饭原料，并提供肉类加工 OEM 与自有品牌产品生产服务。",
     heroCtaStory: "了解 SAERIM",
     heroCtaContact: "批发 · OEM 咨询",
     badges: [

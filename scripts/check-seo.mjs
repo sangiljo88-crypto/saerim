@@ -41,7 +41,16 @@ for (const path of paths) {
   }
   const schemas = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
   assert.ok(schemas.some((schema) => schema["@type"] === "WebSite" && schema.name === "새림"));
-  if (path === "/") assert.ok(schemas.some((schema) => schema["@type"] === "Organization" && schema.name === "유한회사 새림"));
+  if (path === "/") {
+    assert.equal(meta(head, "og:site_name"), "새림");
+    const organization = schemas.find((schema) => schema["@type"] === "Organization");
+    assert.equal(organization?.name, "새림");
+    assert.equal(organization?.legalName, "유한회사 새림");
+    const page = schemas.find((schema) => schema["@type"] === "WebPage");
+    assert.equal(page?.about?.["@id"], organization["@id"]);
+    assert.equal(page?.isPartOf?.["@id"], `${canonicalBase}/#website`);
+    assert.match(html, /<h2[^>]*>새림 공식 홈페이지<\/h2>/);
+  }
   console.log(`PASS ${path}`);
 }
 for (const path of ["/ko", "/ko/products?category=test"]) {

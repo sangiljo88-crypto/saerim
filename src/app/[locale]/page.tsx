@@ -1,11 +1,13 @@
 import Link from "next/link";
 
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Downloads } from "@/components/ui/Downloads";
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle, StatBlock, TrustBadge } from "@/components/ui/brand";
 import { categoryLabel, factoryImageAlt, getSettings, listFactories, listFeaturedProducts, productImageAlt } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
+import { SITE_URL } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +28,18 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": `${SITE_URL}${href(locale, "/")}#webpage`,
+        url: `${SITE_URL}${href(locale, "/")}`,
+        name: t.companyHeading,
+        description: t.companyIntro,
+        inLanguage: locale === "zh" ? "zh-Hans" : locale,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": `${SITE_URL}/#organization` },
+        mainEntity: { "@id": `${SITE_URL}/#organization` },
+      }} />
       {/* Hero — 풀스크린 미디어 + 브랜드 메시지 */}
       <section className="relative flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden bg-ink-950">
         {isVideo ? (
@@ -50,7 +64,7 @@ export default async function HomePage({ params }: Props) {
         <div className="absolute inset-0 bg-ink-950/55" aria-hidden />
 
         <div className="relative z-10 px-6 text-center text-white">
-          <p className="kicker !text-white/60">Saerim Food Infrastructure</p>
+          <p className="kicker !text-white/80">{t.siteLabel}</p>
           <h1 className="mt-6 text-display">
             {settings.hero_title_1}
             <br />
@@ -79,11 +93,13 @@ export default async function HomePage({ params }: Props) {
       <section className="section">
         <div className="container-grid">
           <Reveal>
+            <h2 className="text-h2 text-ink-900">{t.companyHeading}</h2>
+            <p className="prose-body mt-6 mb-6 max-w-3xl">{t.companyIntro}</p>
             {/* 설명형 한 줄 — 무엇을 하는 회사인지 텍스트로 먼저 밝힌다 */}
             {settings.hero_descriptor && (
-              <h2 className="mb-8 max-w-3xl text-body font-medium leading-relaxed text-ink-600">
+              <p className="mb-8 max-w-3xl text-body font-medium leading-relaxed text-ink-600">
                 {settings.hero_descriptor}
-              </h2>
+              </p>
             )}
             <div className="flex flex-wrap items-center gap-3">
               {t.badges.map((badge) => (

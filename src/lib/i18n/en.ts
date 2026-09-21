@@ -57,6 +57,9 @@ export const en: Dictionary = {
   },
 
   home: {
+    siteLabel: "SAERIM · Food Infrastructure",
+    companyHeading: "SAERIM official website",
+    companyIntro: "SAERIM Co., Ltd. is a food manufacturer and processor headquartered in Gunsan, Korea. We supply pork by-products, head meat, specialty cuts and ingredients for Korean soup restaurants, and produce OEM and private-label processed meat products.",
     heroCtaStory: "Our story",
     heroCtaContact: "Wholesale & OEM inquiry",
     badges: [

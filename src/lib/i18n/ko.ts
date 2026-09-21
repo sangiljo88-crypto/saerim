@@ -5,7 +5,7 @@
 export const ko = {
   common: {
     companyName: "유한회사 새림",
-    companyShort: "(유)새림",
+    companyShort: "새림",
     latin: "Saerim Food Infrastructure",
     nav: [
       { href: "/why", label: "WHY" },
@@ -55,6 +55,9 @@ export const ko = {
   },
 
   home: {
+    siteLabel: "새림 · SAERIM",
+    companyHeading: "새림 공식 홈페이지",
+    companyIntro: "새림(SAERIM)은 전북 군산에 본사를 둔 식품 제조·가공 기업입니다. 법인명은 유한회사 새림이며, 돼지 부산물·머릿고기·뒷고기와 국밥 재료를 공급하고 육가공 OEM·PB 제품을 생산합니다.",
     heroCtaStory: "새림 이야기 보기",
     heroCtaContact: "도매·OEM 문의",
     badges: [
