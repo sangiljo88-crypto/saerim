@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { FactoryVideoGallery } from "@/components/factory/FactoryVideoGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Downloads } from "@/components/ui/Downloads";
 import { Reveal } from "@/components/ui/Reveal";
@@ -15,7 +16,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 /**
  * HOME — 첫 화면은 제품이 아니라 신뢰를 보여준다. (docs/brand-system/01)
- * Hero(브랜드 메시지 + 심벌) → 신뢰 지표(+공장 사진) → 브랜드 구조 → 공장 → 대표 제품 → 다음 이야기
+ * Hero(브랜드 메시지 + 공장 전경) → 신뢰 지표 → 브랜드 구조 → 공장·소개 영상 → 대표 제품 → 다음 이야기
  */
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
@@ -24,8 +25,11 @@ export default async function HomePage({ params }: Props) {
   const settings = getSettings(locale);
   const factories = listFactories(locale);
   const products = listFeaturedProducts(locale).slice(0, 3);
-  const heroMedia = settings.hero_media ?? "";
-  const isVideo = heroMedia.endsWith(".mp4") || heroMedia.endsWith(".webm");
+  const heroMedia = settings.hero_media?.trim() || "/images/company/hero-main-photo4.jpg";
+  const isVideo = /\.(mp4|webm)(?:[?#]|$)/i.test(heroMedia);
+  const heroAlt = heroMedia === "/images/company/hero-main-photo4.jpg"
+    ? t.heroMediaAlt
+    : settings.hero_alt || t.heroMediaAlt;
 
   return (
     <>
@@ -41,9 +45,9 @@ export default async function HomePage({ params }: Props) {
         about: { "@id": `${SITE_URL}/#organization` },
         mainEntity: { "@id": `${SITE_URL}/#organization` },
       }} />
-      {/* Hero — 아이보리 바탕 · 브랜드 메시지 + 심벌 (브랜드 가이드 §15 디지털 적용) */}
+      {/* Hero — 브랜드의 약속과 그 약속을 준비하는 실제 현장 */}
       <section className="relative overflow-hidden bg-paper">
-        <div className="container-grid grid min-h-[calc(100svh-4rem)] items-center gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
+        <div className="container-grid grid items-center gap-10 py-12 sm:py-16 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:py-20">
           <div>
             <p className="kicker">{t.siteLabel}</p>
             <BrandStatement
@@ -67,18 +71,37 @@ export default async function HomePage({ params }: Props) {
               </Link>
             </div>
           </div>
-          <div className="flex justify-center lg:justify-end">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/logo/symbol-flat.svg"
-              alt=""
-              aria-hidden
-              width={420}
-              height={416}
-              fetchPriority="high"
-              className="w-56 max-w-full sm:w-72 lg:w-[26rem]"
-            />
-          </div>
+          <figure className="min-w-0">
+            <div className="overflow-hidden rounded-2xl bg-paper-warm">
+              {isVideo ? (
+                <video
+                  className="aspect-[16/10] w-full object-cover object-bottom"
+                  src={heroMedia}
+                  aria-label={heroAlt}
+                  controls
+                  muted
+                  playsInline
+                  preload="metadata"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={heroMedia}
+                  alt={heroAlt}
+                  width={1984}
+                  height={1104}
+                  fetchPriority="high"
+                  className="aspect-[16/10] w-full object-cover object-bottom"
+                />
+              )}
+            </div>
+            <figcaption className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 text-sm">
+              <span className="text-ink-400">{t.heroMediaCaption}</span>
+              <Link href={href(locale, "/factory")} className="font-semibold text-ink-900 underline-offset-4 hover:underline">
+                {t.heroMediaCta} <span aria-hidden>→</span>
+              </Link>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -112,17 +135,6 @@ export default async function HomePage({ params }: Props) {
               <StatBlock value={settings.stat_partners ?? "55"} label={t.stats.partners} />
               <StatBlock value={settings.stat_daily ?? "1,500"} label={t.stats.daily} />
             </div>
-            {/* 공장 사진 — Hero에서 신뢰 영역으로 옮겼다 (설정 hero_media · hero_alt 그대로 사용) */}
-            {heroMedia && (
-              <div className="mt-14 overflow-hidden rounded-2xl">
-                {isVideo ? (
-                  <video className="aspect-[21/9] w-full object-cover" src={heroMedia} autoPlay muted loop playsInline />
-                ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={heroMedia} alt={settings.hero_alt ?? ""} loading="lazy" className="aspect-[21/9] w-full object-cover" />
-                )}
-              </div>
-            )}
             {settings.partners && (
               <div className="mt-14 border-t border-line pt-8">
                 <p className="kicker mb-4">{t.partnersKicker}</p>
@@ -156,7 +168,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      {/* 세 공장 */}
+      {/* 본사와 지점 */}
       <section className="section">
         <div className="container-grid">
           <SectionTitle kicker={t.factoryKicker} title={t.factoryTitle} lead={t.factoryLead} />
@@ -182,6 +194,8 @@ export default async function HomePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <FactoryVideoGallery locale={locale} factories={factories} />
 
       {/* 대표 제품 — 신뢰 이후에 등장 */}
       <section className="section hairline-t bg-paper-warm">

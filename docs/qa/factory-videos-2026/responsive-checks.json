@@ -1,0 +1,294 @@
+[
+  {
+    "width": 320,
+    "path": "/brand",
+    "client": 305,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 305,
+    "videoButtons": 0
+  },
+  {
+    "width": 390,
+    "path": "/",
+    "client": 375,
+    "h1": 1,
+    "heroTop": 607.5390625,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 375,
+    "videoButtons": 2
+  },
+  {
+    "width": 390,
+    "path": "/en",
+    "client": 375,
+    "h1": 1,
+    "heroTop": 758.4765625,
+    "iframes": 0,
+    "lang": "en",
+    "scroll": 375,
+    "videoButtons": 2
+  },
+  {
+    "width": 390,
+    "path": "/zh",
+    "client": 375,
+    "h1": 1,
+    "heroTop": 546.3359375,
+    "iframes": 0,
+    "lang": "zh-Hans",
+    "scroll": 375,
+    "videoButtons": 2
+  },
+  {
+    "width": 390,
+    "path": "/factory",
+    "client": 375,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 375,
+    "videoButtons": 2
+  },
+  {
+    "width": 390,
+    "path": "/factory/gimje",
+    "client": 375,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 375,
+    "videoButtons": 1
+  },
+  {
+    "width": 390,
+    "path": "/factory/yongin",
+    "client": 375,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 375,
+    "videoButtons": 1
+  },
+  {
+    "width": 390,
+    "path": "/brand",
+    "client": 375,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 375,
+    "videoButtons": 0
+  },
+  {
+    "width": 1024,
+    "path": "/",
+    "client": 1009,
+    "h1": 1,
+    "heroTop": 278.0234375,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1009,
+    "videoButtons": 2
+  },
+  {
+    "width": 1024,
+    "path": "/en",
+    "client": 1009,
+    "h1": 1,
+    "heroTop": 278.0234375,
+    "iframes": 0,
+    "lang": "en",
+    "scroll": 1009,
+    "videoButtons": 2
+  },
+  {
+    "width": 1024,
+    "path": "/zh",
+    "client": 1009,
+    "h1": 1,
+    "heroTop": 278.0234375,
+    "iframes": 0,
+    "lang": "zh-Hans",
+    "scroll": 1009,
+    "videoButtons": 2
+  },
+  {
+    "width": 1024,
+    "path": "/factory",
+    "client": 1009,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1009,
+    "videoButtons": 2
+  },
+  {
+    "width": 1024,
+    "path": "/factory/gimje",
+    "client": 1009,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1009,
+    "videoButtons": 1
+  },
+  {
+    "width": 1024,
+    "path": "/factory/yongin",
+    "client": 1009,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1009,
+    "videoButtons": 1
+  },
+  {
+    "width": 1024,
+    "path": "/brand",
+    "client": 1009,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1009,
+    "videoButtons": 0
+  },
+  {
+    "width": 1440,
+    "path": "/",
+    "client": 1425,
+    "h1": 1,
+    "heroTop": 254.5625,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1425,
+    "videoButtons": 2
+  },
+  {
+    "width": 1440,
+    "path": "/en",
+    "client": 1425,
+    "h1": 1,
+    "heroTop": 277.0078125,
+    "iframes": 0,
+    "lang": "en",
+    "scroll": 1425,
+    "videoButtons": 2
+  },
+  {
+    "width": 1440,
+    "path": "/zh",
+    "client": 1425,
+    "h1": 1,
+    "heroTop": 254.5625,
+    "iframes": 0,
+    "lang": "zh-Hans",
+    "scroll": 1425,
+    "videoButtons": 2
+  },
+  {
+    "width": 1440,
+    "path": "/factory",
+    "client": 1425,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1425,
+    "videoButtons": 2
+  },
+  {
+    "width": 1440,
+    "path": "/factory/gimje",
+    "client": 1425,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1425,
+    "videoButtons": 1
+  },
+  {
+    "width": 1440,
+    "path": "/factory/yongin",
+    "client": 1425,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1425,
+    "videoButtons": 1
+  },
+  {
+    "width": 1440,
+    "path": "/brand",
+    "client": 1425,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 1425,
+    "videoButtons": 0
+  },
+  {
+    "width": 320,
+    "path": "/",
+    "client": 305,
+    "h1": 1,
+    "heroTop": 667.5390625,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 305,
+    "videoButtons": 2
+  },
+  {
+    "width": 320,
+    "path": "/en",
+    "client": 305,
+    "h1": 1,
+    "heroTop": 858.265625,
+    "iframes": 0,
+    "lang": "en",
+    "scroll": 305,
+    "videoButtons": 2
+  },
+  {
+    "width": 320,
+    "path": "/zh",
+    "client": 305,
+    "h1": 1,
+    "heroTop": 606.3359375,
+    "iframes": 0,
+    "lang": "zh-Hans",
+    "scroll": 305,
+    "videoButtons": 2
+  },
+  {
+    "width": 320,
+    "path": "/factory",
+    "client": 305,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 305,
+    "videoButtons": 2
+  },
+  {
+    "width": 320,
+    "path": "/factory/gimje",
+    "client": 305,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 305,
+    "videoButtons": 1
+  },
+  {
+    "width": 320,
+    "path": "/factory/yongin",
+    "client": 305,
+    "h1": 1,
+    "iframes": 0,
+    "lang": "ko",
+    "scroll": 305,
+    "videoButtons": 1
+  }
+]

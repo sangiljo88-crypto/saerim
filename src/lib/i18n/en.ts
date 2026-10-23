@@ -63,6 +63,9 @@ export const en: Dictionary = {
     companyIntro: "SAERIM Co., Ltd. is a food manufacturer and processor headquartered in Gunsan, Korea. We supply pork by-products, head meat, specialty cuts and ingredients for Korean soup restaurants, and produce OEM and private-label processed meat products.",
     heroCtaStory: "Our story",
     heroCtaContact: "Wholesale & OEM inquiry",
+    heroMediaCaption: "Where careful preparation begins",
+    heroMediaCta: "Explore our facilities",
+    heroMediaAlt: "Exterior view of a SAERIM factory with wooded hills in the background",
     badges: [
       "HACCP certified in 2 categories (meat packaging · livestock product processing)",
       "ISO 9001 · 14001 certification in progress",
@@ -143,6 +146,13 @@ export const en: Dictionary = {
     kicker: "Brand Architecture",
     title: "One infrastructure,\nthree faces.",
     lead: "SAERIM is the master brand responsible for production, quality and OEM. Gukbap Exchange and Yuksik Note are channel brands that meet their own customers on top of it.",
+    identity: {
+      kicker: "The SAERIM Promise",
+      title: "Good ingredients.\nHonest food.",
+      body: "For SAERIM, careful preparation starts with choosing good ingredients. The same care carries through processing, packing and supply, preparing what restaurants need so they can focus on serving their guests.",
+      expression: "The symbol's flowing curves, deep green and restrained touches of gold give this promise a visual form. From our company story to product packaging, the SAERIM name stands for the same approach.",
+      steps: ["Selecting good ingredients", "Consistent processing and packing", "Supply that reaches the kitchen"],
+    },
     masterSuffix: "Master Brand",
     subSuffix: "by SAERIM",
     customerLabel: "Customers",

@@ -63,6 +63,9 @@ export const zh: Dictionary = {
     companyIntro: "SAERIM（새림）是一家总部位于韩国全北群山市的食品制造与加工企业，韩国法人名称为“유한회사 새림”。我们供应猪副产品、猪头肉、特色部位肉及汤饭原料，并提供肉类加工 OEM 与自有品牌产品生产服务。",
     heroCtaStory: "了解 SAERIM",
     heroCtaContact: "批发 · OEM 咨询",
+    heroMediaCaption: "用心准备，从 SAERIM 的生产现场开始",
+    heroMediaCta: "了解生产基地",
+    heroMediaAlt: "以山林绿地为背景的 SAERIM 工厂外观全景",
     badges: [
       "HACCP 双业种认证（肉类包装处理 · 畜产品加工）",
       "ISO 9001 · 14001 认证准备中",
@@ -156,6 +159,13 @@ export const zh: Dictionary = {
     kicker: "Brand Architecture",
     title: "一套基础设施，\n三种面貌。",
     lead: "SAERIM 是负责生产、品质与 OEM 的母品牌。全国汤饭交易所与肉食笔记，则是建立其上、各自面对不同客户的渠道品牌。",
+    identity: {
+      kicker: "The SAERIM Promise",
+      title: "用好食材，\n做好食品。",
+      body: "对 SAERIM 来说，用心准备始于好食材的选择。从加工、包装到供应，我们以同样的标准照顾每一个环节，提前做好餐厅所需的准备，让餐厅能够专心迎接客人。",
+      expression: "标志中相互连接的曲线、深绿色与适度点缀的金色，是这份承诺的视觉表达。从公司介绍到产品包装，SAERIM 的名字始终传递着同一种做事态度。",
+      steps: ["选择好食材", "按标准加工与包装", "将食材送达餐厅"],
+    },
     masterSuffix: "母品牌",
     subSuffix: "by SAERIM",
     customerLabel: "客户群",

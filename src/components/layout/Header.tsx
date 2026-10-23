@@ -34,13 +34,13 @@ export function Header({ locale }: { locale: Locale }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 max-[380px]:px-4">
         {/* 심벌 + 별도 워드마크 텍스트 (로고 락업을 재조합하지 않는다 — 가이드 §06) */}
-        <Link href={href(locale, "/")} className="flex shrink-0 items-center gap-3">
+        <Link href={href(locale, "/")} className="flex shrink-0 items-center gap-3 max-[380px]:gap-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/logo/symbol-flat.svg" alt={t.logoAlt} width={36} height={36} className="h-9 w-9" />
           <span className="flex items-baseline gap-2">
-            <span className="text-[17px] font-semibold tracking-[0.14em] text-ink-900">SAERIM</span>
+            <span className="text-[17px] font-semibold tracking-[0.14em] text-ink-900 max-[380px]:text-[15px]">SAERIM</span>
             {/* 한글 보조 회사명은 한국어에서만 — 영어·중국어는 워드마크와 중복된다 */}
             {locale === "ko" && (
               <span className="hidden text-sm font-medium text-ink-400 sm:inline">{t.companyShort}</span>
@@ -48,7 +48,7 @@ export function Header({ locale }: { locale: Locale }) {
           </span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 max-[380px]:gap-2">
           <nav className="hidden items-center gap-4 xl:flex" aria-label={t.mainMenuLabel}>
             {t.nav.map((item) => {
               const active = basePath.startsWith(item.href);

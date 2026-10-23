@@ -1,0 +1,94 @@
+[
+  {
+    "path": "/en/factory",
+    "h1": "Headquarters and branches,\none standard.",
+    "lang": "en",
+    "overflow": false,
+    "videoButtons": [
+      "Play introduction video: Inside the Gimje branch",
+      "Play introduction video: Inside the Yongin factory"
+    ],
+    "videoLinks": [
+      "https://www.youtube.com/watch?v=4pXO82VN6bQ",
+      "https://www.youtube.com/watch?v=Y2fNzjaCV54"
+    ]
+  },
+  {
+    "path": "/en/factory/gimje",
+    "h1": "Gimje Plant",
+    "lang": "en",
+    "overflow": false,
+    "videoButtons": [
+      "Play introduction video: Inside the Gimje branch"
+    ],
+    "videoLinks": [
+      "https://www.youtube.com/watch?v=4pXO82VN6bQ"
+    ]
+  },
+  {
+    "path": "/en/factory/yongin",
+    "h1": "Yongin Plant",
+    "lang": "en",
+    "overflow": false,
+    "videoButtons": [
+      "Play introduction video: Inside the Yongin factory"
+    ],
+    "videoLinks": [
+      "https://www.youtube.com/watch?v=Y2fNzjaCV54"
+    ]
+  },
+  {
+    "path": "/en/brand",
+    "h1": "One infrastructure,\nthree faces.",
+    "lang": "en",
+    "overflow": false,
+    "videoButtons": [],
+    "videoLinks": []
+  },
+  {
+    "path": "/zh/factory",
+    "h1": "总部与分厂，\n同一套标准。",
+    "lang": "zh-Hans",
+    "overflow": false,
+    "videoButtons": [
+      "播放介绍视频: 走进金堤分厂",
+      "播放介绍视频: 走进龙仁工厂"
+    ],
+    "videoLinks": [
+      "https://www.youtube.com/watch?v=4pXO82VN6bQ",
+      "https://www.youtube.com/watch?v=Y2fNzjaCV54"
+    ]
+  },
+  {
+    "path": "/zh/factory/gimje",
+    "h1": "金堤工厂",
+    "lang": "zh-Hans",
+    "overflow": false,
+    "videoButtons": [
+      "播放介绍视频: 走进金堤分厂"
+    ],
+    "videoLinks": [
+      "https://www.youtube.com/watch?v=4pXO82VN6bQ"
+    ]
+  },
+  {
+    "path": "/zh/factory/yongin",
+    "h1": "龙仁工厂",
+    "lang": "zh-Hans",
+    "overflow": false,
+    "videoButtons": [
+      "播放介绍视频: 走进龙仁工厂"
+    ],
+    "videoLinks": [
+      "https://www.youtube.com/watch?v=Y2fNzjaCV54"
+    ]
+  },
+  {
+    "path": "/zh/brand",
+    "h1": "一套基础设施，\n三种面貌。",
+    "lang": "zh-Hans",
+    "overflow": false,
+    "videoButtons": [],
+    "videoLinks": []
+  }
+]
