@@ -7,6 +7,8 @@ export const ko = {
     companyName: "유한회사 새림",
     companyShort: "새림",
     latin: "Saerim Food Infrastructure",
+    /** 마스터 태그라인 — 로고 원본 문구. 로고 안에서는 원문·문장부호를 유지한다 */
+    tagline: "좋은 재료, 바른 먹거리.",
     nav: [
       { href: "/why", label: "WHY" },
       { href: "/brand", label: "BRAND" },
@@ -60,6 +62,9 @@ export const ko = {
     companyIntro: "새림(SAERIM)은 전북 군산에 본사를 둔 식품 제조·가공 기업입니다. 법인명은 유한회사 새림이며, 돼지 부산물·머릿고기·뒷고기와 국밥 재료를 공급하고 육가공 OEM·PB 제품을 생산합니다.",
     heroCtaStory: "새림 이야기 보기",
     heroCtaContact: "도매·OEM 문의",
+    heroMediaCaption: "바른 준비가 시작되는 새림의 현장",
+    heroMediaCta: "공장 둘러보기",
+    heroMediaAlt: "산과 녹지를 배경으로 한 새림 공장 외관 전경",
     badges: [
       "HACCP 2개 업종 (포장처리 · 축산물가공)",
       "ISO 9001 · 14001 인증 준비 중",
@@ -111,6 +116,7 @@ export const ko = {
     },
     closing:
       "인프라는 화려하지 않습니다. 대신 멈추지 않습니다. 매일 같은 품질, 같은 시간의 출고, 같은 기준의 검수. 새림이 지키는 것은 이 반복의 신뢰입니다.",
+    campaign: "바른 준비가, 좋은 먹거리로.",
     promiseKicker: "Our Promises",
     promiseTitle: "새림이 지키는 세 가지",
     promises: [
@@ -152,6 +158,13 @@ export const ko = {
     kicker: "Brand Architecture",
     title: "하나의 인프라,\n세 개의 얼굴.",
     lead: "새림은 생산·품질·OEM을 책임지는 마스터 브랜드입니다. 전국국밥거래소와 육식노트는 그 위에서 각자의 손님을 만나는 채널 브랜드입니다.",
+    identity: {
+      kicker: "The SAERIM Promise",
+      title: "좋은 재료,\n바른 먹거리.",
+      body: "새림이 말하는 ‘바른 준비’는 좋은 재료를 고르는 데서 시작합니다. 가공과 포장, 공급까지 같은 기준으로 살피는 일. 식당이 손님을 맞이하는 데 집중할 수 있도록, 그 앞의 과정을 준비합니다.",
+      expression: "서로 이어지는 심벌의 곡선과 깊은 녹색, 절제된 금색으로 이 약속을 표현합니다. 회사 소개에서 제품 포장까지, 새림의 이름이 보이는 곳마다 같은 태도를 전합니다.",
+      steps: ["좋은 재료의 선택", "기준을 지키는 가공·포장", "식당까지 이어지는 공급"],
+    },
     masterSuffix: "Master Brand",
     subSuffix: "by 새림",
     customerLabel: "고객",

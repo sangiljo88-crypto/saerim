@@ -49,9 +49,11 @@ npm run dev        # http://localhost:3000
 
 ## 배포 (Railway)
 
-1. 환경변수 설정: `ADMIN_USER`, `ADMIN_PASSWORD`, `DATA_DIR=/data`
-2. **볼륨을 `/data`에 마운트** — 없으면 재배포 때마다 CMS 데이터가 초기화됩니다
+1. 환경변수 설정: `ADMIN_USER`, `ADMIN_PASSWORD`, `DATA_DIR=/app/data`
+2. **영구 볼륨을 `/app/data`에 마운트** — 운영 환경은 2026-10-24부터 이 경로를 사용합니다. `DATA_DIR`와 마운트 경로가 같아야 합니다.
 3. Node 버전 22.5+ 확인 (필요 시 `NIXPACKS_NODE_VERSION=22` 지정)
+
+기존 서비스를 영구 볼륨으로 옮길 때는 빈 볼륨을 바로 연결하지 않습니다. SQLite 온라인 백업을 먼저 확보하고, 최종 복사 중 쓰기를 잠시 중지한 뒤 백업을 볼륨에 복원·검증하고 연결합니다. 백업 DB에는 문의 정보가 포함되므로 저장소에 커밋하지 않습니다.
 
 ## 네이버 검색 등록
 

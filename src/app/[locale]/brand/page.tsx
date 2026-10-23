@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
-import { NextStory, SectionTitle } from "@/components/ui/brand";
+import { BrandStatement, NextStory, SectionTitle } from "@/components/ui/brand";
 import { listBrands } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 /** BRAND — 새림 ↔ 전국국밥거래소 ↔ 육식노트 관계를 명확하게 보여준다 (docs/brand-system/02) */
 export default async function BrandPage({ params }: Props) {
   const { locale } = await params;
-  const t = getDict(locale).brand;
+  const dict = getDict(locale);
+  const t = dict.brand;
   const brands = listBrands(locale);
   const master = brands.find((b) => b.role === "master");
   const subs = brands.filter((b) => b.role === "sub");
@@ -37,8 +38,43 @@ export default async function BrandPage({ params }: Props) {
         </div>
       </section>
 
+      {/* 브랜드의 약속 — 로고와 현장의 일하는 방식을 함께 설명한다 */}
+      <section className="section hairline-t bg-paper-warm">
+        <div className="container-grid grid items-center gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+          <Reveal>
+            <div className="flex justify-center py-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo/logo-flat.svg"
+                alt={dict.common.logoAlt}
+                width={624}
+                height={566}
+                loading="lazy"
+                className="w-64 max-w-full"
+              />
+            </div>
+          </Reveal>
+          <Reveal>
+            <p className="kicker">{t.identity.kicker}</p>
+            <BrandStatement locale={locale} as="h2" className="mt-5 whitespace-pre-line text-h1 text-ink-900">
+              {t.identity.title}
+            </BrandStatement>
+            <p className="prose-body mt-6">{t.identity.body}</p>
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ink-400">{t.identity.expression}</p>
+            <ol className="mt-8 grid gap-4 border-t border-line pt-6 sm:grid-cols-3">
+              {t.identity.steps.map((step, i) => (
+                <li key={step} className="text-sm font-medium leading-relaxed text-ink-900">
+                  <span className="mb-1 block text-xs tracking-widest text-accent" aria-hidden>0{i + 1}</span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </div>
+      </section>
+
       {/* 구조도 */}
-      <section className="pb-20 md:pb-32">
+      <section className="section">
         <div className="container-grid">
           <Reveal>
             {master && (
@@ -84,7 +120,9 @@ export default async function BrandPage({ params }: Props) {
           </div>
           <Reveal>
             <div className="mt-16 text-center">
-              <p className="text-h2 text-ink-900">{t.signature}</p>
+              <BrandStatement locale={locale} className="text-h2 text-ink-900">
+                {t.signature}
+              </BrandStatement>
               <Link href={href(locale, "/oem")} className="cta-secondary mt-8">
                 {t.oemCta}
               </Link>

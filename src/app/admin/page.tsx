@@ -27,7 +27,7 @@ export default function AdminDashboardPage() {
           </Link>
         ))}
         <Link href="/admin/inquiries" className="rounded-xl border border-line bg-accent-soft p-5 transition-colors hover:border-accent">
-          <p className="text-3xl font-bold text-accent">{inquiry.unread}</p>
+          <p className="text-3xl font-bold text-danger">{inquiry.unread}</p>
           <p className="mt-1 text-sm text-ink-600">새 문의 (전체 {inquiry.total})</p>
         </Link>
       </div>
@@ -54,7 +54,7 @@ export default function AdminDashboardPage() {
                 <td className="px-4 py-3">
                   <span
                     className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                      item.status === "new" ? "bg-accent-soft text-accent" : "bg-trust-soft text-trust"
+                      item.status === "new" ? "bg-danger/10 text-danger" : "bg-trust-soft text-trust"
                     }`}
                   >
                     {item.status === "new" ? "새 문의" : "답변 완료"}

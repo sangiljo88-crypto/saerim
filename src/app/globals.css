@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 새림 디자인 시스템 — 화이트 기반 미니멀 (docs/brand-system/03) */
+/* 새림 디자인 시스템 — 아이보리 바탕 · 녹색 신뢰 · 금색 온기 (브랜드 아이덴티티 1.0, docs/brand-system/03) */
 
 :root {
   color-scheme: light;
@@ -20,8 +20,8 @@ body {
     "Apple SD Gothic Neo",
     "Noto Sans KR",
     sans-serif;
-  background: #ffffff;
-  color: #111417;
+  background: #f6f3e9;
+  color: #202c25;
   -webkit-font-smoothing: antialiased;
   /* 한글은 단어(어절) 단위로만 줄바꿈 — "슬라이스"가 "슬라이/스"로 잘리지 않게 */
   word-break: keep-all;
@@ -51,13 +51,23 @@ body {
     @apply text-body text-ink-600 max-w-[65ch];
   }
 
+  /* 브랜드 문장 — 고운바탕 Regular, 넓은 행간. 한국어 짧은 문장에만 쓴다 (BrandStatement 컴포넌트 경유) */
+  .brand-statement {
+    @apply font-batang font-normal leading-[1.35] tracking-[-0.01em];
+  }
+
+  /* 금색 짧은 구분선 — 브랜드 문장 아래 한 줄 강조 */
+  .gold-rule {
+    @apply block h-px w-10 bg-gold;
+  }
+
   /* CTA */
   .cta-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-ink-900 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-ink-950;
+    @apply inline-flex items-center justify-center rounded-full bg-ink-900 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-ink-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .cta-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-line bg-transparent px-7 py-3.5 text-sm font-semibold text-ink-900 transition-colors hover:border-ink-400;
+    @apply inline-flex items-center justify-center rounded-full border border-ink-900/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-ink-900 transition-colors hover:border-ink-900 hover:bg-white/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   /* 헤어라인 구분 */

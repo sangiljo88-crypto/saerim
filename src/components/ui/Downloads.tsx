@@ -9,7 +9,16 @@ import type { Locale } from "@/lib/i18n/config";
  * public/downloads/saerim-company-profile-{locale}.pdf · saerim-product-catalog-{locale}.pdf
  * 파일이 실제로 있을 때만 링크를 그린다 — PDF를 올리기 전에는 아무것도 노출되지 않는다(죽은 링크 방지).
  */
-export function Downloads({ locale, className = "" }: { locale: Locale; className?: string }) {
+export function Downloads({
+  locale,
+  className = "",
+  inverse = false,
+}: {
+  locale: Locale;
+  className?: string;
+  /** 어두운(Deep) 배경 위에서는 흰 글자로 */
+  inverse?: boolean;
+}) {
   const t = getDict(locale).common;
   const files = [
     { file: `saerim-company-profile-${locale}.pdf`, label: t.profilePdf },
@@ -24,7 +33,9 @@ export function Downloads({ locale, className = "" }: { locale: Locale; classNam
         <li key={file}>
           <a
             href={`/downloads/${file}`}
-            className="font-semibold text-ink-900 underline underline-offset-4 hover:text-accent"
+            className={`font-semibold underline underline-offset-4 ${
+              inverse ? "text-white hover:text-gold" : "text-ink-900 hover:text-accent"
+            }`}
           >
             {label} ↓
           </a>

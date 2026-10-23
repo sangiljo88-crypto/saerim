@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 
 import { Reveal } from "@/components/ui/Reveal";
-import { NextStory, SectionTitle } from "@/components/ui/brand";
+import { BrandStatement, NextStory, SectionTitle } from "@/components/ui/brand";
 import { getDict } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n/config";
 
@@ -39,17 +39,22 @@ export default async function WhyPage({ params }: Props) {
 
           <Reveal>
             <div className="hairline-t pt-16">
-              <p className="whitespace-pre-line text-h1 leading-snug text-ink-900">
+              <BrandStatement locale={locale} className="whitespace-pre-line text-h1 leading-snug text-ink-900">
                 {t.pullQuote.lead}
                 <br />
                 <span className="text-accent">{t.pullQuote.accent}</span>
                 {t.pullQuote.tail}
-              </p>
+              </BrandStatement>
             </div>
           </Reveal>
 
           <Reveal>
             <p className="prose-body text-xl leading-loose">{t.closing}</p>
+            {/* 캠페인 문구 — 브랜드 에센스 "바른 준비" (가이드 §03). 마무리에 한 번만 */}
+            <span className="gold-rule mt-10" aria-hidden />
+            <BrandStatement locale={locale} className="mt-5 text-h2 text-ink-900">
+              {t.campaign}
+            </BrandStatement>
           </Reveal>
         </div>
       </section>
@@ -90,7 +95,9 @@ export default async function WhyPage({ params }: Props) {
       <section className="section">
         <div className="container-text text-center">
           <Reveal>
-            <p className="text-h1 text-ink-900">{t.signature}</p>
+            <BrandStatement locale={locale} className="text-h1 text-ink-900">
+              {t.signature}
+            </BrandStatement>
           </Reveal>
         </div>
       </section>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
+import { FactoryVideo } from "@/components/factory/FactoryVideo";
+import { getFactoryVideo } from "@/lib/factory-videos";
 
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory } from "@/components/ui/brand";
@@ -37,36 +39,42 @@ export default async function FactoryPage({ params }: Props) {
 
       <section className="pb-20 md:pb-32">
         <div className="container-grid space-y-20">
-          {factories.map((factory, i) => (
-            <Reveal key={factory.slug}>
-              <Link
-                href={href(locale, `/factory/${factory.slug}`)}
-                className={`group grid items-center gap-10 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
-              >
-                <div className="overflow-hidden rounded-2xl">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={factory.image}
-                    alt={factoryImageAlt(locale, factory)}
-                    className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
+          {factories.map((factory, i) => {
+            const video = getFactoryVideo(factory.slug, locale);
+            return (
+              <Reveal key={factory.slug}>
+                <div
+                  className={`group grid grid-cols-1 items-center gap-10 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
+                >
+                  {video ? (
+                    <FactoryVideo {...video} locale={locale} />
+                  ) : (
+                    <Link href={href(locale, `/factory/${factory.slug}`)} className="block overflow-hidden rounded-2xl">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={factory.image}
+                        alt={factoryImageAlt(locale, factory)}
+                        className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    </Link>
+                  )}
+                  <div>
+                    <p className="kicker">{factory.code}</p>
+                    <h2 className="mt-4 text-h1 text-ink-900">
+                      <Link href={href(locale, `/factory/${factory.slug}`)} className="transition-colors hover:text-accent">{factory.name}</Link>
+                    </h2>
+                    <p className="mt-2 text-body font-medium text-ink-600">{factory.role}</p>
+                    <p className="mt-5 text-lg italic leading-relaxed text-ink-400">
+                      “{factory.symbolSentence}”
+                    </p>
+                    <Link href={href(locale, `/factory/${factory.slug}`)} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-ink-900 hover:underline">
+                      {t.more} <span aria-hidden>→</span>
+                    </Link>
+                  </div>
                 </div>
-                <div>
-                  <p className="kicker">{factory.code}</p>
-                  <h2 className="mt-4 text-h1 text-ink-900 transition-colors group-hover:text-accent">
-                    {factory.name}
-                  </h2>
-                  <p className="mt-2 text-body font-medium text-ink-600">{factory.role}</p>
-                  <p className="mt-5 text-lg italic leading-relaxed text-ink-400">
-                    “{factory.symbolSentence}”
-                  </p>
-                  <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-ink-900">
-                    {t.more} <span aria-hidden>→</span>
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 

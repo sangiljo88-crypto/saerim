@@ -1,9 +1,10 @@
 import Link from "next/link";
 
+import { FactoryVideoGallery } from "@/components/factory/FactoryVideoGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Downloads } from "@/components/ui/Downloads";
 import { Reveal } from "@/components/ui/Reveal";
-import { NextStory, SectionTitle, StatBlock, TrustBadge } from "@/components/ui/brand";
+import { BrandStatement, NextStory, SectionTitle, StatBlock, TrustBadge } from "@/components/ui/brand";
 import { categoryLabel, factoryImageAlt, getSettings, listFactories, listFeaturedProducts, productImageAlt } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
@@ -15,16 +16,20 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 /**
  * HOME — 첫 화면은 제품이 아니라 신뢰를 보여준다. (docs/brand-system/01)
- * Hero(브랜드 메시지) → 신뢰 지표 → 브랜드 구조 → 공장 → 대표 제품 → 다음 이야기
+ * Hero(브랜드 메시지 + 공장 전경) → 신뢰 지표 → 브랜드 구조 → 공장·소개 영상 → 대표 제품 → 다음 이야기
  */
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
-  const t = getDict(locale).home;
+  const dict = getDict(locale);
+  const t = dict.home;
   const settings = getSettings(locale);
   const factories = listFactories(locale);
   const products = listFeaturedProducts(locale).slice(0, 3);
-  const heroMedia = settings.hero_media ?? "";
-  const isVideo = heroMedia.endsWith(".mp4") || heroMedia.endsWith(".webm");
+  const heroMedia = settings.hero_media?.trim() || "/images/company/hero-main-photo4.jpg";
+  const isVideo = /\.(mp4|webm)(?:[?#]|$)/i.test(heroMedia);
+  const heroAlt = heroMedia === "/images/company/hero-main-photo4.jpg"
+    ? t.heroMediaAlt
+    : settings.hero_alt || t.heroMediaAlt;
 
   return (
     <>
@@ -40,53 +45,64 @@ export default async function HomePage({ params }: Props) {
         about: { "@id": `${SITE_URL}/#organization` },
         mainEntity: { "@id": `${SITE_URL}/#organization` },
       }} />
-      {/* Hero — 풀스크린 미디어 + 브랜드 메시지 */}
-      <section className="relative flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden bg-ink-950">
-        {isVideo ? (
-          <video
-            className="absolute inset-0 h-full w-full object-cover opacity-60"
-            src={heroMedia}
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-        ) : (
-          heroMedia && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={heroMedia}
-              alt={settings.hero_alt ?? ""}
-              className="absolute inset-0 h-full w-full animate-slow-zoom object-cover opacity-60"
-            />
-          )
-        )}
-        <div className="absolute inset-0 bg-ink-950/55" aria-hidden />
-
-        <div className="relative z-10 px-6 text-center text-white">
-          <p className="kicker !text-white/80">{t.siteLabel}</p>
-          <h1 className="mt-6 text-display">
-            {settings.hero_title_1}
-            <br />
-            <span className="text-white">{settings.hero_title_2}</span>
-          </h1>
-          <p className="mx-auto mt-8 max-w-xl text-body text-white/80">{settings.hero_sub}</p>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-            <Link href={href(locale, "/why")} className="cta-primary !bg-white !text-ink-900 hover:!bg-paper-warm">
-              {t.heroCtaStory}
-            </Link>
-            <Link
-              href={href(locale, "/contact")}
-              className="cta-secondary !border-white/40 !text-white hover:!border-white"
+      {/* Hero — 브랜드의 약속과 그 약속을 준비하는 실제 현장 */}
+      <section className="relative overflow-hidden bg-paper">
+        <div className="container-grid grid items-center gap-10 py-12 sm:py-16 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:py-20">
+          <div>
+            <p className="kicker">{t.siteLabel}</p>
+            <BrandStatement
+              locale={locale}
+              as="h1"
+              className="mt-8 text-[clamp(2.125rem,3.8vw,3.5rem)] font-bold leading-[1.2] text-ink-900 [&.brand-statement]:font-normal"
             >
-              {t.heroCtaContact}
-            </Link>
+              {settings.hero_title_1}
+              <br />
+              {settings.hero_title_2}
+            </BrandStatement>
+            <p className="prose-body mt-8 text-lg">{settings.hero_sub}</p>
+            <span className="gold-rule mt-8" aria-hidden />
+            <p className="mt-4 text-sm font-medium tracking-[0.02em] text-ink-400">{dict.common.tagline}</p>
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Link href={href(locale, "/contact")} className="cta-primary">
+                {t.heroCtaContact}
+              </Link>
+              <Link href={href(locale, "/why")} className="cta-secondary">
+                {t.heroCtaStory}
+              </Link>
+            </div>
           </div>
+          <figure className="min-w-0">
+            <div className="overflow-hidden rounded-2xl bg-paper-warm">
+              {isVideo ? (
+                <video
+                  className="aspect-[16/10] w-full object-cover object-bottom"
+                  src={heroMedia}
+                  aria-label={heroAlt}
+                  controls
+                  muted
+                  playsInline
+                  preload="metadata"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={heroMedia}
+                  alt={heroAlt}
+                  width={1984}
+                  height={1104}
+                  fetchPriority="high"
+                  className="aspect-[16/10] w-full object-cover object-bottom"
+                />
+              )}
+            </div>
+            <figcaption className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 text-sm">
+              <span className="text-ink-400">{t.heroMediaCaption}</span>
+              <Link href={href(locale, "/factory")} className="font-semibold text-ink-900 underline-offset-4 hover:underline">
+                {t.heroMediaCta} <span aria-hidden>→</span>
+              </Link>
+            </figcaption>
+          </figure>
         </div>
-
-        <p className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.2em] text-white/50">
-          SCROLL
-        </p>
       </section>
 
       {/* 신뢰 지표 — 숫자로 증명 */}
@@ -152,7 +168,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      {/* 세 공장 */}
+      {/* 본사와 지점 */}
       <section className="section">
         <div className="container-grid">
           <SectionTitle kicker={t.factoryKicker} title={t.factoryTitle} lead={t.factoryLead} />
@@ -178,6 +194,8 @@ export default async function HomePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <FactoryVideoGallery locale={locale} factories={factories} />
 
       {/* 대표 제품 — 신뢰 이후에 등장 */}
       <section className="section hairline-t bg-paper-warm">

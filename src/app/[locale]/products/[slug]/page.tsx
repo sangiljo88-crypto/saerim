@@ -175,7 +175,7 @@ export default async function ProductDetailPage({ params }: Props) {
             <ul className="space-y-3">
               {product.useCases.map((useCase) => (
                 <li key={useCase} className="flex items-start gap-3 text-body text-ink-600">
-                  <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
                   {useCase}
                 </li>
               ))}

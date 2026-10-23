@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Faq } from "@/components/ui/Faq";
 import { Reveal } from "@/components/ui/Reveal";
-import { NextStory, SectionTitle, TrustBadge } from "@/components/ui/brand";
+import { BrandStatement, NextStory, SectionTitle, TrustBadge } from "@/components/ui/brand";
 import { factoryImageAlt, listFactories } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
@@ -105,10 +105,20 @@ export default async function OemPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="section hairline-t bg-paper-warm">
-        <div className="container-text text-center">
+      <section className="section hairline-t relative overflow-hidden bg-paper-warm">
+        {/* 보조 그래픽 Prepared Flow — 페이지당 한 번, 정보 영역을 가리지 않게 오른쪽 아래에만 */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/brand/prepared-flow.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -bottom-24 -right-24 w-[28rem] opacity-[0.12] md:-bottom-40 md:-right-32 md:w-[40rem]"
+        />
+        <div className="container-text relative text-center">
           <Reveal>
-            <p className="text-h1 text-ink-900">{t.signature}</p>
+            <BrandStatement locale={locale} className="text-h1 text-ink-900">
+              {t.signature}
+            </BrandStatement>
             <p className="prose-body mx-auto mt-5">{t.signatureLead}</p>
             <Link href={href(locale, "/contact?type=oem")} className="cta-primary mt-10">
               {t.cta}

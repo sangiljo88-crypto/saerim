@@ -95,3 +95,22 @@ export function TrustBadge({ children }: { children: React.ReactNode }) {
     </span>
   );
 }
+
+/**
+ * 브랜드 문장 — 고운바탕 Regular (가이드 §08).
+ * 짧은 한국어 문장에만 쓴다. 고운바탕에는 한자 글리프가 없으므로 영어·중국어는 Pretendard로 둔다.
+ */
+export function BrandStatement({
+  locale,
+  as: Tag = "p",
+  className = "",
+  children,
+}: {
+  locale: Locale;
+  as?: "p" | "h1" | "h2" | "span";
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const serif = locale === "ko" ? "brand-statement" : "";
+  return <Tag className={`${serif} ${className}`.trim()}>{children}</Tag>;
+}
