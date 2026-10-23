@@ -14,6 +14,7 @@
 | 모바일 메뉴 높이 / 마지막 CONTACT 가시 | 780px / 보임 | 736px / 보임 | — | — |
 | 메뉴 열기→body overflow hidden, 닫기·링크 이동 후 복원 | 확인 | 확인 | — | — |
 | H1 1개 · "새림 공식 홈페이지" H2 · 영어 검색형 H1 | 유지 | 유지 | 유지 | 유지 |
+| 언어 전환(ko→en→zh→ko, /contact 유지): html lang · 헤더 홈 링크 · 활성 언어 · 푸터 메뉴/태그라인 모두 전환 | 확인 (LocaleSwitcher를 전체 문서 이동 <a>로) |
 | 고운바탕 적용: ko Hero H1·WHY 인용/캠페인·시그니처 / zh·en은 Pretendard | 확인 (`document.fonts`, computed font-family) |
 
 ## 캡처
