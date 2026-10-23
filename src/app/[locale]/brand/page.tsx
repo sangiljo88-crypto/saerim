@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
-import { NextStory, SectionTitle } from "@/components/ui/brand";
+import { BrandStatement, NextStory, SectionTitle } from "@/components/ui/brand";
 import { listBrands } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
@@ -84,7 +84,9 @@ export default async function BrandPage({ params }: Props) {
           </div>
           <Reveal>
             <div className="mt-16 text-center">
-              <p className="text-h2 text-ink-900">{t.signature}</p>
+              <BrandStatement locale={locale} className="text-h2 text-ink-900">
+                {t.signature}
+              </BrandStatement>
               <Link href={href(locale, "/oem")} className="cta-secondary mt-8">
                 {t.oemCta}
               </Link>

@@ -9,6 +9,7 @@ export const zh: Dictionary = {
     companyName: "SAERIM 有限公司",
     companyShort: "SAERIM",
     latin: "Saerim Food Infrastructure",
+    tagline: "用好食材，做好食品。",
     nav: [
       { href: "/why", label: "理念" },
       { href: "/brand", label: "品牌" },
@@ -113,6 +114,7 @@ export const zh: Dictionary = {
     },
     closing:
       "基础设施并不华丽，但它从不停摆。每天同样的品质、同样的出货时间、同样的验收标准。SAERIM 所守护的，正是这种重复带来的信赖。",
+    campaign: "正确的准备，成就好的食品。",
     promiseKicker: "Our Promises",
     promiseTitle: "SAERIM 坚守的三件事",
     promises: [

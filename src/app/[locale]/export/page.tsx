@@ -46,7 +46,7 @@ export default async function ExportPage({ params }: Props) {
               <ul className="mt-8 space-y-3">
                 {section.items.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-body text-ink-600">
-                    <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
                     {item}
                   </li>
                 ))}

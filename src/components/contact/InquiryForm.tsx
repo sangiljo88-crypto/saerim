@@ -76,7 +76,7 @@ export function InquiryForm({
   const inputCls =
     "w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ink-900 focus:outline-none";
   const labelCls = "mb-2 block text-sm font-semibold text-ink-900";
-  const errCls = "mt-1.5 text-xs font-medium text-accent";
+  const errCls = "mt-1.5 text-xs font-medium text-danger";
 
   return (
     <form onSubmit={onSubmit} className="space-y-6" noValidate>
@@ -103,21 +103,21 @@ export function InquiryForm({
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="company" className={labelCls}>
-            {labels.company} <span className="text-accent">*</span>
+            {labels.company} <span className="text-danger">*</span>
           </label>
           <input id="company" name="company" required className={inputCls} placeholder={labels.companyPlaceholder} />
           {errors.company && <p className={errCls}>{errors.company[0]}</p>}
         </div>
         <div>
           <label htmlFor="name" className={labelCls}>
-            {labels.name} <span className="text-accent">*</span>
+            {labels.name} <span className="text-danger">*</span>
           </label>
           <input id="name" name="name" required className={inputCls} placeholder={labels.namePlaceholder} />
           {errors.name && <p className={errCls}>{errors.name[0]}</p>}
         </div>
         <div>
           <label htmlFor="phone" className={labelCls}>
-            {labels.phone} <span className="text-accent">*</span>
+            {labels.phone} <span className="text-danger">*</span>
           </label>
           <input id="phone" name="phone" required className={inputCls} placeholder={labels.phonePlaceholder} />
           {errors.phone && <p className={errCls}>{errors.phone[0]}</p>}
@@ -145,7 +145,7 @@ export function InquiryForm({
         {errors.message && <p className={errCls}>{errors.message[0]}</p>}
       </div>
 
-      {errorMessage && <p className="text-sm font-medium text-accent">{errorMessage}</p>}
+      {errorMessage && <p className="text-sm font-medium text-danger">{errorMessage}</p>}
 
       <button type="submit" disabled={state === "submitting"} className="cta-primary w-full disabled:opacity-60">
         {state === "submitting" ? labels.submitting : labels.submit}

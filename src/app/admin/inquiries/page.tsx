@@ -28,7 +28,7 @@ export default function AdminInquiriesPage() {
                 <div className="flex flex-wrap items-center gap-3">
                   <span
                     className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                      item.status === "new" ? "bg-accent-soft text-accent" : "bg-trust-soft text-trust"
+                      item.status === "new" ? "bg-danger/10 text-danger" : "bg-trust-soft text-trust"
                     }`}
                   >
                     {item.status === "new" ? "새 문의" : "답변 완료"}

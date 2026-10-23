@@ -9,6 +9,7 @@ export const en: Dictionary = {
     companyName: "SAERIM Co., Ltd.",
     companyShort: "SAERIM",
     latin: "Saerim Food Infrastructure",
+    tagline: "Good ingredients, honest food.",
     nav: [
       { href: "/why", label: "WHY" },
       { href: "/brand", label: "BRAND" },
@@ -112,6 +113,7 @@ export const en: Dictionary = {
     },
     closing:
       "Infrastructure is not glamorous. Instead, it never stops. The same quality every day, the same shipping time, the same inspection standard. What SAERIM protects is the trust of that repetition.",
+    campaign: "Right preparation makes good food.",
     promiseKicker: "Our Promises",
     promiseTitle: "Three things SAERIM keeps",
     promises: [

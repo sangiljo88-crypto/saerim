@@ -3,7 +3,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Downloads } from "@/components/ui/Downloads";
 import { Reveal } from "@/components/ui/Reveal";
-import { NextStory, SectionTitle, StatBlock, TrustBadge } from "@/components/ui/brand";
+import { BrandStatement, NextStory, SectionTitle, StatBlock, TrustBadge } from "@/components/ui/brand";
 import { categoryLabel, factoryImageAlt, getSettings, listFactories, listFeaturedProducts, productImageAlt } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
@@ -15,11 +15,12 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 /**
  * HOME — 첫 화면은 제품이 아니라 신뢰를 보여준다. (docs/brand-system/01)
- * Hero(브랜드 메시지) → 신뢰 지표 → 브랜드 구조 → 공장 → 대표 제품 → 다음 이야기
+ * Hero(브랜드 메시지 + 심벌) → 신뢰 지표(+공장 사진) → 브랜드 구조 → 공장 → 대표 제품 → 다음 이야기
  */
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
-  const t = getDict(locale).home;
+  const dict = getDict(locale);
+  const t = dict.home;
   const settings = getSettings(locale);
   const factories = listFactories(locale);
   const products = listFeaturedProducts(locale).slice(0, 3);
@@ -40,53 +41,45 @@ export default async function HomePage({ params }: Props) {
         about: { "@id": `${SITE_URL}/#organization` },
         mainEntity: { "@id": `${SITE_URL}/#organization` },
       }} />
-      {/* Hero — 풀스크린 미디어 + 브랜드 메시지 */}
-      <section className="relative flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden bg-ink-950">
-        {isVideo ? (
-          <video
-            className="absolute inset-0 h-full w-full object-cover opacity-60"
-            src={heroMedia}
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-        ) : (
-          heroMedia && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={heroMedia}
-              alt={settings.hero_alt ?? ""}
-              className="absolute inset-0 h-full w-full animate-slow-zoom object-cover opacity-60"
-            />
-          )
-        )}
-        <div className="absolute inset-0 bg-ink-950/55" aria-hidden />
-
-        <div className="relative z-10 px-6 text-center text-white">
-          <p className="kicker !text-white/80">{t.siteLabel}</p>
-          <h1 className="mt-6 text-display">
-            {settings.hero_title_1}
-            <br />
-            <span className="text-white">{settings.hero_title_2}</span>
-          </h1>
-          <p className="mx-auto mt-8 max-w-xl text-body text-white/80">{settings.hero_sub}</p>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-            <Link href={href(locale, "/why")} className="cta-primary !bg-white !text-ink-900 hover:!bg-paper-warm">
-              {t.heroCtaStory}
-            </Link>
-            <Link
-              href={href(locale, "/contact")}
-              className="cta-secondary !border-white/40 !text-white hover:!border-white"
+      {/* Hero — 아이보리 바탕 · 브랜드 메시지 + 심벌 (브랜드 가이드 §15 디지털 적용) */}
+      <section className="relative overflow-hidden bg-paper">
+        <div className="container-grid grid min-h-[calc(100svh-4rem)] items-center gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
+          <div>
+            <p className="kicker">{t.siteLabel}</p>
+            <BrandStatement
+              locale={locale}
+              as="h1"
+              className="mt-8 text-[clamp(2.125rem,3.8vw,3.5rem)] font-bold leading-[1.2] text-ink-900 [&.brand-statement]:font-normal"
             >
-              {t.heroCtaContact}
-            </Link>
+              {settings.hero_title_1}
+              <br />
+              {settings.hero_title_2}
+            </BrandStatement>
+            <p className="prose-body mt-8 text-lg">{settings.hero_sub}</p>
+            <span className="gold-rule mt-8" aria-hidden />
+            <p className="mt-4 text-sm font-medium tracking-[0.02em] text-ink-400">{dict.common.tagline}</p>
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Link href={href(locale, "/contact")} className="cta-primary">
+                {t.heroCtaContact}
+              </Link>
+              <Link href={href(locale, "/why")} className="cta-secondary">
+                {t.heroCtaStory}
+              </Link>
+            </div>
+          </div>
+          <div className="flex justify-center lg:justify-end">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/logo/symbol-flat.svg"
+              alt=""
+              aria-hidden
+              width={420}
+              height={416}
+              fetchPriority="high"
+              className="w-56 max-w-full sm:w-72 lg:w-[26rem]"
+            />
           </div>
         </div>
-
-        <p className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.2em] text-white/50">
-          SCROLL
-        </p>
       </section>
 
       {/* 신뢰 지표 — 숫자로 증명 */}
@@ -119,6 +112,17 @@ export default async function HomePage({ params }: Props) {
               <StatBlock value={settings.stat_partners ?? "55"} label={t.stats.partners} />
               <StatBlock value={settings.stat_daily ?? "1,500"} label={t.stats.daily} />
             </div>
+            {/* 공장 사진 — Hero에서 신뢰 영역으로 옮겼다 (설정 hero_media · hero_alt 그대로 사용) */}
+            {heroMedia && (
+              <div className="mt-14 overflow-hidden rounded-2xl">
+                {isVideo ? (
+                  <video className="aspect-[21/9] w-full object-cover" src={heroMedia} autoPlay muted loop playsInline />
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={heroMedia} alt={settings.hero_alt ?? ""} loading="lazy" className="aspect-[21/9] w-full object-cover" />
+                )}
+              </div>
+            )}
             {settings.partners && (
               <div className="mt-14 border-t border-line pt-8">
                 <p className="kicker mb-4">{t.partnersKicker}</p>

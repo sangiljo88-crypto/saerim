@@ -7,6 +7,8 @@ export const ko = {
     companyName: "유한회사 새림",
     companyShort: "새림",
     latin: "Saerim Food Infrastructure",
+    /** 마스터 태그라인 — 로고 원본 문구. 로고 안에서는 원문·문장부호를 유지한다 */
+    tagline: "좋은 재료, 바른 먹거리.",
     nav: [
       { href: "/why", label: "WHY" },
       { href: "/brand", label: "BRAND" },
@@ -111,6 +113,7 @@ export const ko = {
     },
     closing:
       "인프라는 화려하지 않습니다. 대신 멈추지 않습니다. 매일 같은 품질, 같은 시간의 출고, 같은 기준의 검수. 새림이 지키는 것은 이 반복의 신뢰입니다.",
+    campaign: "바른 준비가, 좋은 먹거리로.",
     promiseKicker: "Our Promises",
     promiseTitle: "새림이 지키는 세 가지",
     promises: [

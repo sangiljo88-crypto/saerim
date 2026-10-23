@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { headers } from "next/headers";
 
 import { Footer } from "@/components/layout/Footer";
@@ -19,6 +20,15 @@ import { getDict } from "@/lib/i18n";
 import { SITE_IMAGE, SITE_URL } from "@/lib/seo";
 
 import "./globals.css";
+
+/** 고운바탕 Regular (SIL OFL, src/fonts/GowunBatang-OFL.txt) — 짧은 한국어 브랜드 문장 전용 */
+const gowunBatang = localFont({
+  src: "../fonts/GowunBatang-Regular.woff2",
+  weight: "400",
+  display: "swap",
+  variable: "--font-batang",
+  preload: false,
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const headerList = await headers();
@@ -76,7 +86,7 @@ export default async function RootLayout({
     alternateName: ["유한회사 새림", "(유)새림", "SAERIM", "SAERIM Co., Ltd.", "SAERIM 有限公司"],
     description: t.common.orgDescription,
     url: SITE_URL,
-    logo: `${SITE_URL}/images/logo.svg`,
+    logo: `${SITE_URL}/images/logo/logo-flat.png`,
     foundingDate: "2014",
     address: {
       "@type": "PostalAddress",
@@ -102,7 +112,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={LOCALE_META[locale].htmlLang}>
+    <html lang={LOCALE_META[locale].htmlLang} className={gowunBatang.variable}>
       <head>
         {naverVerification && <meta name="naver-site-verification" content={naverVerification} />}
         <link

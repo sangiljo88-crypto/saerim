@@ -83,7 +83,7 @@ export default async function AdminEditPage({
         </div>
         {archive && (
           <form action={archive}>
-            <button type="submit" className="text-sm font-semibold text-accent hover:underline">
+            <button type="submit" className="text-sm font-semibold text-danger hover:underline">
               보관 처리 (숨김)
             </button>
           </form>
@@ -95,7 +95,7 @@ export default async function AdminEditPage({
           <div key={field.column}>
             <label className="mb-1.5 block text-sm font-semibold text-ink-900">
               {field.label}
-              {field.required && <span className="text-accent"> *</span>}
+              {field.required && <span className="text-danger"> *</span>}
             </label>
             <FieldInput field={field} value={row?.[field.column]} />
             {field.help && <p className="mt-1 text-xs text-ink-400">{field.help}</p>}
