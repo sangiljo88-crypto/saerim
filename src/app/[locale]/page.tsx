@@ -4,7 +4,7 @@ import { FactoryVideoGallery } from "@/components/factory/FactoryVideoGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Downloads } from "@/components/ui/Downloads";
 import { Reveal } from "@/components/ui/Reveal";
-import { BrandStatement, NextStory, SectionTitle, StatBlock, TrustBadge } from "@/components/ui/brand";
+import { NextStory, SectionTitle, StatBlock, TrustBadge } from "@/components/ui/brand";
 import { categoryLabel, factoryImageAlt, getSettings, listFactories, listFeaturedProducts, productImageAlt } from "@/lib/content";
 import { getDict } from "@/lib/i18n";
 import { href, type Locale } from "@/lib/i18n/config";
@@ -45,63 +45,48 @@ export default async function HomePage({ params }: Props) {
         about: { "@id": `${SITE_URL}/#organization` },
         mainEntity: { "@id": `${SITE_URL}/#organization` },
       }} />
-      {/* Hero — 브랜드의 약속과 그 약속을 준비하는 실제 현장 */}
-      <section className="relative overflow-hidden bg-paper">
-        <div className="container-grid grid items-center gap-10 py-12 sm:py-16 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:py-20">
-          <div>
-            <p className="kicker">{t.siteLabel}</p>
-            <BrandStatement
-              locale={locale}
-              as="h1"
-              className="mt-8 text-[clamp(2.125rem,3.8vw,3.5rem)] font-bold leading-[1.2] text-ink-900 [&.brand-statement]:font-normal"
-            >
-              {settings.hero_title_1}
-              <br />
-              {settings.hero_title_2}
-            </BrandStatement>
-            <p className="prose-body mt-8 text-lg">{settings.hero_sub}</p>
-            <span className="gold-rule mt-8" aria-hidden />
-            <p className="mt-4 text-sm font-medium tracking-[0.02em] text-ink-400">{dict.common.tagline}</p>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <Link href={href(locale, "/contact")} className="cta-primary">
-                {t.heroCtaContact}
-              </Link>
-              <Link href={href(locale, "/why")} className="cta-secondary">
-                {t.heroCtaStory}
-              </Link>
-            </div>
+      {/* Hero — 실제 생산 현장을 화면 가득 보여주고 브랜드의 약속을 전한다 */}
+      <section className="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden bg-ink-900 text-white">
+        {isVideo ? (
+          <video
+            className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+            src={heroMedia}
+            aria-label={heroAlt}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={heroMedia}
+            alt={heroAlt}
+            width={1984}
+            height={1104}
+            fetchPriority="high"
+            className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+          />
+        )}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/50 via-black/55 to-black/70" aria-hidden />
+        <div className="container-grid w-full py-20 text-center sm:py-28">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/80 sm:text-sm">{t.siteLabel}</p>
+          <h1 className="mx-auto mt-8 max-w-6xl break-keep font-sans text-[clamp(2rem,4.6vw,4.5rem)] font-bold leading-[1.22] tracking-tight sm:mt-10">
+            {settings.hero_title_1}
+            <br />
+            {settings.hero_title_2}
+          </h1>
+          <p className="mx-auto mt-7 max-w-2xl break-keep text-base leading-relaxed text-white/90 sm:mt-10 sm:text-lg">{settings.hero_sub}</p>
+          <p className="mt-3 text-sm font-medium tracking-wide text-white/75">{dict.common.tagline}</p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:mt-12">
+            <Link href={href(locale, "/why")} className="rounded-full bg-white px-7 py-4 text-sm font-bold text-ink-900 transition hover:bg-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              {t.heroCtaStory}
+            </Link>
+            <Link href={href(locale, "/contact")} className="rounded-full border border-white/60 bg-black/15 px-7 py-4 text-sm font-bold text-white transition hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              {t.heroCtaContact}
+            </Link>
           </div>
-          <figure className="min-w-0">
-            <div className="overflow-hidden rounded-2xl bg-paper-warm">
-              {isVideo ? (
-                <video
-                  className="aspect-[16/10] w-full object-cover object-bottom"
-                  src={heroMedia}
-                  aria-label={heroAlt}
-                  controls
-                  muted
-                  playsInline
-                  preload="metadata"
-                />
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={heroMedia}
-                  alt={heroAlt}
-                  width={1984}
-                  height={1104}
-                  fetchPriority="high"
-                  className="aspect-[16/10] w-full object-cover object-bottom"
-                />
-              )}
-            </div>
-            <figcaption className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 text-sm">
-              <span className="text-ink-400">{t.heroMediaCaption}</span>
-              <Link href={href(locale, "/factory")} className="font-semibold text-ink-900 underline-offset-4 hover:underline">
-                {t.heroMediaCta} <span aria-hidden>→</span>
-              </Link>
-            </figcaption>
-          </figure>
         </div>
       </section>
 
