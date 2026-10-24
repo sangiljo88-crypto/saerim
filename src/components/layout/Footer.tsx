@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { JANGNAL_URL, jangnalCopy } from "@/lib/jangnal";
 
 import { Downloads } from "@/components/ui/Downloads";
 import { getSettings } from "@/lib/content";
@@ -67,6 +68,8 @@ export function Footer({ locale }: { locale: Locale }) {
               <li key={brand}>{brand}</li>
             ))}
           </ul>
+          <p className="kicker mb-3 mt-8 !text-white/50">{jangnalCopy[locale].label}</p>
+          <a href={JANGNAL_URL} className="text-sm text-white/80 underline underline-offset-4 hover:text-white">{jangnalCopy[locale].title} ↗</a>
         </div>
       </div>
 

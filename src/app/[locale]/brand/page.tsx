@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JANGNAL_URL, jangnalCopy } from "@/lib/jangnal";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
@@ -22,6 +23,7 @@ export default async function BrandPage({ params }: Props) {
   const { locale } = await params;
   const dict = getDict(locale);
   const t = dict.brand;
+  const channel = jangnalCopy[locale];
   const brands = listBrands(locale);
   const master = brands.find((b) => b.role === "master");
   const subs = brands.filter((b) => b.role === "sub");
@@ -128,6 +130,16 @@ export default async function BrandPage({ params }: Props) {
               </Link>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="section hairline-t" aria-labelledby="jangnal-channel-title">
+        <div className="container-text">
+          <p className="kicker">{channel.label}</p>
+          <h2 id="jangnal-channel-title" className="mt-5 text-h1 text-ink-900">{channel.title}</h2>
+          <p className="prose-body mt-6">{channel.body}</p>
+          <p className="mt-5 text-sm leading-relaxed text-ink-600">{channel.note}</p>
+          <a href={JANGNAL_URL} className="cta-secondary mt-8">{channel.cta} ↗</a>
         </div>
       </section>
 
