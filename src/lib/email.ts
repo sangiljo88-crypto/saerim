@@ -30,7 +30,7 @@ function smtpSend(socket: TLSSocket, command: string | null, expectCode: string)
       if (last && /^\d{3} /.test(last)) {
         socket.off("data", onData);
         if (last.startsWith(expectCode)) resolve(buffer);
-        else reject(new Error(`SMTP ${command ?? "(greeting)"} 실패: ${last}`));
+        else reject(new Error(`SMTP 응답 오류 (${last.slice(0, 3)})`));
       }
     };
     socket.on("data", onData);
@@ -63,9 +63,9 @@ const FOREIGN_LOCALE: Record<string, { tag: string; note: string }> = {
 export async function sendInquiryNotification(inquiry: InquiryMail): Promise<void> {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
-  if (!user || !pass) return; // 미설정 시 메일 없이 접수만 진행
+  const relayUrl = process.env.INQUIRY_MAIL_RELAY_URL;
+  if (!relayUrl && (!user || !pass)) return; // 미설정 시 메일 없이 접수만 진행
 
-  const to = process.env.INQUIRY_NOTIFY_TO ?? user;
   const kindLabel = KIND_LABEL[inquiry.kind] ?? inquiry.kind;
   // 해외 로케일 접수 건은 제목과 본문에 접수 언어를 남긴다
   const foreign = inquiry.locale ? FOREIGN_LOCALE[inquiry.locale] : undefined;
@@ -86,7 +86,27 @@ export async function sendInquiryNotification(inquiry: InquiryMail): Promise<voi
     inquiry.message || "(내용 없음)",
     "",
     "— 관리자 페이지 문의함에서도 확인할 수 있습니다.",
-  ].filter((line): line is string => line !== "" || true);
+  ].filter((line) => line !== undefined);
+  const body = bodyLines.join("\n");
+
+  if (relayUrl) {
+    const key = process.env.INQUIRY_MAIL_RELAY_KEY;
+    if (!key || !/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(relayUrl)) {
+      throw new Error("문의 메일 중계 설정을 확인해주세요.");
+    }
+    const response = await fetch(relayUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key, subject, body }),
+      signal: AbortSignal.timeout(25000),
+    });
+    const result = response.ok && await response.json().catch(() => null);
+    if (result?.ok !== true) throw new Error(`문의 메일 중계 실패 (HTTP ${response.status})`);
+    return;
+  }
+
+  if (!user || !pass) return;
+  const to = process.env.INQUIRY_NOTIFY_TO ?? user;
 
   // 본문은 base64 인코딩으로 전송하므로 dot-stuffing이 필요 없다.
   const message = [
@@ -97,7 +117,7 @@ export async function sendInquiryNotification(inquiry: InquiryMail): Promise<voi
     'Content-Type: text/plain; charset="UTF-8"',
     "Content-Transfer-Encoding: base64",
     "",
-    b64(bodyLines.join("\n")),
+    b64(body),
   ].join("\r\n");
 
   await new Promise<void>((resolve, reject) => {
