@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { factoryVideoText } from "@/lib/factory-videos";
+import { factoryVideoTextFor } from "@/lib/factory-videos";
 import type { Locale } from "@/lib/i18n/config";
 
 type Props = { id: string; title: string; locale: Locale };
@@ -10,7 +10,7 @@ type Props = { id: string; title: string; locale: Locale };
 export function FactoryVideo({ id, title, locale }: Props) {
   const [playing, setPlaying] = useState(false);
   const player = useRef<HTMLIFrameElement>(null);
-  const t = factoryVideoText[locale];
+  const t = factoryVideoTextFor(locale);
 
   useEffect(() => {
     if (playing) player.current?.focus();

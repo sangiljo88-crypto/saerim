@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JANGNAL_URL, jangnalCopy } from "@/lib/jangnal";
+import { JANGNAL_URL, jangnalCopyFor } from "@/lib/jangnal";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
@@ -23,7 +23,7 @@ export default async function BrandPage({ params }: Props) {
   const { locale } = await params;
   const dict = getDict(locale);
   const t = dict.brand;
-  const channel = jangnalCopy[locale];
+  const channel = jangnalCopyFor(locale);
   const brands = listBrands(locale);
   const master = brands.find((b) => b.role === "master");
   const subs = brands.filter((b) => b.role === "sub");

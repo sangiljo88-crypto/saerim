@@ -86,8 +86,10 @@ export const config = {
      * 아래를 제외한 모든 경로에 적용:
      * - api (문의 접수 등 API 라우트)
      * - _next (프레임워크 자산)
-     * - 파일 확장자가 있는 정적 파일(.jpg, .svg, .xml …)
+     * - 실제 정적 자산 확장자(.jpg, .svg, .xml …)
+     *   확장자 전체를 제외하면 /index.php·/.env 같은 봇 경로가 middleware를 건너뛰어
+     *   [locale] 세그먼트에 "index.php"가 들어가 페이지 렌더가 깨진다(로그 오류). 자산만 제외한다.
      */
-    "/((?!api|_next|.*\\.[\\w]+$).*)",
+    "/((?!api|_next|.*\\.(?:svg|png|jpe?g|gif|webp|avif|ico|mp4|webm|pdf|xml|txt|json|css|js|map|woff2?|ttf)$).*)",
   ],
 };

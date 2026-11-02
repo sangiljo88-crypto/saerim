@@ -3,11 +3,11 @@ import { FactoryVideo } from "@/components/factory/FactoryVideo";
 import { SectionTitle } from "@/components/ui/brand";
 import { Reveal } from "@/components/ui/Reveal";
 import type { Factory } from "@/lib/db/types";
-import { factoryVideoText, getFactoryVideo } from "@/lib/factory-videos";
+import { factoryVideoTextFor, getFactoryVideo } from "@/lib/factory-videos";
 import { href, type Locale } from "@/lib/i18n/config";
 
 export function FactoryVideoGallery({ locale, factories }: { locale: Locale; factories: Factory[] }) {
-  const t = factoryVideoText[locale];
+  const t = factoryVideoTextFor(locale);
   const films = factories.flatMap((factory) => {
     const video = getFactoryVideo(factory.slug, locale);
     return video ? [{ factory, video }] : [];

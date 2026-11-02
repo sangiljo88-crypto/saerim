@@ -47,7 +47,12 @@ export const factoryVideoText = {
   },
 } satisfies Record<Locale, Record<string, string>>;
 
+/** 잘못된 로케일 세그먼트로 렌더가 시작돼도(layout의 notFound와 병렬) 터지지 않게 ko로 폴백한다 */
+export function factoryVideoTextFor(locale: Locale) {
+  return factoryVideoText[locale] ?? factoryVideoText.ko;
+}
+
 export function getFactoryVideo(slug: string, locale: Locale) {
   const video = FACTORY_VIDEOS[slug];
-  return video ? { id: video.id, title: video.titles[locale] } : null;
+  return video ? { id: video.id, title: video.titles[locale] ?? video.titles.ko } : null;
 }

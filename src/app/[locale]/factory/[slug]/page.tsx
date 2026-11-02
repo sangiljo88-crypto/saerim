@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FactoryVideo } from "@/components/factory/FactoryVideo";
-import { factoryVideoText, getFactoryVideo } from "@/lib/factory-videos";
+import { factoryVideoTextFor, getFactoryVideo } from "@/lib/factory-videos";
 
 import { Reveal } from "@/components/ui/Reveal";
 import { NextStory, SectionTitle, TrustBadge } from "@/components/ui/brand";
@@ -69,7 +69,7 @@ export default async function FactoryDetailPage({ params }: Props) {
       {video && (
         <section className="section hairline-t">
           <div className="container-text">
-            <SectionTitle kicker={factoryVideoText[locale].detailKicker} title={video.title} />
+            <SectionTitle kicker={factoryVideoTextFor(locale).detailKicker} title={video.title} />
             <FactoryVideo {...video} locale={locale} />
           </div>
         </section>
