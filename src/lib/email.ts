@@ -63,7 +63,11 @@ const FOREIGN_LOCALE: Record<string, { tag: string; note: string }> = {
 export async function sendInquiryNotification(inquiry: InquiryMail): Promise<void> {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
-  if (!user || !pass) return; // 미설정 시 메일 없이 접수만 진행
+  if (!user || !pass) {
+    // 미설정 시 메일 없이 접수만 진행 — 조용히 빠지면 운영 변수 누락을 알아채기 어려우므로 로그는 남긴다
+    console.warn("[inquiries] SMTP_USER / SMTP_PASS 미설정 — 문의 알림 메일을 보내지 않았습니다. Railway Variables를 확인하세요.");
+    return;
+  }
 
   const to = process.env.INQUIRY_NOTIFY_TO ?? user;
   const kindLabel = KIND_LABEL[inquiry.kind] ?? inquiry.kind;

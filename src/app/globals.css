@@ -28,6 +28,11 @@ body {
   overflow-wrap: break-word;
 }
 
+/* 중국어는 띄어쓰기가 없어 keep-all이면 한 문장이 통째로 넘친다(모바일 /zh/brand 가로 스크롤) — 글자 단위 줄바꿈 허용 */
+html[lang="zh-Hans"] body {
+  word-break: normal;
+}
+
 @layer utilities {
   /* 레이아웃 */
   .section {

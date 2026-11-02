@@ -14,14 +14,19 @@ export const jangnalCopy: Record<Locale, { label: string; title: string; body: s
     label: "Group-buying collaboration",
     title: "Jangnal — a food group-buying platform",
     body: "Explore group-buying collaborations that connect SAERIM’s food manufacturing and supply capabilities with creators through Jangnal. Discuss product ranges, tastings, configurations and sales schedules.",
-    note: "Jangnal is operated by 주식회사 백년커머스 (a separate operating company) SAERIM participates through manufacturing and supply. Check each product’s manufacturer, seller and supply conditions on Jangnal or during consultation.",
+    note: "Jangnal is operated by Baeknyeon Commerce Co., Ltd., a separate operating company. SAERIM participates through manufacturing and supply. Check each product’s manufacturer, seller and supply conditions on Jangnal or during consultation.",
     cta: "Visit Jangnal’s official website",
   },
   zh: {
     label: "团购合作渠道",
-    title: "Jangnal 장날 — 食品团购平台",
+    title: "Jangnal — 食品团购平台",
     body: "通过Jangnal，可咨询将SAERIM的食品生产与供应基础和创作者内容相结合的团购合作。了解肉制品、汤饭、方便食品等产品类别，并协商试吃、产品组合与销售安排。",
-    note: "Jangnal由주식회사 백년커머스（独立运营公司）运营。SAERIM参与生产与供应，具体产品的生产商、销售方及供货条件请以Jangnal的产品说明与咨询结果为准。",
+    note: "Jangnal 由百年商务株式会社（Baeknyeon Commerce，独立运营公司）运营。SAERIM参与生产与供应，具体产品的生产商、销售方及供货条件请以Jangnal的产品说明与咨询结果为准。",
     cta: "访问Jangnal官方网站",
   },
 };
+
+/** 잘못된 로케일 세그먼트로 렌더가 시작돼도 터지지 않게 ko로 폴백한다 */
+export function jangnalCopyFor(locale: Locale) {
+  return jangnalCopy[locale] ?? jangnalCopy.ko;
+}
