@@ -137,6 +137,12 @@ function migrate(db: DatabaseSync) {
     "serim6408@naver.com",
   );
 
+  // 카카오 오픈채팅 링크 교체 (2026-11-02): 옛 방 pRSmEn9h 가 삭제돼 "새림CS" 방으로. 문의 페이지 설정값과 스토어 링크 모두
+  const OLD_KAKAO = "https://open.kakao.com/o/pRSmEn9h";
+  const NEW_KAKAO = "https://open.kakao.com/o/sYInjgHi";
+  db.prepare("UPDATE settings SET value=? WHERE key='contact_kakao' AND value=?").run(NEW_KAKAO, OLD_KAKAO);
+  db.prepare("UPDATE store_links SET url=? WHERE url=?").run(NEW_KAKAO, OLD_KAKAO);
+
   // ISO 9001·14001은 미보유(취득 절차 진행 중) — 보유 인증처럼 저장된 기존 값을 "준비 중"으로 바로잡는다
   db.prepare(
     "UPDATE factories SET certifications = replace(certifications, ?, ?) WHERE slug='gunsan'",

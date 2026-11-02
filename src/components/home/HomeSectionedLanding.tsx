@@ -12,7 +12,7 @@ type HomeSectionedLandingProps = {
   featuredProducts: Product[];
 };
 
-const KAKAO_CHAT_URL = "https://open.kakao.com/o/pRSmEn9h";
+const KAKAO_CHAT_URL = "https://open.kakao.com/o/sYInjgHi";
 const SMARTSTORE_URL = "https://vo.la/RFDWcIg";
 
 const branchCards = [
@@ -239,7 +239,7 @@ export function HomeSectionedLanding({ categories, products, featuredProducts }:
             <li>주소: 전북특별자치도 군산시 옥산면 산성로 154</li>
             <li>TEL: 063-464-8681 / FAX: 063-464-8683</li>
             <li>E-MAIL: info@saerim.kr</li>
-            <li>카카오 상담: open.kakao.com/o/pRSmEn9h</li>
+            <li>카카오 상담: open.kakao.com/o/sYInjgHi</li>
             <li>스마트스토어: vo.la/RFDWcIg</li>
           </ul>
           <div className="mt-7 grid gap-3 sm:grid-cols-3">

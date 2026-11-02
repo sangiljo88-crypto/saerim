@@ -4,7 +4,7 @@ export function TopPromoBar() {
       <div className="mx-auto flex h-[var(--top-promo-height)] max-w-6xl items-center justify-center gap-3 px-4 text-xs sm:text-sm">
         <p className="font-medium tracking-[0.01em]">HACCP 공장 직송 · 오전 10시 이전 주문 당일 출고</p>
         <a
-          href="https://open.kakao.com/o/pRSmEn9h"
+          href="https://open.kakao.com/o/sYInjgHi"
           target="_blank"
           rel="noreferrer"
           className="rounded-full border border-white/50 px-3 py-1 text-[11px] font-semibold transition hover:bg-white/15 sm:text-xs"

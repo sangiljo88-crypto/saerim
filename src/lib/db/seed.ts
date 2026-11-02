@@ -493,7 +493,7 @@ const STORE_LINKS = [
   {
     name: "카카오 채널 상담",
     description: "도매·정기 납품 상담을 카카오톡으로 빠르게 시작하세요.",
-    url: "https://open.kakao.com/o/pRSmEn9h",
+    url: "https://open.kakao.com/o/sYInjgHi",
     kind: "kakao",
     sort: 2,
   },
@@ -518,7 +518,7 @@ export const SEED_SETTINGS: Record<string, string> = {
   contact_fax: "063-464-8683",
   contact_email: "info@saerim.kr",
   contact_address: "전북특별자치도 군산시 옥산면 산성로 154",
-  contact_kakao: "https://open.kakao.com/o/pRSmEn9h",
+  contact_kakao: "https://open.kakao.com/o/sYInjgHi",
 };
 
 export function seedIfEmpty(db: DatabaseSync) {
