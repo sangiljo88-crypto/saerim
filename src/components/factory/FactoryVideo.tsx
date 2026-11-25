@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { factoryVideoText } from "@/lib/factory-videos";
 import type { Locale } from "@/lib/i18n/config";
 
-type Props = { id: string; title: string; locale: Locale };
+type Props = { id: string; title: string; locale: Locale; paused?: boolean };
 
 /** Load the external player only after a visitor chooses to watch. */
-export function FactoryVideo({ id, title, locale }: Props) {
+export function FactoryVideo({ id, title, locale, paused = false }: Props) {
   const [playing, setPlaying] = useState(false);
   const player = useRef<HTMLIFrameElement>(null);
   const t = factoryVideoText[locale];
@@ -19,7 +19,15 @@ export function FactoryVideo({ id, title, locale }: Props) {
   return (
     <div className="min-w-0">
       <div className="relative aspect-video min-h-[200px] w-full overflow-hidden rounded-2xl bg-deep">
-        {playing ? (
+        {paused ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white">
+            <svg viewBox="0 0 24 24" className="h-10 w-10 fill-none stroke-current opacity-70" strokeWidth="1.5" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" strokeLinecap="round" />
+            </svg>
+            <p className="text-lg font-semibold tracking-wide">{t.preparing}</p>
+          </div>
+        ) : playing ? (
           <iframe
             ref={player}
             src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1&rel=0&hl=${locale === "zh" ? "zh-Hans" : locale}`}
@@ -55,6 +63,7 @@ export function FactoryVideo({ id, title, locale }: Props) {
       </div>
       <div className="mt-3 flex flex-wrap items-start justify-between gap-x-4 gap-y-2 text-sm">
         <p className="font-medium text-ink-600">{title}</p>
+        {!paused && (
         <a
           href={`https://www.youtube.com/watch?v=${id}`}
           target="_blank"
@@ -63,6 +72,7 @@ export function FactoryVideo({ id, title, locale }: Props) {
         >
           {t.watch} <span aria-hidden="true">↗</span>
         </a>
+        )}
       </div>
     </div>
   );
